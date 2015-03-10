@@ -1,2 +1,2 @@
 # Spase Impakt
-Avaruuslentely-javalabra
+pewpew-avaruuslentely-javalabra
