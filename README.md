@@ -1,2 +1,2 @@
-# Spase-ks
+# Spase Impakt
 Avaruuslentely-javalabra
