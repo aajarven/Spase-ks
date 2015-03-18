@@ -1,8 +1,9 @@
 /*
  * Copyright Anni Järvenpää 2015
  */
-package data;
+package spaseimpakt.data;
 
+import spaseimpakt.data.Ammus;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

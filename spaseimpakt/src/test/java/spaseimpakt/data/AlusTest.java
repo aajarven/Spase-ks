@@ -1,5 +1,7 @@
-package data;
+package spaseimpakt.data;
 
+import spaseimpakt.data.Alus;
+import spaseimpakt.data.Suunta;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

@@ -1,5 +1,5 @@
 
-package data;
+package spaseimpakt.data;
 
 /**
  * Pelin yleisin ase: tavallinen oikealle liikkuva ammus, joka tuhoutuu osuessaan kohteeseen.
