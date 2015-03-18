@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package data;
 
 import org.junit.After;
@@ -26,6 +21,10 @@ public class AlusTest {
     int liikkumiskerrat;
 
     public AlusTest() {
+        alkuperainenX = 10;
+        alkuperainenY = 11;
+        maxX = 15;
+        maxY = 15;
     }
 
     @BeforeClass
@@ -39,10 +38,7 @@ public class AlusTest {
 
     @Before
     public void setUp() {
-        alkuperainenX = 10;
-        alkuperainenY = 11;
-        maxX = 15;
-        maxY = 15;
+        
         alus = new Alus(alkuperainenX, alkuperainenY, maxX, maxY);
     }
 
@@ -206,6 +202,25 @@ public class AlusTest {
                 liikuSuuntaan(suunta);
             } while (alkuX + liikkumiskerrat * Alus.NOPEUS <= maxX);
         }
+    }
+    
+    @Test
+    public void eiVoiLuodaSallitunUlkopuolelle(){
+        Alus vasemmallaUlkona = new Alus(-5, 5, 10, 10);
+        assertEquals("Aluksen luomisen pelialueen vasemman reunan vasemmalle puolelle pitäisi olla mahdotonta", 0, vasemmallaUlkona.getX());
+        
+        Alus oikeallaUlkona = new Alus(15, 5, 10, 10);
+        assertEquals("Aluksen luomisen pelialueen oikean reunan oikealle puolele pitäisi olla mahdotonta", 10, oikeallaUlkona.getX());
+    
+        Alus ylhaallaUlkona = new Alus(5, -5, 10, 10);
+        assertEquals("Aluksen luomisen pelialueen yläreunan yläpuolelle pitäisi olla mahdotonta", 0, ylhaallaUlkona.getY());
+        
+        Alus alhaallaUlkona = new Alus(5, 15, 10, 10);
+        assertEquals("Aluksen luomisen pelialueen alareunan alapuolelle pitäisi olla mahdotonta", 10, alhaallaUlkona.getY());
+        
+        Alus kahdessaSuunnassaUlkona = new Alus (-5, -5, 10, 10);
+        assertEquals("Aluksen luomisen pelialueen vasemman reunan vasemmalle puolelle pitäisi olla mahdotonta", 0, kahdessaSuunnassaUlkona.getX());
+        assertEquals("Aluksen luomisen pelialueen yläreunan yläpuolelle pitäisi olla mahdotonta", 0, kahdessaSuunnassaUlkona.getY());
     }
 
 }

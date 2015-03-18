@@ -1,14 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package data;
 
 /**
- *
+ * Pelin yleisin ase: tavallinen oikealle liikkuva ammus, joka tuhoutuu osuessaan kohteeseen.
+ * 
  * @author Anni Järvenpää
  */
 public class Ammus {
-    // TODO ammus
+    int x;
+    int y;
+    public static final int NOPEUS=5; // TODO järkevä nopeus
+
+    // TODO sprite
+    
+    public Ammus(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    public void liiku(){
+        x+=this.NOPEUS;
+        // TODO poisto kun oikeassa laidassa
+    }
+
+    public int getX() {
+        return x;
+    }    
+
+    public int getY() {
+        return y;
+    }
+    
+    
+    
 }
