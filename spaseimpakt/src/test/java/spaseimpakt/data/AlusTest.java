@@ -69,27 +69,23 @@ public class AlusTest {
      */
     @Test
     public void testLiiku() {
-        alus.setSuunta(Suunta.YLOS);
-        alus.liiku();
+        liikutaSuuntaan(alus, Suunta.YLOS);
         int odotettuX = alkuperainenX;
         int odotettuY = alkuperainenY - Alus.NOPEUS;
         assertEquals("Aluksen liikuttua ylös se oli väärässä x-koordinaatissa", odotettuX, alus.getX());
         assertEquals("Aluksen liikuttua ylös se oli väärässä y-koordinaatissa", odotettuY, alus.getY());
 
-        alus.setSuunta(Suunta.OIKEA);
-        alus.liiku();
+        liikutaSuuntaan(alus, Suunta.OIKEA);
         odotettuX += Alus.NOPEUS;
         assertEquals("Aluksen liikuttua oikealle se oli väärässä x-koordinaatissa", odotettuX, alus.getX());
         assertEquals("Aluksen liikuttua oikealle se oli väärässä y-koordinaatissa", odotettuY, alus.getY());
 
-        alus.setSuunta(Suunta.ALAS);
-        alus.liiku();
+        liikutaSuuntaan(alus, Suunta.ALAS);
         odotettuY += Alus.NOPEUS;
         assertEquals("Aluksen liikuttua alas se oli väärässä x-koordinaatissa", odotettuX, alus.getX());
         assertEquals("Aluksen liikuttua alas se oli väärässä y-koordinaatissa", odotettuY, alus.getY());
 
-        alus.setSuunta(Suunta.VASEN);
-        alus.liiku();
+        liikutaSuuntaan(alus, Suunta.VASEN);
         odotettuX -= Alus.NOPEUS;
         assertEquals("Aluksen liikuttua vasemmalle se oli väärässä x-koordinaatissa", odotettuX, alus.getX());
         assertEquals("Aluksen liikuttua vasemmalle se oli väärässä y-koordinaatissa", odotettuY, alus.getY());
@@ -100,16 +96,16 @@ public class AlusTest {
      */
     @Test
     public void yritaLiikkuaSivuistaLapi() {
-        liikuReunaan(Suunta.VASEN);
+        liikutaReunanYli(alus, Suunta.VASEN);
         assertEquals("Alus ei käyttäydy oikein vasemmassa reunassa", 0, alus.getX());
 
-        liikuSuuntaan(Suunta.OIKEA);
+        liikutaSuuntaan(alus, Suunta.OIKEA);
         assertEquals("Alus ei liiku oikein pois vasemmasta reunasta lennettyään sitä vasten", Alus.NOPEUS, alus.getX());
 
-        liikuReunaan(Suunta.OIKEA);
+        liikutaReunanYli(alus, Suunta.OIKEA);
         assertEquals("Alus ei käyttäydy oikein oikeassa reunassa", maxX, alus.getX());
 
-        liikuSuuntaan(Suunta.VASEN);
+        liikutaSuuntaan(alus, Suunta.VASEN);
         assertEquals("Alus ei liiku oikein pois oikeasta reunasta lennettyään sitä vasten", maxX - Alus.NOPEUS, alus.getX());
 
     }
@@ -119,18 +115,40 @@ public class AlusTest {
      */
     @Test
     public void yritaLiikkuaKatostaTaiLattiastaLapi() {
-        liikuReunaan(Suunta.YLOS);
+        liikutaReunanYli(alus, Suunta.YLOS);
         assertEquals("Alus ei käyttäydy oikein ylhäällä reunassa", 0, alus.getY());
 
-        liikuSuuntaan(Suunta.ALAS);
+        liikutaSuuntaan(alus, Suunta.ALAS);
         assertEquals("Alus ei liiku oikein pois yläreunasta lennettyään sitä vasten", Alus.NOPEUS, alus.getY());
 
-        liikuReunaan(Suunta.ALAS);
+        liikutaReunanYli(alus, Suunta.ALAS);
         assertEquals("Alus ei käyttäydy oikein alareunassa", maxY, alus.getY());
 
-        liikuSuuntaan(Suunta.YLOS);
+        liikutaSuuntaan(alus, Suunta.YLOS);
         assertEquals("Alus ei liiku oikein pois alareunasta lennettyään sitä vasten", maxY - Alus.NOPEUS, alus.getY());
 
+    }
+    
+    @Test
+    public void jamptistiReunaanVoiMenna(){
+        Alus jampti=new Alus(Alus.NOPEUS, Alus.NOPEUS, Alus.NOPEUS*2, Alus.NOPEUS*2);
+        
+        
+        liikutaSuuntaan(jampti, Suunta.YLOS);
+        assertEquals("Aluksen pitäisi voida liikkua tasan reunaan saakka ylöspäin mentäessä", 0, jampti.getY());
+        
+        liikutaSuuntaan(jampti, Suunta.ALAS);
+        liikutaSuuntaan(jampti, Suunta.VASEN);
+        assertEquals("Aluksen pitäisi voida liikkua tasan reunaan saakka vasemmalle mentäessä", 0, jampti.getX());
+        
+        liikutaSuuntaan(jampti, Suunta.OIKEA);
+        liikutaSuuntaan(jampti, Suunta.ALAS);
+        assertEquals("Aluksen pitäisi voida liikkua tasan reunaan saakka alas mentäessä", Alus.NOPEUS*2, jampti.getY());
+        
+        liikutaSuuntaan(jampti, Suunta.YLOS);
+        liikutaSuuntaan(jampti, Suunta.OIKEA);
+        assertEquals("Aluksen pitäisi voida liikkua tasan reunaan saakka oikealle mentäessä", Alus.NOPEUS*2, jampti.getX());
+        
     }
     
     /**
@@ -138,18 +156,18 @@ public class AlusTest {
      */
     @Test
     public void kierraReunat(){
-        liikuReunaan(Suunta.VASEN);
+        liikutaReunanYli(alus, Suunta.VASEN);
         
-        liikuReunaan(Suunta.YLOS);
+        liikutaReunanYli(alus, Suunta.YLOS);
         assertEquals("Alus ei pääse liikkumaan vasenta reunaa pitkin yläkulmaan", 0, alus.getY());
         
-        liikuReunaan(Suunta.OIKEA);
+        liikutaReunanYli(alus, Suunta.OIKEA);
         assertEquals("Alus ei pääse liikkumaan yläreunaa pitkin oikeaan reunaan", maxX, alus.getX());
         
-        liikuReunaan(Suunta.ALAS);
+        liikutaReunanYli(alus, Suunta.ALAS);
         assertEquals("Alus ei pääse liikkumaan oikeaa reunaa pitkin alakulmaan", maxY, alus.getY());
         
-        liikuReunaan(Suunta.VASEN);
+        liikutaReunanYli(alus, Suunta.VASEN);
         assertEquals("Alus ei pääse liikkumaan alareunaa pitkin vasempaan reunaan", 0, alus.getX());
         
     }
@@ -159,10 +177,10 @@ public class AlusTest {
      */
     @Test
     public void eiLiikuPaikallaan() {
-        liikuSuuntaan(Suunta.ALAS);
+        liikutaSuuntaan(alus, Suunta.ALAS);
         int odotettuX = alus.getX();
         int odotettuY = alus.getY();
-        liikuSuuntaan(Suunta.PAIKALLAAN);
+        liikutaSuuntaan(alus, Suunta.PAIKALLAAN);
         assertEquals("Alus liikkuu x-suunnassa vaikka se on paikallaan", odotettuX, alus.getX());
         assertEquals("Alus liikkuu y-suunnassa vaikka se on paikallaan", odotettuY, alus.getY());
     }
@@ -172,7 +190,7 @@ public class AlusTest {
      *
      * @param suunta suunta, johon alus liikkuu
      */
-    private void liikuSuuntaan(Suunta suunta) {
+    private void liikutaSuuntaan(Alus alus, Suunta suunta) {
         alus.setSuunta(suunta);
         liikkumiskerrat++;
         alus.liiku();
@@ -183,25 +201,25 @@ public class AlusTest {
      * Liikuttaa aluksen annettuun reunaan.
      * @param suunta reuna, johon alus liikutetaan
      */
-    private void liikuReunaan(Suunta suunta) {
+    private void liikutaReunanYli(Alus alus, Suunta suunta) {
         int alkuX = alus.getX();
         int alkuY = alus.getY();
         liikkumiskerrat = 0;
         if (suunta == Suunta.YLOS) {
             do {
-                liikuSuuntaan(suunta);
+                liikutaSuuntaan(alus, suunta);
             } while (alkuY - liikkumiskerrat * Alus.NOPEUS >= 0);
         } else if (suunta == Suunta.ALAS) {
             do {
-                liikuSuuntaan(suunta);
+                liikutaSuuntaan(alus, suunta);
             } while (alkuY + liikkumiskerrat * Alus.NOPEUS <= maxY);
         } else if (suunta == Suunta.VASEN) {
             do {
-                liikuSuuntaan(suunta);
+                liikutaSuuntaan(alus, suunta);
             } while (alkuX - liikkumiskerrat * Alus.NOPEUS >= 0);
         } else if (suunta == Suunta.OIKEA) {
             do {
-                liikuSuuntaan(suunta);
+                liikutaSuuntaan(alus, suunta);
             } while (alkuX + liikkumiskerrat * Alus.NOPEUS <= maxX);
         }
     }

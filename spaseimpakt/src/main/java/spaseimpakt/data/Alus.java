@@ -76,6 +76,7 @@ public class Alus {
         } else if (this.x < 0) {
             this.x = 0;
         }
+        
         if (this.y > maxY) {
             this.y = maxY;
         } else if (this.y < 0) {
