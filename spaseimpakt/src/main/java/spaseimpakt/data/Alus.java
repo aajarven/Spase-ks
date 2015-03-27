@@ -1,21 +1,29 @@
 package spaseimpakt.data;
 
 import java.util.ArrayList;
+import logiikka.Pelimoottori;
 
 /**
  *
  * @author Anni Järvenpää
  */
-public class Alus {
+public class Alus{
 
+    private Pelimoottori moottori;
     private int x;
     private int y;
     private int maxX;
     private int maxY;
     private Suunta suunta;
+    private long edellinenAmmus;
+    private int laserit;
+    private int pommit;
 
     // Onko tämä rumaa?
     public static final int NOPEUS = 5; // TODO sopiva nopeuden arvo alukselle
+    private final int AMPUMIS_INTERVALLI=150; 
+    private final int LASERIT_ALUSSA = 3;
+    private final int POMMIT_ALUSSA = 3;
 
     // TODO mieti, miten otat aluksen korkeuden ja leveyden huomioon sallittuja koordinaatteja laskettaessa
     // TODO alukselle sprite
@@ -32,13 +40,17 @@ public class Alus {
      * @param maxY Suurin sallittu y-koordinaatti, jota alemmas ei voi liikkua
      * (käytännössä pelialueen korkeus)
      */
-    public Alus(int x, int y, int maxX, int maxY) {
+    public Alus(int x, int y, int maxX, int maxY, Pelimoottori moottori) {
         this.x = x;
         this.y = y;
         this.maxX = maxX; // TODO korjaa se, ettei mikään estä laittamasta maksimiarvoksi esim negatiivista lukua, jos ohjelmoija on tyhmä
         this.maxY = maxY;
+        this.moottori=moottori;
+        this.laserit=LASERIT_ALUSSA;
+        this.pommit=POMMIT_ALUSSA;
         tarkastaPaikka();
         suunta = Suunta.PAIKALLAAN;
+        edellinenAmmus=0;
     }
 
     public int getX() {
@@ -85,5 +97,47 @@ public class Alus {
 
     }
 
-    // TODO ampumistoiminnallisuus
+    /**
+     * Laukaisee aluksen pääaseen.
+     * Ammus muistuttaa luotia, joka liikkuu lineaarisesti kohti pelialueen laitaa. Ammus tuhoutuu, jos se koskettaa vihollistaa.
+     * @see Ammus
+     */
+    public void ammuLaukaus(){
+        if(System.currentTimeMillis()-edellinenAmmus>AMPUMIS_INTERVALLI){
+            moottori.lisaaAse(new Ammus(x, y, maxX, moottori));
+            edellinenAmmus=System.currentTimeMillis();
+        }
+    }
+    
+    /**
+     * Laukaisee aluksen laserin.
+     * Laser lähtee aluksen nokasta tuhoten kaikki tavalliset viholliset, joihin se aktiivisena ollessaan osuu. Laserin voi laukaista vain, jos käyttökertoja on vielä jäljellä.
+     * @see Laser
+     */
+    public void ammuLaser(){
+        if(laserit>0){
+            moottori.lisaaAse(new Laser(this, moottori));
+            laserit--;
+        }
+    }
+    
+    
+    /**
+     * Ampuu pommin, joka tuhoaa kaikki tavalliset viholliset näytöltä.
+     * @see Pommi
+     */
+    public void ammuPommi(){
+        if(pommit>0){
+            moottori.lisaaAse(new Pommi(moottori));
+            pommit--;
+        }
+    }
+
+    public int getLaserit() {
+        return laserit;
+    }
+
+    public int getPommit() {
+        return pommit;
+    }
 }

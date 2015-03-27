@@ -3,6 +3,7 @@
  */
 package spaseimpakt.data;
 
+import logiikka.Pelimoottori;
 import spaseimpakt.data.Ammus;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,11 +20,15 @@ public class AmmusTest {
 
     int alkuX;
     int alkuY;
+    int maxX;
     Ammus ammus;
+    Pelimoottori moottori;
 
     public AmmusTest() {
         alkuX = 5;
         alkuY = 20;
+        maxX=25;
+        moottori=new Pelimoottori();
     }
 
     @BeforeClass
@@ -36,16 +41,13 @@ public class AmmusTest {
 
     @Before
     public void setUp() {
-        ammus = new Ammus(alkuX, alkuY);
+        ammus = new Ammus(alkuX, alkuY, maxX, moottori);
     }
 
     @After
     public void tearDown() {
     }
 
-    /**
-     * Test of liiku method, of class Ammus.
-     */
     @Test
     public void testLiiku() {
         for (int i = 0; i < 10; i++) {
@@ -55,5 +57,15 @@ public class AmmusTest {
         }
 
     }
+    
+    @Test
+    public void tuhoutuuReunassa(){
+        for(int i=0; Ammus.NOPEUS*i+alkuX<=maxX; i++){
+            ammus.liiku();
+        }
+        assertTrue("Ammusta ei poisteta kun se poistuu pelialueelta", !moottori.getAseet().contains(ammus));
+    }
 
+    
+    
 }
