@@ -3,7 +3,7 @@
  */
 package spaseimpakt.data;
 
-import logiikka.Pelimoottori;
+import spaseimpakt.logiikka.Pelimoottori;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -33,23 +33,29 @@ public class PommiTest {
     
     @Before
     public void setUp() {
-        moottori=new Pelimoottori();
-        alus=new Alus(10, 10, 20, 20, moottori);
+        moottori = new Pelimoottori();
+        alus = new Alus(10, 10, 20, 20, moottori);
     }
     
     @After
     public void tearDown() {
     }
+    
+    @Test
+    public void pomminVoiAmpua() {
+        alus.ammuPommi();
+        assertEquals("Pommi ei synny kun se ammutaan", 1, moottori.getAseet().size());
+    }
 
     /**
-     * Test of liiku method, of class Pommi.
+     * Pommin poistumisen testaaminen
      */
     @Test
-    public void testLiiku() {
+    public void liikkuminenToimii() {
         alus.ammuPommi();
-        Pommi pommi=(Pommi) moottori.getAseet().get(0);
+        Pommi pommi = (Pommi) moottori.getAseet().get(0);
         pommi.liiku();
-        assertTrue("Pommi ei katoa", !moottori.getAseet().contains(pommi));
+        assertEquals("Pommi ei katoa", 0, moottori.getAseet().size());
     }
     
 }

@@ -1,6 +1,6 @@
 package spaseimpakt.data;
 
-import logiikka.Pelimoottori;
+import spaseimpakt.logiikka.Pelimoottori;
 import spaseimpakt.data.Alus;
 import spaseimpakt.data.Suunta;
 import org.junit.After;

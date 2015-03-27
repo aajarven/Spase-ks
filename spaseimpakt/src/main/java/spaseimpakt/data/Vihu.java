@@ -4,7 +4,7 @@
 package spaseimpakt.data;
 
 /**
- *
+ * Pelin pahikset.
  * @author Anni Järvenpää
  */
 public interface Vihu{

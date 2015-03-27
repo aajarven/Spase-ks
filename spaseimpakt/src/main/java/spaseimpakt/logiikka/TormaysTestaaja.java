@@ -1,7 +1,7 @@
 /*
  * Copyright Anni Järvenpää 2015
  */
-package logiikka;
+package spaseimpakt.logiikka;
 
 import spaseimpakt.data.Alus;
 import spaseimpakt.data.Ase;

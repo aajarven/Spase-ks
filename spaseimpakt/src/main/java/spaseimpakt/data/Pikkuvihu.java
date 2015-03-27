@@ -9,7 +9,7 @@ package spaseimpakt.data;
  */
 public class Pikkuvihu implements Vihu{
 
-    
+    // TODO metodit
     
     @Override
     public void liiku() {

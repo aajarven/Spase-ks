@@ -11,6 +11,9 @@ public interface Ase {
     
     // TODO törmäystarkastus johonkin, mihin?
     
+    /**
+     * Liikuttaa asetta yhdessä framessa liikutettavan määrän.
+     */
     public void liiku();
     
 }

@@ -3,7 +3,7 @@
  */
 package spaseimpakt.data;
 
-import logiikka.Pelimoottori;
+import spaseimpakt.logiikka.Pelimoottori;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -37,7 +37,8 @@ public class LaserTest {
     public void setUp() {
         moottori = new Pelimoottori();
         alus = new Alus(5, 10, 20, 30, moottori);
-        laser = new Laser(alus, moottori);
+        alus.ammuLaser();
+        laser = (Laser) moottori.getAseet().get(0);
         alku = System.currentTimeMillis();
     }
 
@@ -80,12 +81,13 @@ public class LaserTest {
     }
 
     @Test
-    public void katoaa() {
+    public void katoaaOikein() {
+        laser.liiku();
+        assertEquals("Laser katoaa liian aikaisin", 1, moottori.getAseet().size());
         while(System.currentTimeMillis()-alku<=laser.getKESTO()){
             laser.liiku();
         }
-        laser.liiku();
-        assertTrue("Laser sammuu halutun ajan kuluttua", !moottori.getAseet().contains(laser));
+        assertEquals("Laser ei sammu", 0, moottori.getAseet().size());
     }
 
     private void liikutaMolemmat(Suunta suunta) {

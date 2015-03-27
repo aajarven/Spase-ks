@@ -1,7 +1,7 @@
 package spaseimpakt.data;
 
 /**
- *
+ * Aluksen mahdolliset liikesuunnat.
  * @author Anni Järvenpää
  */
 public enum Suunta {
