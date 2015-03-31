@@ -1,5 +1,6 @@
 package spaseimpakt.data;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import spaseimpakt.logiikka.Pelimoottori;
 
@@ -7,7 +8,7 @@ import spaseimpakt.logiikka.Pelimoottori;
  *
  * @author Anni Järvenpää
  */
-public class Alus {
+public class Alus implements Piirrettava{
 
     private Pelimoottori moottori;
     private int x;
@@ -157,5 +158,11 @@ public class Alus {
      */
     public int getPommit() {
         return pommit;
+    }
+
+    @Override
+    public Image getSprite() {
+        //TODO oispa kuva
+        return null;
     }
 }

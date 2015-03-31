@@ -3,13 +3,14 @@
  */
 package spaseimpakt.data;
 
+import java.awt.Image;
 import spaseimpakt.logiikka.Pelimoottori;
 
 /**
  * Ase, joka tuhoaa kaiken aluksen edessä olevan.
  * @author Anni Järvenpää
  */
-public class Laser implements Ase {
+public class Laser implements Ase, Piirrettava {
 
     Alus alus;
     Pelimoottori moottori;
@@ -46,6 +47,12 @@ public class Laser implements Ase {
 
     public int getKESTO() {
         return KESTO;
+    }
+
+    @Override
+    public Image getSprite() {
+        //TODO oispa kuva
+        return null;
     }
 
 }

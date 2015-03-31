@@ -1,5 +1,6 @@
 package spaseimpakt.data;
 
+import java.awt.Image;
 import spaseimpakt.logiikka.Pelimoottori;
 
 /**
@@ -8,7 +9,7 @@ import spaseimpakt.logiikka.Pelimoottori;
  *
  * @author Anni Järvenpää
  */
-public class Ammus implements Ase {
+public class Ammus implements Ase, Piirrettava {
 
     Pelimoottori moottori;
     int x;
@@ -38,6 +39,12 @@ public class Ammus implements Ase {
 
     public int getY() {
         return y;
+    }
+
+    @Override
+    public Image getSprite() {
+        //TODO oispa kuva
+        return null;
     }
 
 }
