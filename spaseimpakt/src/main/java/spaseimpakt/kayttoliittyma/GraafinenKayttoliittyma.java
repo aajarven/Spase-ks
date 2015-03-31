@@ -29,7 +29,7 @@ public class GraafinenKayttoliittyma implements Runnable {
     private static JFrame frame;
     
     /**
-     * Käyttöliittymän se osa, jossa itse pelitapahtumat (luola, alus yms) näytetään.
+     * Käyttöliittymän se osa, jossa itse pelitapahtumat (alus, ammukset, viholliset yms) näytetään.
      */
     private Ikkuna ikkuna;
 

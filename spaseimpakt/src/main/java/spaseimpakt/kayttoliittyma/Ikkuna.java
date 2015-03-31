@@ -21,7 +21,7 @@ public class Ikkuna extends JPanel{
     
     /**
      * Konstruktori
-     * @param maailma maailma, josta haetaan alus sekä piirrettävät polygonit
+     * @param alus pelaajan ohjaama alus, joka näytölle piirretään
      */
     public Ikkuna(Alus alus){
         this.alus=alus;
