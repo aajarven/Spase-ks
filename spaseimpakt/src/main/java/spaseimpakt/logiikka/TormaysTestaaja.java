@@ -15,15 +15,15 @@ public class TormaysTestaaja {
 
     public TormaysTestaaja() {
     }
-    
-    protected boolean tormaa(Ase ase, Vihu vihu){
+
+    protected boolean tormaa(Ase ase, Vihu vihu) {
         return false;
         //TODO actual code
     }
-    
-    protected boolean tormaa(Alus alus, Vihu vihu){
+
+    protected boolean tormaa(Alus alus, Vihu vihu) {
         return false;
         //TODO actual code
     }
-    
+
 }

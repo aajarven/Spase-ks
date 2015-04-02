@@ -8,6 +8,7 @@ import spaseimpakt.logiikka.Pelimoottori;
 
 /**
  * Ase, joka tuhoaa kaiken aluksen edessä olevan.
+ *
  * @author Anni Järvenpää
  */
 public class Laser implements Ase, Piirrettava {

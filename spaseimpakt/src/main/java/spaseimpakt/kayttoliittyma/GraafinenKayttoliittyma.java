@@ -9,19 +9,21 @@ import spaseimpakt.logiikka.Pelimoottori;
 import spaseimpakt.logiikka.Pelirunko;
 
 /**
- * Luo käyttöliittymän ja hoitaa sen käyttämiseen liittyviä asioita sisältäen mm. tarvittavat kuuntelijat
+ * Luo käyttöliittymän ja hoitaa sen käyttämiseen liittyviä asioita sisältäen
+ * mm. tarvittavat kuuntelijat
+ *
  * @author Anni
  */
 public class GraafinenKayttoliittyma implements Runnable {
 
-    
     /**
      * JFrame johon komponentit asetellaan
      */
     private static JFrame frame;
-    
+
     /**
-     * Käyttöliittymän se osa, jossa itse pelitapahtumat (alus, ammukset, viholliset yms) näytetään.
+     * Käyttöliittymän se osa, jossa itse pelitapahtumat (alus, ammukset,
+     * viholliset yms) näytetään.
      */
     private Ikkuna ikkuna;
 
@@ -32,26 +34,28 @@ public class GraafinenKayttoliittyma implements Runnable {
 
     /**
      * Konstruktori
+     *
      * @param moottori pelimoottori, jonka ajaman pelin tapahtumat piirretään
      */
     public GraafinenKayttoliittyma(Pelimoottori moottori) {
-        this.moottori=moottori;
+        this.moottori = moottori;
     }
 
     /**
-     * Konstruktori.
-     * Pelimoottori täytyy asettaa erikseen käyttäen setteriä.
+     * Konstruktori. Pelimoottori täytyy asettaa erikseen käyttäen setteriä.
+     *
      * @see setPelimoottori
      */
     public GraafinenKayttoliittyma() {
     }
-    
-    public void setPelimoottori(Pelimoottori moottori){
-        this.moottori=moottori;
+
+    public void setPelimoottori(Pelimoottori moottori) {
+        this.moottori = moottori;
     }
 
     /**
-     * Luo framen sekä kutsuu metodeja komponenttien ja kuuntelijoiden luomiseksi
+     * Luo framen sekä kutsuu metodeja komponenttien ja kuuntelijoiden
+     * luomiseksi
      */
     @Override
     public void run() {
@@ -72,18 +76,18 @@ public class GraafinenKayttoliittyma implements Runnable {
 
     /**
      * Lisää parametrina annettuun containeriin yläpalkin ja peli-ikkunan
+     *
      * @param container container, johon komponentit lisätään
      */
     private void luoKomponentit(Container container) {
-        ikkuna=new Ikkuna(moottori);
+        ikkuna = new Ikkuna(moottori);
         ikkuna.setPreferredSize(new Dimension(Pelirunko.LEVEYS, Pelirunko.KORKEUS));
         container.add(ikkuna);
     }
 
-
-    
     /**
      * Palauttaa framen
+     *
      * @return frame
      */
     public JFrame getFrame() {
@@ -92,6 +96,7 @@ public class GraafinenKayttoliittyma implements Runnable {
 
     /**
      * Mahdollistaa pelin tapahtumia ohjaavan pelimoottorin asettamisen
+     *
      * @param moottori käytettävä pelimoottori
      */
     public void setMoottori(Pelimoottori moottori) {
@@ -100,7 +105,7 @@ public class GraafinenKayttoliittyma implements Runnable {
 
     /**
      * Päivittää grafiikat ikkunan repaint-metodilla
-     * 
+     *
      * @see Ikkuna#repaint
      */
     public void piirra() {

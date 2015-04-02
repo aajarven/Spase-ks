@@ -11,7 +11,7 @@ import spaseimpakt.logiikka.Pelimoottori;
  *
  * @author Anni Järvenpää
  */
-public class Alus implements Piirrettava{
+public class Alus implements Piirrettava {
 
     private Pelimoottori moottori;
     private int x;
@@ -35,7 +35,6 @@ public class Alus implements Piirrettava{
     // TODO törmäystarkastus
     // TODO elämät
     // TODO ammusten liikuttaminen (onko ylipäänsä tyhmää ja sinkkuvastuuperiaatteen vastaista, että alus käskee ammuksensa liikkumaan, pitäisi laittaa muualle? mieti minne?)
-    
     /**
      * Alus, jolla pelaaja lentää. Jos annetut aloituskoordinaatit eivät ole
      * sallitulla alueella, luodaan alus niitä lähimpään sallittuun pisteeseen.
@@ -43,29 +42,28 @@ public class Alus implements Piirrettava{
      * @param x Aluksen x-koordinaatti (0 vasemmassa laidassa, kasvaa oikealle)
      * @param y Aluksen y-koodrinaatti (0 ylhäällä, kasvaa alas)
      * @param pelialueenLeveys Peli-ikkunan koko x-suunnassa
-     * @param pelialueenKorkeus Peli-ikkunan koko y-suunnassa
-     * (käytännössä pelialueen korkeus)
+     * @param pelialueenKorkeus Peli-ikkunan koko y-suunnassa (käytännössä
+     * pelialueen korkeus)
      */
     public Alus(int x, int y, int pelialueenLeveys, int pelialueenKorkeus, Pelimoottori moottori) {
-        try{
+        try {
             BufferedImage i = ImageIO.read(new File("resources/simppelialus.png"));
             this.sprite = i;
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Aluksen kuvaa ei löytynyt");
         }
-        
+
         this.x = x;
         this.y = y;
-        this.maxX = pelialueenLeveys-sprite.getWidth(null); // TODO korjaa se, ettei mikään estä laittamasta maksimiarvoksi esim negatiivista lukua, jos ohjelmoija on tyhmä
-        this.maxY = pelialueenKorkeus-sprite.getHeight(null);
+        this.maxX = pelialueenLeveys - sprite.getWidth(null); // TODO korjaa se, ettei mikään estä laittamasta maksimiarvoksi esim negatiivista lukua, jos ohjelmoija on tyhmä
+        this.maxY = pelialueenKorkeus - sprite.getHeight(null);
         this.moottori = moottori;
         this.laserit = LASERIT_ALUSSA;
         this.pommit = POMMIT_ALUSSA;
         tarkastaPaikka();
         suunta = Suunta.PAIKALLAAN;
         edellinenAmmus = 0;
-        
-        
+
     }
 
     public int getX() {
@@ -98,7 +96,7 @@ public class Alus implements Piirrettava{
         } else if (suunta == Suunta.VASEN) {
             this.x -= NOPEUS;
         }
-        
+
         tarkastaPaikka();
     }
 

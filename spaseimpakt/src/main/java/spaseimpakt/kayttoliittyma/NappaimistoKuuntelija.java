@@ -12,66 +12,67 @@ import spaseimpakt.data.Suunta;
 import spaseimpakt.logiikka.Pelimoottori;
 
 /**
- * 
+ *
  * @author Anni Järvenpää
  */
-public class NappaimistoKuuntelija implements KeyListener{
+public class NappaimistoKuuntelija implements KeyListener {
 
     private final Alus alus;
     private final Pelimoottori moottori;
-    
+
     private boolean vasenpainettu;
     private boolean oikeapainettu;
     private boolean ylospainettu;
     private boolean alaspainettu;
 
     public NappaimistoKuuntelija(Pelimoottori moottori) {
-        this.moottori=moottori;
-        this.alus =moottori.getAlus();
+        this.moottori = moottori;
+        this.alus = moottori.getAlus();
     }
-    
+
     @Override
-    public void keyPressed(KeyEvent e){
-        if (e.getKeyCode()==KeyEvent.VK_UP) {
-            ylospainettu=true;
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            ylospainettu = true;
             alus.setSuunta(Suunta.YLOS);
-        } else if (e.getKeyCode()==KeyEvent.VK_DOWN){
-            alaspainettu=true;
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            alaspainettu = true;
             alus.setSuunta(Suunta.ALAS);
-        } else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
-            oikeapainettu=true;
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            oikeapainettu = true;
             alus.setSuunta(Suunta.OIKEA);
-        } else if (e.getKeyCode()==KeyEvent.VK_LEFT){
-            vasenpainettu=true;
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            vasenpainettu = true;
             alus.setSuunta(Suunta.VASEN);
-        } 
-    }
-    
-    @Override
-    public void keyReleased(KeyEvent e){
-      if (e.getKeyCode()==KeyEvent.VK_UP) {
-            ylospainettu=false;
-        } else if (e.getKeyCode()==KeyEvent.VK_DOWN){
-            alaspainettu=false;
-        } else if (e.getKeyCode()==KeyEvent.VK_LEFT){
-            vasenpainettu=false;
-        } else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
-            oikeapainettu=false;
         }
-      tarkastaMuutSuunnat();
     }
-    
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            ylospainettu = false;
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            alaspainettu = false;
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            vasenpainettu = false;
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            oikeapainettu = false;
+        }
+        tarkastaMuutSuunnat();
+    }
+
     /**
-     * Tarkastaa, pitääkö aluksen yhä liikkua johonkin suuntaan, vaikka yksi nappuloista onkin päästetty irti
+     * Tarkastaa, pitääkö aluksen yhä liikkua johonkin suuntaan, vaikka yksi
+     * nappuloista onkin päästetty irti
      */
-    private void tarkastaMuutSuunnat(){
-        if(ylospainettu==true){
+    private void tarkastaMuutSuunnat() {
+        if (ylospainettu == true) {
             alus.setSuunta(Suunta.YLOS);
-        } else if (alaspainettu==true){
+        } else if (alaspainettu == true) {
             alus.setSuunta(Suunta.ALAS);
-        } else if(oikeapainettu==true){
+        } else if (oikeapainettu == true) {
             alus.setSuunta(Suunta.OIKEA);
-        } else if(vasenpainettu==true){
+        } else if (vasenpainettu == true) {
             alus.setSuunta(Suunta.VASEN);
         } else {
             alus.setSuunta(Suunta.PAIKALLAAN);
