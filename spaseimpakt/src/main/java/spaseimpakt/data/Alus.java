@@ -27,7 +27,7 @@ public class Alus implements Piirrettava {
     private boolean ampuuLaukauksiaNyt;
 
     // Onko tämä rumaa?
-    public static final int NOPEUS = 5; // TODO sopiva nopeuden arvo alukselle
+    public static final int NOPEUS = 3; // TODO sopiva nopeuden arvo alukselle
     private final int AMPUMIS_INTERVALLI = 150;
     private final int LASERIT_ALUSSA = 3;
     private final int POMMIT_ALUSSA = 3;
