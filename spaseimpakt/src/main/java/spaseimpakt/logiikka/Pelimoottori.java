@@ -65,6 +65,7 @@ public class Pelimoottori extends Thread {
 
     public void poistaAse(Ase ase) {
         aseet.remove(ase);
+        piirrettavat.remove(ase);
     }
 
     public CopyOnWriteArraySet<Ase> getAseet() {

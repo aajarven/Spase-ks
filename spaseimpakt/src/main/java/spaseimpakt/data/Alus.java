@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import spaseimpakt.logiikka.Pelimoottori;
+import spaseimpakt.logiikka.Pelirunko;
 
 /**
  *
@@ -132,7 +133,7 @@ public class Alus implements Piirrettava {
      */
     private void ammuLaukaus() {
         if (System.currentTimeMillis() - edellinenAmmus > AMPUMIS_INTERVALLI) {
-            moottori.lisaaAse(new Ammus(x, y, maxX, moottori));
+            moottori.lisaaAse(new Ammus(x, y, Pelirunko.LEVEYS, moottori));
             edellinenAmmus = System.currentTimeMillis();
         }
     }
