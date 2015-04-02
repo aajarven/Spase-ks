@@ -23,6 +23,7 @@ public class Alus implements Piirrettava {
     private int laserit;
     private int pommit;
     private Image sprite;
+    private boolean ampuuLaukauksiaNyt;
 
     // Onko tämä rumaa?
     public static final int NOPEUS = 5; // TODO sopiva nopeuden arvo alukselle
@@ -46,13 +47,7 @@ public class Alus implements Piirrettava {
      * pelialueen korkeus)
      */
     public Alus(int x, int y, int pelialueenLeveys, int pelialueenKorkeus, Pelimoottori moottori) {
-        try {
-            BufferedImage i = ImageIO.read(new File("resources/simppelialus.png"));
-            this.sprite = i;
-        } catch (IOException e) {
-            System.out.println("Aluksen kuvaa ei löytynyt");
-        }
-
+        lueSprite();
         this.x = x;
         this.y = y;
         this.maxX = pelialueenLeveys - sprite.getWidth(null); // TODO korjaa se, ettei mikään estä laittamasta maksimiarvoksi esim negatiivista lukua, jos ohjelmoija on tyhmä
@@ -63,7 +58,16 @@ public class Alus implements Piirrettava {
         tarkastaPaikka();
         suunta = Suunta.PAIKALLAAN;
         edellinenAmmus = 0;
+        ampuuLaukauksiaNyt=false;
+    }
 
+    private void lueSprite() {
+        try {
+            BufferedImage i = ImageIO.read(new File("resources/simppelialus.png"));
+            this.sprite = i;
+        } catch (IOException e) {
+            System.out.println("Aluksen kuvaa ei löytynyt");
+        }
     }
 
     public int getX() {
@@ -86,7 +90,7 @@ public class Alus implements Piirrettava {
     /**
      * Liikuttaa alusta pelaajan valitsemaan suuntaan yhden askeleen
      */
-    public void liiku() {
+    public void paivita() {
         if (suunta == Suunta.ALAS) {
             this.y += NOPEUS;
         } else if (suunta == Suunta.YLOS) {
@@ -98,6 +102,10 @@ public class Alus implements Piirrettava {
         }
 
         tarkastaPaikka();
+        
+        if(ampuuLaukauksiaNyt){
+            ammuLaukaus();
+        }
     }
 
     private void tarkastaPaikka() {
@@ -122,7 +130,7 @@ public class Alus implements Piirrettava {
      *
      * @see Ammus
      */
-    public void ammuLaukaus() {
+    private void ammuLaukaus() {
         if (System.currentTimeMillis() - edellinenAmmus > AMPUMIS_INTERVALLI) {
             moottori.lisaaAse(new Ammus(x, y, maxX, moottori));
             edellinenAmmus = System.currentTimeMillis();
@@ -175,4 +183,10 @@ public class Alus implements Piirrettava {
     public Image getSprite() {
         return sprite;
     }
+
+    public void setAmpuuLaukauksiaNyt(boolean ampuuLaukauksiaNyt) {
+        this.ampuuLaukauksiaNyt = ampuuLaukauksiaNyt;
+    }
+    
+    
 }

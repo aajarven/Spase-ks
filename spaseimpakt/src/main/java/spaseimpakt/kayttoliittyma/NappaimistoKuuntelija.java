@@ -32,6 +32,10 @@ public class NappaimistoKuuntelija implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            alus.setAmpuuLaukauksiaNyt(true);
+        }
+        
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             ylospainettu = true;
             alus.setSuunta(Suunta.YLOS);
@@ -44,13 +48,15 @@ public class NappaimistoKuuntelija implements KeyListener {
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             vasenpainettu = true;
             alus.setSuunta(Suunta.VASEN);
-        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            alus.ammuLaukaus();
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            alus.setAmpuuLaukauksiaNyt(false);
+        }
+        
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             ylospainettu = false;
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {

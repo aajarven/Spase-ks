@@ -5,8 +5,11 @@ package spaseimpakt.kayttoliittyma;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.HashSet;
+import java.util.concurrent.CopyOnWriteArraySet;
 import javax.swing.JPanel;
 import spaseimpakt.data.Alus;
+import spaseimpakt.data.Piirrettava;
 import spaseimpakt.logiikka.Pelimoottori;
 import spaseimpakt.logiikka.Pelirunko;
 
@@ -18,6 +21,8 @@ public class Ikkuna extends JPanel {
      * ikkunaan piirrettävä alus
      */
     Alus alus;
+    
+    CopyOnWriteArraySet<Piirrettava> piirrettavat;
 
     //TODO muut piirrettävät
     /**
@@ -26,7 +31,7 @@ public class Ikkuna extends JPanel {
      * @param alus pelaajan ohjaama alus, joka näytölle piirretään
      */
     public Ikkuna(Pelimoottori moottori) {
-        this.alus = moottori.getAlus();
+        this.piirrettavat=moottori.getPiirrettavat();
     }
 
     //TODO vihut, ammukset
@@ -43,6 +48,8 @@ public class Ikkuna extends JPanel {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, Pelirunko.LEVEYS, Pelirunko.KORKEUS);
 
-        g.drawImage(alus.getSprite(), alus.getX(), alus.getY(), this);
+        for(Piirrettava piirrettava:piirrettavat){
+            g.drawImage(piirrettava.getSprite(), piirrettava.getX(), piirrettava.getY(), this);
+        }
     }
 }

@@ -1,6 +1,10 @@
 package spaseimpakt.data;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import spaseimpakt.logiikka.Pelimoottori;
 
 /**
@@ -16,13 +20,14 @@ public class Ammus implements Ase, Piirrettava {
     int y;
     int maxX;
     public static final int NOPEUS = 5; // TODO järkevä nopeus
+    Image sprite;
 
-    // TODO sprite
     public Ammus(int x, int y, int maxX, Pelimoottori moottori) {
         this.x = x;
         this.y = y;
         this.maxX = maxX;
         this.moottori = moottori;
+        lueSprite();
     }
 
     @Override
@@ -43,8 +48,16 @@ public class Ammus implements Ase, Piirrettava {
 
     @Override
     public Image getSprite() {
-        //TODO oispa kuva
-        return null;
+        return sprite;
+    }
+    
+    private void lueSprite() {
+        try {
+            BufferedImage i = ImageIO.read(new File("resources/ammus.png"));
+            this.sprite = i;
+        } catch (IOException e) {
+            System.out.println("Ammuksen kuvaa ei löytynyt");
+        }
     }
 
 }

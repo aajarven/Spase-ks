@@ -93,7 +93,7 @@ public class LaserTest {
 
     private void liikutaMolemmat(Suunta suunta) {
         alus.setSuunta(suunta);
-        alus.liiku();
+        alus.paivita();
         laser.liiku();
     }
     

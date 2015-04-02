@@ -5,7 +5,9 @@ package spaseimpakt.logiikka;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.concurrent.CopyOnWriteArraySet;
 import spaseimpakt.data.Alus;
+import spaseimpakt.data.Ammus;
 import spaseimpakt.data.Ase;
 import spaseimpakt.data.Piirrettava;
 import spaseimpakt.kayttoliittyma.GraafinenKayttoliittyma;
@@ -32,11 +34,11 @@ public class Pelimoottori extends Thread {
      */
     private Alus alus;
 
-    ArrayList<Ase> aseet;
+    private CopyOnWriteArraySet <Ase> aseet;
 
     private GraafinenKayttoliittyma kayttoliittyma;
 
-    private HashSet<Piirrettava> piirrettavat;
+    private CopyOnWriteArraySet<Piirrettava> piirrettavat;
 
     /**
      * Konstruktori
@@ -48,18 +50,24 @@ public class Pelimoottori extends Thread {
         this.kayttoliittyma = kayttoliittyma;
         this.kaynnissa = true;
         this.alus = new Alus(0, Pelirunko.KORKEUS / 2, Pelirunko.LEVEYS, Pelirunko.KORKEUS, this);
-        this.aseet = new ArrayList<>();
+        this.aseet = new CopyOnWriteArraySet<>();
+        this.piirrettavat=new CopyOnWriteArraySet<>();
+        piirrettavat.add(alus);
     }
 
     public void lisaaAse(Ase ase) {
         aseet.add(ase);
+        System.out.println("pew");
+        if(ase instanceof Ammus){ // tai myöhemmin laser, pommia ei piirretä
+            piirrettavat.add((Ammus) ase);
+        }
     }
 
     public void poistaAse(Ase ase) {
         aseet.remove(ase);
     }
 
-    public ArrayList<Ase> getAseet() {
+    public CopyOnWriteArraySet<Ase> getAseet() {
         return aseet;
     }
 
@@ -77,7 +85,7 @@ public class Pelimoottori extends Thread {
 
         //TODO alkuun varmaan dialogi, jossa kysytään pelaajan nimeä
         do {
-            alus.liiku();
+            alus.paivita();
             for (Ase ase : aseet) {
                 ase.liiku();
             }
@@ -108,7 +116,7 @@ public class Pelimoottori extends Thread {
         kaynnissa = false;
     }
 
-    public HashSet<Piirrettava> getPiirrettavat() {
+    public CopyOnWriteArraySet<Piirrettava> getPiirrettavat() {
         return piirrettavat;
     }
 

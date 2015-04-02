@@ -7,7 +7,7 @@ package spaseimpakt.data;
  *
  * @author Anni Järvenpää
  */
-public interface Ase {
+public interface Ase{
 
     // TODO törmäystarkastus johonkin, mihin?
     /**

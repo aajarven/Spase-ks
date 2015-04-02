@@ -196,7 +196,7 @@ public class AlusTest {
     private void liikutaSuuntaan(Alus alus, Suunta suunta) {
         alus.setSuunta(suunta);
         liikkumiskerrat++;
-        alus.liiku();
+        alus.paivita();
     }
 
     /**
