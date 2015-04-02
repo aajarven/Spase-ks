@@ -4,9 +4,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import spaseimpakt.logiikka.Pelimoottori;
 
 /**
@@ -37,6 +35,7 @@ public class Alus implements Piirrettava{
     // TODO törmäystarkastus
     // TODO elämät
     // TODO ammusten liikuttaminen (onko ylipäänsä tyhmää ja sinkkuvastuuperiaatteen vastaista, että alus käskee ammuksensa liikkumaan, pitäisi laittaa muualle? mieti minne?)
+    
     /**
      * Alus, jolla pelaaja lentää. Jos annetut aloituskoordinaatit eivät ole
      * sallitulla alueella, luodaan alus niitä lähimpään sallittuun pisteeseen.
