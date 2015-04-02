@@ -9,13 +9,20 @@ import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 import spaseimpakt.data.Alus;
+import spaseimpakt.logiikka.Pelimoottori;
+import spaseimpakt.logiikka.Pelirunko;
 
 public class Ikkuna extends JPanel{
+    
+    
+    Pelimoottori moottori;
+    
     
     /**
      * ikkunaan piirrettävä alus
      */
     Alus alus;
+    
     
     //TODO muut piirrettävät
     
@@ -23,8 +30,8 @@ public class Ikkuna extends JPanel{
      * Konstruktori
      * @param alus pelaajan ohjaama alus, joka näytölle piirretään
      */
-    public Ikkuna(Alus alus){
-        this.alus=alus;
+    public Ikkuna(Pelimoottori moottori){
+        this.alus=moottori.getAlus();
     }
     
     //TODO vihut, ammukset
@@ -38,7 +45,7 @@ public class Ikkuna extends JPanel{
         super.paint(g);
         
         g.setColor(Color.BLACK);
-        //TODO tausta: g.fillRect(0, 0, LEVEYS, KORKEUS);
+        g.fillRect(0, 0, Pelirunko.LEVEYS, Pelirunko.KORKEUS);
         
         g.drawImage(alus.getSprite(), alus.getX(), alus.getY(), this);        
     }

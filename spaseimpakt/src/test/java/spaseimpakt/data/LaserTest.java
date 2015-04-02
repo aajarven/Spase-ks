@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import spaseimpakt.kayttoliittyma.GraafinenKayttoliittyma;
 
 /**
  *
@@ -35,7 +36,7 @@ public class LaserTest {
 
     @Before
     public void setUp() {
-        moottori = new Pelimoottori();
+        moottori = new Pelimoottori(new GraafinenKayttoliittyma());
         alus = new Alus(5, 10, 20, 30, moottori);
         alus.ammuLaser();
         laser = (Laser) moottori.getAseet().get(0);

@@ -1,7 +1,12 @@
 package spaseimpakt.data;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import spaseimpakt.logiikka.Pelimoottori;
 
 /**
@@ -19,6 +24,7 @@ public class Alus implements Piirrettava{
     private long edellinenAmmus;
     private int laserit;
     private int pommit;
+    private Image sprite;
 
     // Onko tämä rumaa?
     public static final int NOPEUS = 5; // TODO sopiva nopeuden arvo alukselle
@@ -53,6 +59,13 @@ public class Alus implements Piirrettava{
         tarkastaPaikka();
         suunta = Suunta.PAIKALLAAN;
         edellinenAmmus = 0;
+        
+        try{
+            BufferedImage i = ImageIO.read(new File("resources/simppelialus.png"));
+            this.sprite = i;
+        } catch (IOException e){
+            System.out.println("Aluksen kuvaa ei löytynyt");
+        }
     }
 
     public int getX() {
@@ -162,7 +175,6 @@ public class Alus implements Piirrettava{
 
     @Override
     public Image getSprite() {
-        //TODO oispa kuva
-        return null;
+        return sprite;
     }
 }

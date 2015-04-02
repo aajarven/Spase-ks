@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import spaseimpakt.kayttoliittyma.GraafinenKayttoliittyma;
 
 /**
  *
@@ -25,7 +26,7 @@ public class AlusTest {
     int liikkumiskerrat;
 
     public AlusTest() {
-        moottori = new Pelimoottori();
+        moottori = new Pelimoottori(new GraafinenKayttoliittyma());
         alkuperainenX = 10;
         alkuperainenY = 11;
         maxX = 15;

@@ -18,8 +18,6 @@ import spaseimpakt.kayttoliittyma.GraafinenKayttoliittyma;
  * @author Anni
  */
 public class Pelimoottori extends Thread {
-
-    //TODO kuolinilmoitus
     
     /**
      * True jos peli on käynnissä, muuten false
@@ -41,13 +39,19 @@ public class Pelimoottori extends Thread {
     private GraafinenKayttoliittyma kayttoliittyma;
     
     private HashSet<Piirrettava> piirrettavat;
-
-    public Pelimoottori() {
-        aseet=new ArrayList<>();
+    
+    /**
+     * Konstruktori
+     * @param kayttoliittyma käyttöliittymä, joka näyttää pelin tapahtumat
+     * @param maailma maailma, jonka tilannetta päivitetään
+     */
+    public Pelimoottori(GraafinenKayttoliittyma kayttoliittyma) {
+        this.kayttoliittyma = kayttoliittyma;
+        this.kaynnissa = true;
+        this.alus = new Alus(0, Pelirunko.KORKEUS/2, Pelirunko.LEVEYS, Pelirunko.KORKEUS, this);
+        this.aseet=new ArrayList<>();
     }
     
-    //TODO muu pelimoottori
-
     public void lisaaAse(Ase ase) {
         aseet.add(ase);
     }
@@ -59,17 +63,13 @@ public class Pelimoottori extends Thread {
     public ArrayList<Ase> getAseet(){
         return aseet;
     }
-    
-    /**
-     * Konstruktori
-     * @param kayttoliittyma käyttöliittymä, joka näyttää pelin tapahtumat
-     * @param maailma maailma, jonka tilannetta päivitetään
-     */
-    public Pelimoottori(GraafinenKayttoliittyma kayttoliittyma) {
-        this.kayttoliittyma = kayttoliittyma;
-        this.kaynnissa = true;
-        this.alus = new Alus(0, 200, 600, 400, this);
+
+    public Alus getAlus() {
+        return alus;
     }
+    
+    
+    
 
     /**
      * Varsinainen pelitapahtuma. 

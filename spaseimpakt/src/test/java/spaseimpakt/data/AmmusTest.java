@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import spaseimpakt.kayttoliittyma.GraafinenKayttoliittyma;
 
 /**
  *
@@ -29,7 +30,7 @@ public class AmmusTest {
         alkuX = 5;
         alkuY = 20;
         maxX=25;
-        moottori=new Pelimoottori();
+        moottori=new Pelimoottori(new GraafinenKayttoliittyma());
         alus=new Alus(alkuX, alkuY, maxX, 20, moottori);
     }
 

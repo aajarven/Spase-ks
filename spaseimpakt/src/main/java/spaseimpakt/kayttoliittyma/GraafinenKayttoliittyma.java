@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import spaseimpakt.logiikka.Pelimoottori;
+import spaseimpakt.logiikka.Pelirunko;
 
 /**
  * Luo käyttöliittymän ja hoitaa sen käyttämiseen liittyviä asioita sisältäen mm. tarvittavat kuuntelijat
@@ -47,11 +48,23 @@ public class GraafinenKayttoliittyma implements Runnable {
     }
 
     /**
+     * Konstruktori.
+     * Pelimoottori täytyy asettaa erikseen käyttäen setteriä.
+     * @see setPelimoottori
+     */
+    public GraafinenKayttoliittyma() {
+    }
+    
+    public void setPelimoottori(Pelimoottori moottori){
+        this.moottori=moottori;
+    }
+
+    /**
      * Luo framen sekä kutsuu metodeja komponenttien ja kuuntelijoiden luomiseksi
      */
     @Override
     public void run() {
-        frame = new JFrame("Luolalentely");
+        frame = new JFrame("Spase Impakt");
 //        frame.setPreferredSize(new Dimension(LEVEYS, KORKEUS+10));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -71,7 +84,9 @@ public class GraafinenKayttoliittyma implements Runnable {
      * @param container container, johon komponentit lisätään
      */
     private void luoKomponentit(Container container) {
-        //TODO koodi
+        Ikkuna ikkuna=new Ikkuna(moottori);
+        ikkuna.setPreferredSize(new Dimension(Pelirunko.LEVEYS, Pelirunko.KORKEUS));
+        container.add(ikkuna);
     }
 
 
@@ -98,9 +113,7 @@ public class GraafinenKayttoliittyma implements Runnable {
      * @see Ikkuna#repaint
      */
     public void piirra() {
-//        System.out.println("piirra-metodissa");
         if (ikkuna != null) {
-//            System.out.println("ikkuna ei null");
             ikkuna.repaint();
         } else {
 //            System.out.println("ikkuna oli null");

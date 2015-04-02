@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import spaseimpakt.kayttoliittyma.GraafinenKayttoliittyma;
 
 /**
  *
@@ -33,7 +34,7 @@ public class PommiTest {
     
     @Before
     public void setUp() {
-        moottori = new Pelimoottori();
+        moottori = new Pelimoottori(new GraafinenKayttoliittyma());
         alus = new Alus(10, 10, 20, 20, moottori);
     }
     
