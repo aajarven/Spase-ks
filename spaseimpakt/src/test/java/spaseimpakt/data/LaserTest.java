@@ -82,7 +82,7 @@ public class LaserTest {
     }
 
     @Test
-    public void katoaaOikein() {
+    public void katoaaOikein() { // TODO testin läpäisy
         laser.liiku();
         assertEquals("Laser katoaa liian aikaisin", 1, moottori.getAseet().size());
         while(System.currentTimeMillis()-alku<=laser.getKESTO()){

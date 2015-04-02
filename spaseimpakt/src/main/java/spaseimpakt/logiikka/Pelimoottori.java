@@ -5,6 +5,7 @@ package spaseimpakt.logiikka;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 import spaseimpakt.data.Alus;
 import spaseimpakt.data.Ammus;
@@ -34,7 +35,7 @@ public class Pelimoottori extends Thread {
      */
     private Alus alus;
 
-    private CopyOnWriteArraySet <Ase> aseet;
+    private CopyOnWriteArrayList <Ase> aseet;
 
     private GraafinenKayttoliittyma kayttoliittyma;
 
@@ -50,14 +51,13 @@ public class Pelimoottori extends Thread {
         this.kayttoliittyma = kayttoliittyma;
         this.kaynnissa = true;
         this.alus = new Alus(0, Pelirunko.KORKEUS / 2, Pelirunko.LEVEYS, Pelirunko.KORKEUS, this);
-        this.aseet = new CopyOnWriteArraySet<>();
+        this.aseet = new CopyOnWriteArrayList<>();
         this.piirrettavat=new CopyOnWriteArraySet<>();
         piirrettavat.add(alus);
     }
 
     public void lisaaAse(Ase ase) {
         aseet.add(ase);
-        System.out.println("pew");
         if(ase instanceof Ammus){ // tai myöhemmin laser, pommia ei piirretä
             piirrettavat.add((Ammus) ase);
         }
@@ -66,9 +66,10 @@ public class Pelimoottori extends Thread {
     public void poistaAse(Ase ase) {
         aseet.remove(ase);
         piirrettavat.remove(ase);
+        System.out.println(aseet.size());
     }
 
-    public CopyOnWriteArraySet<Ase> getAseet() {
+    public CopyOnWriteArrayList<Ase> getAseet() {
         return aseet;
     }
 

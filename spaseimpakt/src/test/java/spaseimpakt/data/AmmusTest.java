@@ -3,6 +3,8 @@
  */
 package spaseimpakt.data;
 
+import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import spaseimpakt.logiikka.Pelimoottori;
 import spaseimpakt.data.Ammus;
 import org.junit.After;
@@ -21,7 +23,7 @@ public class AmmusTest {
 
     int alkuX;
     int alkuY;
-    int maxX;
+    int ruudunLeveys;
     Ammus ammus;
     Alus alus;
     Pelimoottori moottori;
@@ -29,9 +31,9 @@ public class AmmusTest {
     public AmmusTest() {
         alkuX = 5;
         alkuY = 20;
-        maxX=25;
-        moottori=new Pelimoottori(new GraafinenKayttoliittyma());
-        alus=new Alus(alkuX, alkuY, maxX, 20, moottori);
+        ruudunLeveys = 100;
+        moottori = new Pelimoottori(new GraafinenKayttoliittyma());
+        alus = new Alus(alkuX, alkuY, ruudunLeveys, 100, moottori);
     }
 
     @BeforeClass
@@ -56,24 +58,22 @@ public class AmmusTest {
     public void testLiiku() {
         for (int i = 0; i < 10; i++) {
             ammus.liiku();
-            assertEquals("Ammuksen liikkuessa sen x-koordinaatti muuttuu väärin", alkuX + (i+1)* Ammus.NOPEUS, ammus.getX());
+            assertEquals("Ammuksen liikkuessa sen x-koordinaatti muuttuu väärin", alkuX + (i + 1) * Ammus.NOPEUS, ammus.getX());
             assertEquals("Ammuksen liikkuessa sen y-koordinaatin ei pitäisi muuttua", alkuY, ammus.getY());
         }
 
     }
-    
+
     @Test
-    public void tuhoutuuReunanJalkeen(){
-        
-        for(int i=1; Ammus.NOPEUS*i+alkuX<=maxX; i++){
+    public void tuhoutuuReunanJalkeen() { //TODO testin läpäisy
+
+        for (int i = 1; Ammus.NOPEUS * i + alkuX <= ruudunLeveys - ammus.getSprite().getWidth(null); i++) {
             assertEquals("Ammus poistuu liian aikaisin", 1, moottori.getAseet().size());
             ammus.liiku();
         }
-        assertTrue("Ammus poistuu jo kun se koskettaa reunaa mutta ei ole vielä ylittänyt sitä", moottori.getAseet().size()==1);
+        assertTrue("Ammus poistuu jo kun se koskettaa reunaa mutta ei ole vielä ylittänyt sitä", moottori.getAseet().size() == 1);
         ammus.liiku();
         assertEquals("Ammusta ei poisteta kun se poistuu pelialueelta", 0, moottori.getAseet().size());
     }
 
-    
-    
 }

@@ -24,13 +24,13 @@ public class AlusTest {
     int maxX;
     int maxY;
     int liikkumiskerrat;
+    int spritenleveys;
+    int spritenkorkeus;
 
     public AlusTest() {
         moottori = new Pelimoottori(new GraafinenKayttoliittyma());
         alkuperainenX = 10;
         alkuperainenY = 11;
-        maxX = 15;
-        maxY = 15;
     }
 
     @BeforeClass
@@ -44,8 +44,13 @@ public class AlusTest {
 
     @Before
     public void setUp() {
-
-        alus = new Alus(alkuperainenX, alkuperainenY, maxX, maxY, moottori);
+        int pelialuerkorkeus = 80;
+        int pelialueleveys = 100;
+        alus = new Alus(alkuperainenX, alkuperainenY, pelialueleveys, pelialuerkorkeus, moottori);
+        spritenleveys = alus.getSprite().getWidth(null);
+        spritenkorkeus = alus.getSprite().getHeight(null);
+        maxX = pelialueleveys - spritenleveys;
+        maxY = pelialuerkorkeus - spritenkorkeus;
     }
 
     @After
@@ -135,22 +140,33 @@ public class AlusTest {
 
     @Test
     public void jamptistiReunaanVoiMenna() {
-        Alus jampti = new Alus(Alus.NOPEUS, Alus.NOPEUS, Alus.NOPEUS * 2, Alus.NOPEUS * 2, moottori);
+        int ruudunkorkeus = Alus.NOPEUS * 200;
+        int ruudunleveys = Alus.NOPEUS * 200;
+        int jamptiMaxX = ruudunleveys - spritenleveys;
+        int jamptiMaxY = ruudunkorkeus - spritenkorkeus;
+        Alus jampti = new Alus(Alus.NOPEUS * 100, Alus.NOPEUS * 100, ruudunleveys, ruudunkorkeus, moottori);
 
-        liikutaSuuntaan(jampti, Suunta.YLOS);
+        liikutaReunanYli(jampti, Suunta.YLOS);
         assertEquals("Aluksen pitäisi voida liikkua tasan reunaan saakka ylöspäin mentäessä", 0, jampti.getY());
 
         liikutaSuuntaan(jampti, Suunta.ALAS);
-        liikutaSuuntaan(jampti, Suunta.VASEN);
+        while (jampti.getX() > 0) {
+            liikutaSuuntaan(jampti, Suunta.VASEN);
+        }
         assertEquals("Aluksen pitäisi voida liikkua tasan reunaan saakka vasemmalle mentäessä", 0, jampti.getX());
 
         liikutaSuuntaan(jampti, Suunta.OIKEA);
-        liikutaSuuntaan(jampti, Suunta.ALAS);
-        assertEquals("Aluksen pitäisi voida liikkua tasan reunaan saakka alas mentäessä", Alus.NOPEUS * 2, jampti.getY());
+        while (jampti.getY() < jamptiMaxY) {
+            liikutaSuuntaan(jampti, Suunta.ALAS);
+        }
+        assertEquals("Aluksen pitäisi voida liikkua tasan reunaan saakka alas mentäessä", jamptiMaxY, jampti.getY());
 
         liikutaSuuntaan(jampti, Suunta.YLOS);
+        for (int i = 0; i * Alus.NOPEUS < jamptiMaxX; i++) {
+            liikutaReunanYli(jampti, Suunta.OIKEA);
+        }
         liikutaSuuntaan(jampti, Suunta.OIKEA);
-        assertEquals("Aluksen pitäisi voida liikkua tasan reunaan saakka oikealle mentäessä", Alus.NOPEUS * 2, jampti.getX());
+        assertEquals("Aluksen pitäisi voida liikkua tasan reunaan saakka oikealle mentäessä", jamptiMaxX, jampti.getX());
 
     }
 
@@ -229,19 +245,19 @@ public class AlusTest {
 
     @Test
     public void eiVoiLuodaSallitunUlkopuolelle() {
-        Alus vasemmallaUlkona = new Alus(-5, 5, 10, 10, moottori);
+        Alus vasemmallaUlkona = new Alus(-5, 5, 100, 100, moottori);
         assertEquals("Aluksen luomisen pelialueen vasemman reunan vasemmalle puolelle pitäisi olla mahdotonta", 0, vasemmallaUlkona.getX());
 
-        Alus oikeallaUlkona = new Alus(15, 5, 10, 10, moottori);
-        assertEquals("Aluksen luomisen pelialueen oikean reunan oikealle puolele pitäisi olla mahdotonta", 10, oikeallaUlkona.getX());
+        Alus oikeallaUlkona = new Alus(150, 5, 100, 100, moottori);
+        assertEquals("Aluksen luomisen pelialueen oikean reunan oikealle puolele pitäisi olla mahdotonta", 100 - alus.getSprite().getWidth(null), oikeallaUlkona.getX());
 
-        Alus ylhaallaUlkona = new Alus(5, -5, 10, 10, moottori);
+        Alus ylhaallaUlkona = new Alus(5, -5, 100, 100, moottori);
         assertEquals("Aluksen luomisen pelialueen yläreunan yläpuolelle pitäisi olla mahdotonta", 0, ylhaallaUlkona.getY());
 
-        Alus alhaallaUlkona = new Alus(5, 15, 10, 10, moottori);
-        assertEquals("Aluksen luomisen pelialueen alareunan alapuolelle pitäisi olla mahdotonta", 10, alhaallaUlkona.getY());
+        Alus alhaallaUlkona = new Alus(5, 150, 100, 100, moottori);
+        assertEquals("Aluksen luomisen pelialueen alareunan alapuolelle pitäisi olla mahdotonta", 100 - alus.getSprite().getHeight(null), alhaallaUlkona.getY());
 
-        Alus kahdessaSuunnassaUlkona = new Alus(-5, -5, 10, 10, moottori);
+        Alus kahdessaSuunnassaUlkona = new Alus(-5, -5, 100, 100, moottori);
         assertEquals("Aluksen luomisen pelialueen vasemman reunan vasemmalle puolelle pitäisi olla mahdotonta", 0, kahdessaSuunnassaUlkona.getX());
         assertEquals("Aluksen luomisen pelialueen yläreunan yläpuolelle pitäisi olla mahdotonta", 0, kahdessaSuunnassaUlkona.getY());
     }
@@ -262,32 +278,32 @@ public class AlusTest {
     @Test
     public void laserAmmutaan() {
         alus.ammuLaser();
-        assertTrue("Laserin ampumisen jälkeen aseet-listassa ei ollut yhtä asetta", moottori.getAseet().size()==1);
+        assertTrue("Laserin ampumisen jälkeen aseet-listassa ei ollut yhtä asetta", moottori.getAseet().size() == 1);
     }
-    
+
     @Test
-    public void eiVoiAmpuaRajatta(){
-        while(alus.getLaserit()>0){
+    public void eiVoiAmpuaRajatta() {
+        while (alus.getLaserit() > 0) {
             alus.ammuLaser();
         }
-        int ammututLaserit=moottori.getAseet().size();
+        int ammututLaserit = moottori.getAseet().size();
         alus.ammuLaser();
-        assertTrue("Lasereiden ampumista ei lopetettu, vaikka niitä ei ollut enää käytettävissä", moottori.getAseet().size()==ammututLaserit);
+        assertTrue("Lasereiden ampumista ei lopetettu, vaikka niitä ei ollut enää käytettävissä", moottori.getAseet().size() == ammututLaserit);
     }
-    
+
     @Test
-    public void pommiAmmutaan(){
+    public void pommiAmmutaan() {
         alus.ammuPommi();
-        assertTrue("Pommin ampumisen jälkeen aseet-listassa ei ollut yhtä asetta", moottori.getAseet().size()==1);
+        assertTrue("Pommin ampumisen jälkeen aseet-listassa ei ollut yhtä asetta", moottori.getAseet().size() == 1);
     }
-    
+
     @Test
-    public void pommejaEiVoiAmpuaRajatta(){
-        while(alus.getPommit()>0){
+    public void pommejaEiVoiAmpuaRajatta() {
+        while (alus.getPommit() > 0) {
             alus.ammuPommi();
         }
-        int ammututPommit=moottori.getAseet().size();
+        int ammututPommit = moottori.getAseet().size();
         alus.ammuPommi();
-        assertTrue("Pommien ampumista ei lopetettu, vaikka niitä ei ollut enää käytettävissä", moottori.getAseet().size()==ammututPommit);
+        assertTrue("Pommien ampumista ei lopetettu, vaikka niitä ei ollut enää käytettävissä", moottori.getAseet().size() == ammututPommit);
     }
 }

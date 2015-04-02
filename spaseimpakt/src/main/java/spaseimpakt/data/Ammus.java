@@ -17,17 +17,17 @@ public class Ammus implements Ase, Piirrettava {
 
     Pelimoottori moottori;
     int x;
-    int y;
+    final int y;
     int maxX;
     public static final int NOPEUS = 5; // TODO järkevä nopeus
     Image sprite;
 
-    public Ammus(int x, int y, int maxX, Pelimoottori moottori) {
+    public Ammus(int x, int y, int ruudunLeveys, Pelimoottori moottori) {
+        lueSprite();
         this.x = x;
         this.y = y;
-        this.maxX = maxX;
+        this.maxX = ruudunLeveys - sprite.getWidth(null);
         this.moottori = moottori;
-        lueSprite();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class Ammus implements Ase, Piirrettava {
     public Image getSprite() {
         return sprite;
     }
-    
+
     private void lueSprite() {
         try {
             BufferedImage i = ImageIO.read(new File("resources/ammus.png"));
