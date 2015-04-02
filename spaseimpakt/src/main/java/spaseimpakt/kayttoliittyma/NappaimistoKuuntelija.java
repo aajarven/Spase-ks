@@ -44,6 +44,8 @@ public class NappaimistoKuuntelija implements KeyListener {
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             vasenpainettu = true;
             alus.setSuunta(Suunta.VASEN);
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            alus.ammuLaukaus();
         }
     }
 

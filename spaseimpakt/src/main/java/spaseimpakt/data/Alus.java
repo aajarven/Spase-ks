@@ -13,7 +13,7 @@ import spaseimpakt.logiikka.Pelimoottori;
  */
 public class Alus implements Piirrettava {
 
-    private Pelimoottori moottori;
+    private final Pelimoottori moottori;
     private int x;
     private int y;
     private int maxX;
