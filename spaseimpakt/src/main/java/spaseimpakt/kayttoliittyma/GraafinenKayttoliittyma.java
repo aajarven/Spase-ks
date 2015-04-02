@@ -4,15 +4,6 @@
 package spaseimpakt.kayttoliittyma;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import spaseimpakt.logiikka.Pelimoottori;
 import spaseimpakt.logiikka.Pelirunko;
@@ -72,7 +63,7 @@ public class GraafinenKayttoliittyma implements Runnable {
         luoKomponentit(frame.getContentPane());
 
         //TODO näppäimistökuuntelija
-//        frame.addKeyListener(kuuntelija);
+        frame.addKeyListener(new NappaimistoKuuntelija(moottori));
 
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -84,7 +75,7 @@ public class GraafinenKayttoliittyma implements Runnable {
      * @param container container, johon komponentit lisätään
      */
     private void luoKomponentit(Container container) {
-        Ikkuna ikkuna=new Ikkuna(moottori);
+        ikkuna=new Ikkuna(moottori);
         ikkuna.setPreferredSize(new Dimension(Pelirunko.LEVEYS, Pelirunko.KORKEUS));
         container.add(ikkuna);
     }

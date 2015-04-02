@@ -18,8 +18,7 @@ public class Pelirunko {
     public static final int LEVEYS=800;
     
     public static Pelimoottori moottori;
-    private static GraafinenKayttoliittyma kayttoliittyma;
-    
+    private static GraafinenKayttoliittyma kayttoliittyma;    
     
     //TODO pelaajan nimen kysyminen
 
@@ -31,7 +30,7 @@ public class Pelirunko {
         
         moottori.start();
     }
-    
+        
     /**
      * Aloittaa pelin alusta
      */

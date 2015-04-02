@@ -43,16 +43,22 @@ public class Alus implements Piirrettava{
      *
      * @param x Aluksen x-koordinaatti (0 vasemmassa laidassa, kasvaa oikealle)
      * @param y Aluksen y-koodrinaatti (0 ylhäällä, kasvaa alas)
-     * @param maxX Suurin sallittu x-koordinaatti, jota pidemmälle oikealle ei
-     * voi liikkua (käytännössä pelialueen leveys)
-     * @param maxY Suurin sallittu y-koordinaatti, jota alemmas ei voi liikkua
+     * @param pelialueenLeveys Peli-ikkunan koko x-suunnassa
+     * @param pelialueenKorkeus Peli-ikkunan koko y-suunnassa
      * (käytännössä pelialueen korkeus)
      */
-    public Alus(int x, int y, int maxX, int maxY, Pelimoottori moottori) {
+    public Alus(int x, int y, int pelialueenLeveys, int pelialueenKorkeus, Pelimoottori moottori) {
+        try{
+            BufferedImage i = ImageIO.read(new File("resources/simppelialus.png"));
+            this.sprite = i;
+        } catch (IOException e){
+            System.out.println("Aluksen kuvaa ei löytynyt");
+        }
+        
         this.x = x;
         this.y = y;
-        this.maxX = maxX; // TODO korjaa se, ettei mikään estä laittamasta maksimiarvoksi esim negatiivista lukua, jos ohjelmoija on tyhmä
-        this.maxY = maxY;
+        this.maxX = pelialueenLeveys-sprite.getWidth(null); // TODO korjaa se, ettei mikään estä laittamasta maksimiarvoksi esim negatiivista lukua, jos ohjelmoija on tyhmä
+        this.maxY = pelialueenKorkeus-sprite.getHeight(null);
         this.moottori = moottori;
         this.laserit = LASERIT_ALUSSA;
         this.pommit = POMMIT_ALUSSA;
@@ -60,12 +66,7 @@ public class Alus implements Piirrettava{
         suunta = Suunta.PAIKALLAAN;
         edellinenAmmus = 0;
         
-        try{
-            BufferedImage i = ImageIO.read(new File("resources/simppelialus.png"));
-            this.sprite = i;
-        } catch (IOException e){
-            System.out.println("Aluksen kuvaa ei löytynyt");
-        }
+        
     }
 
     public int getX() {
@@ -98,7 +99,7 @@ public class Alus implements Piirrettava{
         } else if (suunta == Suunta.VASEN) {
             this.x -= NOPEUS;
         }
-
+        
         tarkastaPaikka();
     }
 
