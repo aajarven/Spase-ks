@@ -19,6 +19,8 @@ public class Alus implements Piirrettava {
     private int y;
     private int maxX;
     private int maxY;
+    private int pelialueenLeveys;
+    private int pelialueenKorkeus;
     private Suunta suunta;
     private long edellinenAmmus;
     private int laserit;
@@ -51,6 +53,8 @@ public class Alus implements Piirrettava {
         lueSprite();
         this.x = x;
         this.y = y;
+        this.pelialueenLeveys=pelialueenLeveys;
+        this.pelialueenKorkeus=pelialueenKorkeus;
         this.maxX = pelialueenLeveys - sprite.getWidth(null); // TODO korjaa se, ettei mikään estä laittamasta maksimiarvoksi esim negatiivista lukua, jos ohjelmoija on tyhmä
         this.maxY = pelialueenKorkeus - sprite.getHeight(null);
         tarkastaPaikka();
@@ -107,7 +111,6 @@ public class Alus implements Piirrettava {
         if(ampuuLaukauksiaNyt){
             ammuLaukaus();
         }
-        System.out.println(moottori.getAseet().size()); // muista poistaa testitulostus
     }
 
     private void tarkastaPaikka() {
@@ -134,7 +137,7 @@ public class Alus implements Piirrettava {
      */
     public void ammuLaukaus() {
         if (System.currentTimeMillis() - edellinenAmmus > AMPUMIS_INTERVALLI) {
-            moottori.lisaaAse(new Ammus(x, y, Pelirunko.LEVEYS, moottori));
+            moottori.lisaaAse(new Ammus(x, y, pelialueenLeveys, moottori));
             edellinenAmmus = System.currentTimeMillis();
         }
     }

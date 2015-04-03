@@ -4,9 +4,7 @@
 package spaseimpakt.data;
 
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
 import spaseimpakt.logiikka.Pelimoottori;
-import spaseimpakt.data.Ammus;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
