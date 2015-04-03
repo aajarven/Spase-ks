@@ -7,3 +7,6 @@
 |18.3.2015  | 4                 | Testien kirjoittamista alukselle luennolla ja luennon ulkopuolella, aluksen korjaaminen niin, että se läpäisee testit, pit & cobertura, ammuksen + testien aloittaminen |
 |26.3.2015  | 3                 | Aseita ja vihollisluokan runko. Lisäksi pelimoottorille muutama metodi, jotka tarvitaan muiden osien toiminnan testaamiseksi. Törmäystestiluokan dummymetodit. Uusia testejä|
 |27.3.2015  | 2                 | Uudet testit kattaviksi ja toimiviksi. Javadokkia|
+|1.4.2015   | 1                 | Graafisen käyttöliittymän aloittaminen|
+|2.4.2015   | 3                 | Alus liikkumaan näytöllä, ammusten näytölle tuomisen aloittaminen|
+|3.4.2015   | 1                 | Ammukset ja niitä koskevat testit toimimaan|
