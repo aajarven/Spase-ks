@@ -25,6 +25,12 @@ public class NappaimistoKuuntelija implements KeyListener {
     private boolean ylospainettu;
     private boolean alaspainettu;
 
+    /**
+     * Luo uuden näppäimistökuuntelijan, jolla voidaan välittää käyttäjän
+     * näppäimistöltä antama input parametrina annetulle pelimoottorille.
+     *
+     * @param moottori pelimoottori, jonka pyörittämän pelin toimintaa ohjataan.
+     */
     public NappaimistoKuuntelija(Pelimoottori moottori) {
         this.moottori = moottori;
         this.alus = moottori.getAlus();
@@ -35,7 +41,7 @@ public class NappaimistoKuuntelija implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             alus.setAmpuuLaukauksiaNyt(true);
         }
-        
+
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             ylospainettu = true;
             alus.setSuunta(Suunta.YLOS);
@@ -53,10 +59,10 @@ public class NappaimistoKuuntelija implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             alus.setAmpuuLaukauksiaNyt(false);
         }
-        
+
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             ylospainettu = false;
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {

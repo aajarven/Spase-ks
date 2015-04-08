@@ -4,10 +4,11 @@
 package spaseimpakt.data;
 
 /**
+ * Kaikki pelaajan käyttämät aseet, joilla voidaan tuhota vihollisia.
  *
  * @author Anni Järvenpää
  */
-public interface Ase{
+public interface Ase {
 
     // TODO törmäystarkastus johonkin, mihin?
     /**

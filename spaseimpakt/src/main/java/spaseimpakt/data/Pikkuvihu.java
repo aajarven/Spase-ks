@@ -6,6 +6,7 @@ package spaseimpakt.data;
 import java.awt.Image;
 
 /**
+ * Pelin "tavallinen" vihollinen
  *
  * @author Anni Järvenpää
  */

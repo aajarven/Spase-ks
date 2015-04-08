@@ -56,6 +56,10 @@ public class Pelimoottori extends Thread {
         piirrettavat.add(alus);
     }
 
+    /**
+     * Metodi, jota kutsutaan, kun pelaaja ampuu uuden aseen
+     * @param ase ammuttu ase
+     */
     public void lisaaAse(Ase ase) {
         aseet.add(ase);
         if(ase instanceof Ammus){ // tai myöhemmin laser, pommia ei piirretä
@@ -63,15 +67,27 @@ public class Pelimoottori extends Thread {
         }
     }
 
+    /**
+     * Poistaa olemassaolevan aseen kun se ei enää ole toiminnassa
+     * @param ase ase, joka poistetaan
+     */
     public void poistaAse(Ase ase) {
         aseet.remove(ase);
         piirrettavat.remove(ase);
     }
 
+    /**
+     * Palauttaa listan kaikista tällä hetkellä aktiivisista aseista
+     * @return Lista, joka sisältää kaikki aseet.
+     */
     public CopyOnWriteArrayList<Ase> getAseet() {
         return aseet;
     }
 
+    /**
+     * Palauttaa pelaajan ohjaaman aluksen
+     * @return pelaajan lentämä alus
+     */
     public Alus getAlus() {
         return alus;
     }

@@ -22,6 +22,15 @@ public class Ammus implements Ase, Piirrettava {
     public static final int NOPEUS = 5; // TODO järkevä nopeus
     Image sprite;
 
+    /**
+     * Luo uuden ammuksen.
+     *
+     * @param x ammuksen vasemman yläkulman x-koordinaatti
+     * @param y ammuksen vasemman yläkulman y-koordinaatti
+     * @param ruudunLeveys peli-ikkunan leveys, josta lasketaan, koska ammus
+     * voidaan poistaa
+     * @param moottori pelimoottori, jonka pyörittämään peliin ammus on luotu
+     */
     public Ammus(int x, int y, int ruudunLeveys, Pelimoottori moottori) {
         lueSprite();
         this.x = x;
@@ -30,6 +39,10 @@ public class Ammus implements Ase, Piirrettava {
         this.moottori = moottori;
     }
 
+    /**
+     * Liikuttaa ammusta yhden askeleen. Jos ammus on jo pelialueen reunassa,
+     * ammus poistetaan.
+     */
     @Override
     public void liiku() {
         x += this.NOPEUS;
@@ -38,14 +51,28 @@ public class Ammus implements Ase, Piirrettava {
         }
     }
 
+    /**
+     *
+     * @return ammuksen vasemman yläkulman x-koordinaatti
+     */
+    @Override
     public int getX() {
         return x;
     }
 
+    /**
+     *
+     * @return ammuksen vasemman yläkulman y-koordinaatti
+     */
+    @Override
     public int getY() {
         return y;
     }
 
+    /**
+     *
+     * @return ammuksen sprite
+     */
     @Override
     public Image getSprite() {
         return sprite;

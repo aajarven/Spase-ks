@@ -33,7 +33,8 @@ public class GraafinenKayttoliittyma implements Runnable {
     private Pelimoottori moottori;
 
     /**
-     * Konstruktori
+     * Luo uuden graafisen käyttöliittymän, joka näyttää parametrina annetun
+     * pelimoottorin tapahtumat
      *
      * @param moottori pelimoottori, jonka ajaman pelin tapahtumat piirretään
      */

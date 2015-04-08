@@ -9,7 +9,7 @@ import javax.swing.SwingUtilities;
 import spaseimpakt.kayttoliittyma.GraafinenKayttoliittyma;
 
 /**
- *
+ * Main, luo tarvittavat oliot ja käynnistää pelin.
  * @author Anni Järvenpää
  */
 public class Pelirunko {

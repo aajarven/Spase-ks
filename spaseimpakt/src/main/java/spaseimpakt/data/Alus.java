@@ -9,6 +9,7 @@ import spaseimpakt.logiikka.Pelimoottori;
 import spaseimpakt.logiikka.Pelirunko;
 
 /**
+ * Alus, jota pelaaja ohjaa.
  *
  * @author Anni Järvenpää
  */
@@ -40,8 +41,9 @@ public class Alus implements Piirrettava {
     // TODO elämät
     // TODO ammusten liikuttaminen (onko ylipäänsä tyhmää ja sinkkuvastuuperiaatteen vastaista, että alus käskee ammuksensa liikkumaan, pitäisi laittaa muualle? mieti minne?)
     /**
-     * Alus, jolla pelaaja lentää. Jos annetut aloituskoordinaatit eivät ole
-     * sallitulla alueella, luodaan alus niitä lähimpään sallittuun pisteeseen.
+     * Luo aluksen, jolla pelaaja lentää. Jos annetut aloituskoordinaatit eivät
+     * ole sallitulla alueella, luodaan alus niitä lähimpään sallittuun
+     * pisteeseen.
      *
      * @param x Aluksen x-koordinaatti (0 vasemmassa laidassa, kasvaa oikealle)
      * @param y Aluksen y-koodrinaatti (0 ylhäällä, kasvaa alas)
@@ -53,17 +55,17 @@ public class Alus implements Piirrettava {
         lueSprite();
         this.x = x;
         this.y = y;
-        this.pelialueenLeveys=pelialueenLeveys;
-        this.pelialueenKorkeus=pelialueenKorkeus;
+        this.pelialueenLeveys = pelialueenLeveys;
+        this.pelialueenKorkeus = pelialueenKorkeus;
         this.maxX = pelialueenLeveys - sprite.getWidth(null); // TODO korjaa se, ettei mikään estä laittamasta maksimiarvoksi esim negatiivista lukua, jos ohjelmoija on tyhmä
         this.maxY = pelialueenKorkeus - sprite.getHeight(null);
         tarkastaPaikka();
         this.moottori = moottori;
         this.laserit = LASERIT_ALUSSA;
-        this.pommit = POMMIT_ALUSSA;   
+        this.pommit = POMMIT_ALUSSA;
         suunta = Suunta.PAIKALLAAN;
         edellinenAmmus = 0;
-        ampuuLaukauksiaNyt=false;
+        ampuuLaukauksiaNyt = false;
     }
 
     private void lueSprite() {
@@ -75,10 +77,18 @@ public class Alus implements Piirrettava {
         }
     }
 
+    /**
+     *
+     * @return aluksen vasemman yläkulman x-koordinaatti
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     *
+     * @return aluksen vasemman yläkulman y-koordinaatti
+     */
     public int getY() {
         return y;
     }
@@ -107,8 +117,8 @@ public class Alus implements Piirrettava {
         }
 
         tarkastaPaikka();
-        
-        if(ampuuLaukauksiaNyt){
+
+        if (ampuuLaukauksiaNyt) {
             ammuLaukaus();
         }
     }
@@ -184,14 +194,23 @@ public class Alus implements Piirrettava {
         return pommit;
     }
 
+    /**
+     *
+     * @return aluksen sprite
+     */
     @Override
     public Image getSprite() {
         return sprite;
     }
 
+    /**
+     * Asettaa aluksen ampumistilan. Jos true, alus ampuu laukauksen seuraavana
+     * mahdollisena ajanhetkenä, jos false, ei ammu.
+     *
+     * @param ampuuLaukauksiaNyt halutaanko aluksen ampuvan laukauksia.
+     */
     public void setAmpuuLaukauksiaNyt(boolean ampuuLaukauksiaNyt) {
         this.ampuuLaukauksiaNyt = ampuuLaukauksiaNyt;
     }
-    
-    
+
 }

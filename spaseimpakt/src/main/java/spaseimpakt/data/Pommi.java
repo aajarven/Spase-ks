@@ -15,13 +15,22 @@ public class Pommi implements Ase {
 
     Pelimoottori moottori;
 
+    /**
+     * Luo uuden pommin
+     * @param moottori pelimoottori, jonka pyörittämään peliin pommi luodaan.
+     */
     public Pommi(Pelimoottori moottori) {
         this.moottori = moottori;
     }
 
+    /**
+     * Poistaa pommin, koska pommi on aktiivinen vain yhden framen ajan.
+     */
     @Override
     public void liiku() {
         moottori.poistaAse(this);
     }
+    
+    //TODO vahinko vihollisiin
 
 }
