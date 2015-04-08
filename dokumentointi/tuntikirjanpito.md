@@ -10,3 +10,4 @@
 |1.4.2015   | 1                 | Graafisen käyttöliittymän aloittaminen|
 |2.4.2015   | 3                 | Alus liikkumaan näytöllä, ammusten näytölle tuomisen aloittaminen|
 |3.4.2015   | 1                 | Ammukset ja niitä koskevat testit toimimaan|
+|9.4.2015   | 0,5               | Javadoc |
