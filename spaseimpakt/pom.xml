@@ -50,9 +50,11 @@
                 <configuration>
                     <targetClasses>
                         <param>spaseimpakt.data.*</param>
+                        <param>spaseimpakt.logiikka.Pelimoottori</param>
                     </targetClasses>
                     <targetTests>
                         <param>spaseimpakt.data.*</param>
+                        <param>spaseimpakt.logiikka.Pelimoottori</param>
                     </targetTests>
                 </configuration>
             </plugin>
