@@ -12,6 +12,7 @@ package spaseimpakt.data;
 public interface Liikutin {
 
     public int[] liiku();
+    public int getX();
     public int getY();
     
 }
