@@ -11,6 +11,7 @@ import spaseimpakt.data.Alus;
 import spaseimpakt.data.Ammus;
 import spaseimpakt.data.Ase;
 import spaseimpakt.data.Piirrettava;
+import spaseimpakt.data.Vihu;
 import spaseimpakt.kayttoliittyma.GraafinenKayttoliittyma;
 
 /**
@@ -35,11 +36,13 @@ public class Pelimoottori extends Thread {
      */
     private Alus alus;
 
-    private CopyOnWriteArrayList <Ase> aseet;
-
     private GraafinenKayttoliittyma kayttoliittyma;
 
+    private CopyOnWriteArrayList<Ase> aseet;
+
     private CopyOnWriteArraySet<Piirrettava> piirrettavat;
+
+    private CopyOnWriteArrayList<Vihu> viholliset;
 
     /**
      * Konstruktori
@@ -52,23 +55,26 @@ public class Pelimoottori extends Thread {
         this.kaynnissa = true;
         this.alus = new Alus(0, Pelirunko.KORKEUS / 2, Pelirunko.LEVEYS, Pelirunko.KORKEUS, this);
         this.aseet = new CopyOnWriteArrayList<>();
-        this.piirrettavat=new CopyOnWriteArraySet<>();
+        this.piirrettavat = new CopyOnWriteArraySet<>();
+        this.viholliset = new CopyOnWriteArrayList<Vihu>();
         piirrettavat.add(alus);
     }
 
     /**
      * Metodi, jota kutsutaan, kun pelaaja ampuu uuden aseen
+     *
      * @param ase ammuttu ase
      */
     public void lisaaAse(Ase ase) {
         aseet.add(ase);
-        if(ase instanceof Ammus){ // tai myöhemmin laser, pommia ei piirretä
+        if (ase instanceof Ammus) { // tai myöhemmin laser, pommia ei piirretä
             piirrettavat.add((Ammus) ase);
         }
     }
 
     /**
      * Poistaa olemassaolevan aseen kun se ei enää ole toiminnassa
+     *
      * @param ase ase, joka poistetaan
      */
     public void poistaAse(Ase ase) {
@@ -78,14 +84,30 @@ public class Pelimoottori extends Thread {
 
     /**
      * Palauttaa listan kaikista tällä hetkellä aktiivisista aseista
+     *
      * @return Lista, joka sisältää kaikki aseet.
      */
     public CopyOnWriteArrayList<Ase> getAseet() {
         return aseet;
     }
 
+    public CopyOnWriteArrayList<Vihu> getVihut() {
+        return viholliset;
+    }
+
+    public void lisaaVihu(Vihu vihu) {
+        viholliset.add(vihu);
+        piirrettavat.add((Piirrettava) vihu);
+    }
+
+    public void poistaVihu(Vihu vihu) {
+        viholliset.remove(vihu);
+        piirrettavat.remove(vihu);
+    }
+
     /**
      * Palauttaa pelaajan ohjaaman aluksen
+     *
      * @return pelaajan lentämä alus
      */
     public Alus getAlus() {
@@ -108,7 +130,7 @@ public class Pelimoottori extends Thread {
             }
             kayttoliittyma.piirra();
 
-             //TODO do stuff
+            //TODO do stuff
             odota();
         } while (kaynnissa);
     }
