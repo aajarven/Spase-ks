@@ -64,6 +64,15 @@ public class FunktioLiikutin implements Liikutin{
     public int getX() {
         return x;
     }
+
+    public int[] getKertoimet() {
+        return kertoimet;
+    }
+
+    public int getDx() {
+        return dx;
+    }
+    
     
     
 }

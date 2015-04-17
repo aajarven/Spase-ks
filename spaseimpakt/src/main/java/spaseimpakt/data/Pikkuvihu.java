@@ -85,4 +85,8 @@ public class Pikkuvihu implements Vihu, Piirrettava {
         return sprite;
     }
 
+    public Liikutin getLiikutin(){
+        return this.liikutin;
+    }
+    
 }

@@ -11,5 +11,6 @@ package spaseimpakt.data;
 public interface Vihu{
 
     public void liiku();
-
+    public int getX();
+    public int getY();
 }
