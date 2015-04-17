@@ -125,9 +125,15 @@ public class Pelimoottori extends Thread {
         //TODO alkuun varmaan dialogi, jossa kysytään pelaajan nimeä
         do {
             alus.paivita();
+            
             for (Ase ase : aseet) {
                 ase.liiku();
             }
+            
+            for(Vihu vihu: viholliset){
+                vihu.liiku();
+            }
+            
             kayttoliittyma.piirra();
 
             //TODO do stuff

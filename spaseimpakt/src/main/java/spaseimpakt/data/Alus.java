@@ -35,11 +35,9 @@ public class Alus implements Piirrettava {
     private final int LASERIT_ALUSSA = 3;
     private final int POMMIT_ALUSSA = 3;
 
-    // TODO mieti, miten otat aluksen korkeuden ja leveyden huomioon sallittuja koordinaatteja laskettaessa
-    // TODO alukselle sprite
     // TODO törmäystarkastus
     // TODO elämät
-    // TODO ammusten liikuttaminen (onko ylipäänsä tyhmää ja sinkkuvastuuperiaatteen vastaista, että alus käskee ammuksensa liikkumaan, pitäisi laittaa muualle? mieti minne?)
+    
     /**
      * Luo aluksen, jolla pelaaja lentää. Jos annetut aloituskoordinaatit eivät
      * ole sallitulla alueella, luodaan alus niitä lähimpään sallittuun
