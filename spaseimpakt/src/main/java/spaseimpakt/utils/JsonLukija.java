@@ -34,6 +34,12 @@ public class JsonLukija {
     public JsonLukija() {
     }
 
+    /**
+     * Lukee annetussa polussa sijaitsevasta JSON-tiedostosta, mitä vihollisia leveliin kuuluu, ja palauttaa ne ilmestymisaikoineen
+     * @param path polku leveliä kuvaavaan JSON-tiedostoon
+     * @param moottori pelimoottori, jonka pyörittämään peliin viholliset luodaan
+     * @return Viholliset ja ajanhetket, joilla niiden kuuluu ilmestyä näkyville
+     */
     public HashMap<Vihu, Integer> lueVihut(String path, Pelimoottori moottori) {
 
         HashMap<Vihu, Integer> palautettava = new HashMap<>();
