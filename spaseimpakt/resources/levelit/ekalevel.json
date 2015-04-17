@@ -1,0 +1,24 @@
+ekalevel{
+	"vihut": [
+		{
+			"ilmestymisaika": 5000,
+			"vihu": {
+				"x": 500,
+				"sprite": "resources/normivihu.png",
+				"movemode": 1,
+				"dx": 1,
+				"kertoimet":[0, 0, 0, 0, 100]
+			}
+		},
+		{
+			"ilmestymisaika": 6000,
+			{
+				"x": 500,
+				"sprite": "resources/normivihu.png",
+				"movemode": 1,
+				"dx": 1,
+				"kertoimet":[0, 0, 0, 0, 200]
+			}
+		}
+	]
+}
