@@ -52,9 +52,9 @@ public class LevelTest {
         toka = new Pikkuvihu(2, lueSprite(), new FunktioLiikutin(1, 1, new int[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
         kolmas = new Pikkuvihu(3, lueSprite(), new FunktioLiikutin(1, 1, new int[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
 
-        ilmestymisaika1=1;
-        ilmestymisaika2=5;
-        
+        ilmestymisaika1 = 1;
+        ilmestymisaika2 = 5;
+
         lvl = new Level();
         lvl.lisaaVihollinen(ilmestymisaika1, eka);
         lvl.lisaaVihollinen(ilmestymisaika2, toka);
@@ -79,7 +79,7 @@ public class LevelTest {
         assertEquals("Toisen eri aikaan ilmestyvän vihollisen lisääminen ei luo uutta joukkoa kyseisellä hetkellä ilmestyviä vihollisia varten", 2, vihuMap.keySet().size());
         assertEquals("Toisen vihollisen lisäämisen jälkeen vihollisia on väärä määrä kyseistä aikaa vastaavassa listassa", 1, vihuMap.get(5).size());
         assertEquals("Toisen vihollisen lisääminen muuttaa myös ensimmäisen vihollisen sisältävän ArrayListin kokoa", 1, vihuMap.get(5).size());
-        
+
         Vihu kolmas = new Pikkuvihu(1, lueSprite(), new FunktioLiikutin(1, 1, new int[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
         lisaysLevel.lisaaVihollinen(5, kolmas);
         assertEquals("Samaan aikaan edellisen kanssa ilmestyvän vihollisen lisääminen luo uuden avaimen vaikka sopiva on jo olemassa", 2, vihuMap.keySet().size());
@@ -106,12 +106,21 @@ public class LevelTest {
     public void testOnkoSeuraavanVihollisenAika() {
         assertTrue("Ohjelman mukaan ei ole seuraavan aika, vaikka pitäisi olla", lvl.onkoSeuraavanVihollisenAika(ilmestymisaika1));
         assertFalse("Ohjelman mukaan on seuraavan aika, vaikka ei pitäisi olla", lvl.onkoSeuraavanVihollisenAika(0));
-        assertTrue("Ohjlma ei tunnista, että seuraavan vihollisen pitäisi ilmestyä, vaikka sen aika olisi jo ohitettu", lvl.onkoSeuraavanVihollisenAika(ilmestymisaika1+1));
-        while(lvl.onkoSeuraavanVihollisenAika(ilmestymisaika1)){
+        assertTrue("Ohjlma ei tunnista, että seuraavan vihollisen pitäisi ilmestyä, vaikka sen aika olisi jo ohitettu", lvl.onkoSeuraavanVihollisenAika(ilmestymisaika1 + 1));
+        while (lvl.onkoSeuraavanVihollisenAika(ilmestymisaika1)) {
             lvl.seuraavaVihollinen();
         }
         assertTrue("Ohjelman mukaan ei ole seuraavan aika, vaikka pitäisi olla", lvl.onkoSeuraavanVihollisenAika(ilmestymisaika2));
-        assertFalse("Ohjelman mukaan on seuraavan aika, vaikka ei pitäisi olla", lvl.onkoSeuraavanVihollisenAika(ilmestymisaika2-1));
+        assertFalse("Ohjelman mukaan on seuraavan aika, vaikka ei pitäisi olla", lvl.onkoSeuraavanVihollisenAika(ilmestymisaika2 - 1));
+    }
+
+    @Test
+    public void testVihollistenLoppuminen() {
+        for (int i = 0; i < 3; i++) {
+            assertFalse("Vihollisten väitetään loppuvan liian aikaisin", lvl.ovatkoVihollisetLoppu());
+            lvl.seuraavaVihollinen();
+        }
+        assertTrue("Vihollisten loppumista ei tunnisteta", lvl.ovatkoVihollisetLoppu());
     }
 
     private Image lueSprite() {
