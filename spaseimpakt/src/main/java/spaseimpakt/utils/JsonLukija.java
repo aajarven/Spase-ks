@@ -57,10 +57,10 @@ public class JsonLukija {
                 Vihu lisattava;
 
                 JSONObject vihuTiedot = iterator.next();
-                int ilmestymisaika = (int) vihuTiedot.get("ilmestymisaika");
+                int ilmestymisaika = ((Long) vihuTiedot.get("ilmestymisaika")).intValue();
                 JSONObject vihu = (JSONObject) vihuTiedot.get("vihu");
-                int x = (int) vihu.get("x");
-                int dx = (int) vihu.get("dx");
+                int x = ((Long) vihu.get("x")).intValue();
+                int dx = ((Long) vihu.get("dx")).intValue();
                 String spritePath = (String) vihu.get("sprite");
                 BufferedImage sprite;
                 try {
@@ -69,9 +69,13 @@ public class JsonLukija {
                     e.printStackTrace();
                     sprite = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
                 }
-                int movemode = (int) vihu.get("movemode"); // movemode 0=funktio, 1=seuraa, 2=random
+                int movemode = ((Long) vihu.get("movemode")).intValue(); // movemode 0=funktio, 1=seuraa, 2=random
                 if (movemode == 0) {
-                    int[] kertoimet = (int[]) vihu.get("kertoimet");
+                    JSONArray kerroinarray = (JSONArray) vihu.get("kertoimet");
+                    int[] kertoimet = new int[kerroinarray.size()];
+                    for(int i=0; i<kerroinarray.size(); i++){
+                        kertoimet[i]=((Long) kerroinarray.get(i)).intValue();
+                    }
                     FunktioLiikutin liikutin = new FunktioLiikutin(x, dx, kertoimet);
                     lisattava = new Pikkuvihu(x, sprite, liikutin, moottori);
                 } else {

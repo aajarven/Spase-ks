@@ -1,0 +1,47 @@
+{
+	"vihut": [
+		{
+			"ilmestymisaika": 5000,
+			"vihu": {
+				"x": 500,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[5, 7, -2, 1, 100]
+			}
+		},
+
+		{
+			"ilmestymisaika": 6000,
+			"vihu": {
+				"x": 700,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[5, 7, -2, 1, 100]
+			}
+		},
+
+		{
+			"ilmestymisaika": 7000,
+			"vihu": {
+				"x": 600,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[5, 7, -2, 1, 100]
+			}
+		},
+
+		{
+			"ilmestymisaika": 8000,
+			"vihu": {
+				"x": 200,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[5, 7, -2, 1, 100]
+			}
+		}
+	]
+}
