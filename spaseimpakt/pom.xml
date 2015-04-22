@@ -58,10 +58,14 @@
                     <targetClasses>
                         <param>spaseimpakt.data.*</param>
                         <param>spaseimpakt.logiikka.Pelimoottori</param>
+                        <param>spaseimpakt.logiikka.LevelManager</param>
+                        <param>spaseimpakt.utils.JsonLukija</param>
                     </targetClasses>
                     <targetTests>
                         <param>spaseimpakt.data.*</param>
                         <param>spaseimpakt.logiikka.Pelimoottori</param>
+                        <param>spaseimpakt.logiikka.LevelManager</param>
+                        <param>spaseimpakt.utils.JsonLukija</param>
                     </targetTests>
                 </configuration>
             </plugin>
