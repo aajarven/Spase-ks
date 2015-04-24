@@ -72,7 +72,6 @@ public class Level {
         if (viholliset.isEmpty()) {
             return false;
         } else if (viholliset.firstKey() <= nykyhetki) {
-            System.out.println("seuraavan vihollisen aika");
             return true;
         } else {
             return false;

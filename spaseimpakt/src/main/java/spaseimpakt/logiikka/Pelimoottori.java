@@ -34,7 +34,7 @@ public class Pelimoottori extends Thread {
     /**
      * Viive kahden ruudunpäivityksen välillä
      */
-    private final int STEP = 1000 / 75;
+    private final int STEP = 1000 / 100;
 
     private Alus alus;
     private GraafinenKayttoliittyma kayttoliittyma;
@@ -194,7 +194,6 @@ public class Pelimoottori extends Thread {
         
         Long aikaLevelinAlustaLong = System.currentTimeMillis()-levelinAlkuAika;
         int aikaLevelinAlusta = aikaLevelinAlustaLong.intValue();
-        System.out.println(aikaLevelinAlusta);
         while(lvl.onkoSeuraavanVihollisenAika(aikaLevelinAlusta)){
             lisaaVihu(lvl.seuraavaVihollinen());
         }
