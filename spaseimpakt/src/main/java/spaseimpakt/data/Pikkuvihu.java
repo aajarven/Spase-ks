@@ -52,7 +52,7 @@ public class Pikkuvihu implements Vihu, Piirrettava {
         } else if (y>maxY){
             y=maxY;
         }
-        if(x<0){
+        if(x<0-sprite.getWidth(null)){
             moottori.poistaVihu(this);
         }
     }

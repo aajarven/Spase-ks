@@ -89,7 +89,7 @@ public class PikkuvihuTest {
         Pelimoottori moottori = new Pelimoottori(new GraafinenKayttoliittyma());
         Pikkuvihu vihu = new Pikkuvihu(10, sprite, liikutin, moottori);
         moottori.lisaaVihu(vihu);
-        for (int i = 0; i < 10; i++) {
+        while(vihu.getX()>0-sprite.getWidth(null)) {
             assertFalse("Vihollinen ei poistu vasemmassa reunassa oikein", moottori.getVihut().isEmpty());
             assertEquals("vihollisen x-koordinaatti muuttuu väärin", liikutin.getX(), vihu.getX());
             vihu.liiku();
