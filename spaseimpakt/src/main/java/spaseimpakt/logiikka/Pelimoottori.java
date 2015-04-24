@@ -35,13 +35,21 @@ public class Pelimoottori extends Thread {
      * Pelimaailmassa liikkuva alus
      */
     private Alus alus;
-
+    /**
+     * Pelin käyttöliittymä
+     */
     private GraafinenKayttoliittyma kayttoliittyma;
-
+    /**
+     * Pelaajan ampumat aseet, jotka tällä hetkellä ovat ruudulla näkyvissä
+     */
     private CopyOnWriteArrayList<Ase> aseet;
-
+    /**
+     * Kaikki pelihahmot (esim viholliset, alus), jotka näytölle pitää pirtää
+     */
     private CopyOnWriteArraySet<Piirrettava> piirrettavat;
-
+    /**
+     * Näytöllä tällä hetkellä olevat viholliset
+     */
     private CopyOnWriteArrayList<Vihu> viholliset;
 
     /**
@@ -97,6 +105,7 @@ public class Pelimoottori extends Thread {
 
     /**
      * Lisää peliin uuden vihollisen
+     *
      * @param vihu lisättävä vihollinen
      */
     public void lisaaVihu(Vihu vihu) {
@@ -106,6 +115,7 @@ public class Pelimoottori extends Thread {
 
     /**
      * Poistaa pelistä vihollisen
+     *
      * @param vihu poistettava vihollinen
      */
     public void poistaVihu(Vihu vihu) {
@@ -133,15 +143,15 @@ public class Pelimoottori extends Thread {
         //TODO alkuun varmaan dialogi, jossa kysytään pelaajan nimeä
         do {
             alus.paivita();
-            
+
             for (Ase ase : aseet) {
                 ase.liiku();
             }
-            
-            for(Vihu vihu: viholliset){
+
+            for (Vihu vihu : viholliset) {
                 vihu.liiku();
             }
-            
+
             kayttoliittyma.piirra();
 
             //TODO do stuff
