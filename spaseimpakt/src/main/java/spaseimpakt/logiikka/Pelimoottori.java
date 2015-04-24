@@ -95,11 +95,19 @@ public class Pelimoottori extends Thread {
         return viholliset;
     }
 
+    /**
+     * Lisää peliin uuden vihollisen
+     * @param vihu lisättävä vihollinen
+     */
     public void lisaaVihu(Vihu vihu) {
         viholliset.add(vihu);
         piirrettavat.add((Piirrettava) vihu);
     }
 
+    /**
+     * Poistaa pelistä vihollisen
+     * @param vihu poistettava vihollinen
+     */
     public void poistaVihu(Vihu vihu) {
         viholliset.remove(vihu);
         piirrettavat.remove(vihu);
