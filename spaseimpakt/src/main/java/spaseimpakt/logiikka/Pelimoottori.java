@@ -10,6 +10,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import spaseimpakt.data.Alus;
 import spaseimpakt.data.Ammus;
 import spaseimpakt.data.Ase;
+import spaseimpakt.data.Level;
 import spaseimpakt.data.Piirrettava;
 import spaseimpakt.data.Vihu;
 import spaseimpakt.kayttoliittyma.GraafinenKayttoliittyma;
@@ -51,7 +52,18 @@ public class Pelimoottori extends Thread {
      * Näytöllä tällä hetkellä olevat viholliset
      */
     private CopyOnWriteArrayList<Vihu> viholliset;
-
+    /**
+     * LevelManager, joka ohjaa levelien vaihtamista
+     */
+    private LevelManager lvlManager;
+    /**
+     * Taso, jossa pelaaja tällä hetkellä on
+     */
+    private Level lvl;
+    /**
+     * Polut leveltiedostoihin
+     */
+    private final String[] levelTiedostot = new String[]{"resources/levelit/ekalevel.json"}; 
     /**
      * Konstruktori
      *
@@ -65,6 +77,7 @@ public class Pelimoottori extends Thread {
         this.aseet = new CopyOnWriteArrayList<>();
         this.piirrettavat = new CopyOnWriteArraySet<>();
         this.viholliset = new CopyOnWriteArrayList<Vihu>();
+        this.lvlManager=new LevelManager(levelTiedostot, this);
         piirrettavat.add(alus);
     }
 
@@ -142,6 +155,11 @@ public class Pelimoottori extends Thread {
 
         //TODO alkuun varmaan dialogi, jossa kysytään pelaajan nimeä
         do {
+            if(lvl==null){
+                lvl=lvlManager.lueSeuraavaLevel();
+            }
+            
+            if(lvl.onkoSeuraavanVihollisenAika(0));
             alus.paivita();
 
             for (Ase ase : aseet) {

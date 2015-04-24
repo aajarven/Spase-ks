@@ -83,11 +83,7 @@ public class Level {
      * @return true jos uusia vihollisia ei enää ole, false jos on
      */
     public boolean ovatkoVihollisetLoppu() {
-        if (viholliset.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        return viholliset.isEmpty();
     }
 
     /**
