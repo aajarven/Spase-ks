@@ -1,23 +1,23 @@
 {
 	"vihut": [
 		{
-			"ilmestymisaika": 5000,
+			"ilmestymisaika": 1000,
 			"vihu": {
-				"x": 500,
+				"x": 800,
 				"sprite": "resources/normivihu.png",
-				"movemode": 1,
+				"movemode": 0,
 				"dx": 1,
 				"kertoimet":[0, 0, 0, 0, 100]
 			}
 		},
 		{
-			"ilmestymisaika": 6000,
-			{
-				"x": 500,
+			"ilmestymisaika": 2000,
+			"vihu":{
+				"x": 800,
 				"sprite": "resources/normivihu.png",
-				"movemode": 1,
+				"movemode": 0,
 				"dx": 1,
-				"kertoimet":[0, 0, 0, 0, 200]
+				"kertoimet":[0, 0, 0, 0, 400]
 			}
 		}
 	]

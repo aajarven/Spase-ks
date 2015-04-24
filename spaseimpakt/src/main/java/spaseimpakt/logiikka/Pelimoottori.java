@@ -26,44 +26,51 @@ public class Pelimoottori extends Thread {
      * True jos peli on käynnissä, muuten false
      */
     private boolean kaynnissa;
+    /**
+     * True jos kaikki levelit on selvitetty, muuten false
+     */
+    private boolean peliVoitettu;
 
     /**
      * Viive kahden ruudunpäivityksen välillä
      */
     private final int STEP = 1000 / 75;
 
-    /**
-     * Pelimaailmassa liikkuva alus
-     */
     private Alus alus;
-    /**
-     * Pelin käyttöliittymä
-     */
     private GraafinenKayttoliittyma kayttoliittyma;
+    
     /**
      * Pelaajan ampumat aseet, jotka tällä hetkellä ovat ruudulla näkyvissä
      */
     private CopyOnWriteArrayList<Ase> aseet;
+    
     /**
      * Kaikki pelihahmot (esim viholliset, alus), jotka näytölle pitää pirtää
      */
     private CopyOnWriteArraySet<Piirrettava> piirrettavat;
+    
     /**
      * Näytöllä tällä hetkellä olevat viholliset
      */
     private CopyOnWriteArrayList<Vihu> viholliset;
+    
     /**
      * LevelManager, joka ohjaa levelien vaihtamista
      */
     private LevelManager lvlManager;
-    /**
-     * Taso, jossa pelaaja tällä hetkellä on
-     */
+    
     private Level lvl;
+    
     /**
      * Polut leveltiedostoihin
      */
     private final String[] levelTiedostot = new String[]{"resources/levelit/ekalevel.json"}; 
+    
+    /**
+     * 
+     */
+    private long levelinAlkuAika;
+    
     /**
      * Konstruktori
      *
@@ -72,12 +79,15 @@ public class Pelimoottori extends Thread {
      */
     public Pelimoottori(GraafinenKayttoliittyma kayttoliittyma) {
         this.kayttoliittyma = kayttoliittyma;
-        this.kaynnissa = true;
-        this.alus = new Alus(0, Pelirunko.KORKEUS / 2, Pelirunko.LEVEYS, Pelirunko.KORKEUS, this);
-        this.aseet = new CopyOnWriteArrayList<>();
-        this.piirrettavat = new CopyOnWriteArraySet<>();
-        this.viholliset = new CopyOnWriteArrayList<Vihu>();
-        this.lvlManager=new LevelManager(levelTiedostot, this);
+        kaynnissa = true;
+        alus = new Alus(0, Pelirunko.KORKEUS / 2, Pelirunko.LEVEYS, Pelirunko.KORKEUS, this);
+        aseet = new CopyOnWriteArrayList<>();
+        piirrettavat = new CopyOnWriteArraySet<>();
+        viholliset = new CopyOnWriteArrayList<>();
+        lvlManager=new LevelManager(levelTiedostot, this);
+        lvl=lvlManager.lueSeuraavaLevel();
+        levelinAlkuAika=System.currentTimeMillis();
+        peliVoitettu=false;
         piirrettavat.add(alus);
     }
 
@@ -154,12 +164,7 @@ public class Pelimoottori extends Thread {
     public void run() {
 
         //TODO alkuun varmaan dialogi, jossa kysytään pelaajan nimeä
-        do {
-            if(lvl==null){
-                lvl=lvlManager.lueSeuraavaLevel();
-            }
-            
-            if(lvl.onkoSeuraavanVihollisenAika(0));
+        do {        
             alus.paivita();
 
             for (Ase ase : aseet) {
@@ -172,9 +177,27 @@ public class Pelimoottori extends Thread {
 
             kayttoliittyma.piirra();
 
-            //TODO do stuff
+            paivitaLevel();
             odota();
         } while (kaynnissa);
+    }
+
+    private void paivitaLevel() {
+        if(lvl==null){
+            lvl=lvlManager.lueSeuraavaLevel();
+            if(lvl==null){
+                peliVoitettu=false;
+                lopeta();
+            }
+            levelinAlkuAika=System.currentTimeMillis();
+        }
+        
+        Long aikaLevelinAlustaLong = System.currentTimeMillis()-levelinAlkuAika;
+        int aikaLevelinAlusta = aikaLevelinAlustaLong.intValue();
+        System.out.println(aikaLevelinAlusta);
+        while(lvl.onkoSeuraavanVihollisenAika(aikaLevelinAlusta)){
+            lisaaVihu(lvl.seuraavaVihollinen());
+        }
     }
 
     /**

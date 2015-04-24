@@ -34,7 +34,7 @@ public class Pikkuvihu implements Vihu, Piirrettava {
         this.sprite = sprite;
         this.liikutin = liikutin;
         this.moottori = moottori;
-        moottori.lisaaVihu(this);
+//        moottori.lisaaVihu(this);
         this.y=liikutin.getY();
         maxY=Pelirunko.KORKEUS-sprite.getHeight(null);
     }
