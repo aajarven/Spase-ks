@@ -54,7 +54,7 @@ public class PikkuvihuTest {
 
     @Test
     public void testLiiku() {
-        FunktioLiikutin liikutin = new FunktioLiikutin(100, 1, new int[]{0, 0, 0, 1, 100});
+        FunktioLiikutin liikutin = new FunktioLiikutin(100, 1, new double[]{0, 0, 0, 1, 100});
         Pikkuvihu vihu = new Pikkuvihu(100, sprite, liikutin, new Pelimoottori(new GraafinenKayttoliittyma()));
         for (int i = 0; i < 50; i++) {
             assertEquals("vihollisen x-koordinaatti muuttuu väärin", liikutin.getX(), vihu.getX());
@@ -65,7 +65,7 @@ public class PikkuvihuTest {
 
     @Test
     public void testEiVoiLiikkuaLiianAlas() {
-        FunktioLiikutin liikutin = new FunktioLiikutin(100, 1, new int[]{0, 0, 0, 0, Integer.MAX_VALUE});
+        FunktioLiikutin liikutin = new FunktioLiikutin(100, 1, new double[]{0, 0, 0, 0, Integer.MAX_VALUE});
         Pikkuvihu vihu = new Pikkuvihu(100, sprite, liikutin, new Pelimoottori(new GraafinenKayttoliittyma()));
         for (int i = 0; i < 10; i++) {
             vihu.liiku();
@@ -75,7 +75,7 @@ public class PikkuvihuTest {
 
     @Test
     public void testEiVoiLiikkuaLiianYlos() {
-        FunktioLiikutin liikutin = new FunktioLiikutin(100, 1, new int[]{0, 0, 0, 0, -10});
+        FunktioLiikutin liikutin = new FunktioLiikutin(100, 1, new double[]{0, 0, 0, 0, -10});
         Pikkuvihu vihu = new Pikkuvihu(100, sprite, liikutin, new Pelimoottori(new GraafinenKayttoliittyma()));
         for (int i = 0; i < 10; i++) {
             vihu.liiku();
@@ -85,7 +85,7 @@ public class PikkuvihuTest {
 
     @Test
     public void testVihuPoistuuKunReunassa() {
-        FunktioLiikutin liikutin = new FunktioLiikutin(10, 1, new int[]{0, 0, 0, 0, 20});
+        FunktioLiikutin liikutin = new FunktioLiikutin(10, 1, new double[]{0, 0, 0, 0, 20});
         Pelimoottori moottori = new Pelimoottori(new GraafinenKayttoliittyma());
         Pikkuvihu vihu = new Pikkuvihu(10, sprite, liikutin, moottori);
         moottori.lisaaVihu(vihu);

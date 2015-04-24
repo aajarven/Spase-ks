@@ -1,6 +1,7 @@
 package spaseimpakt.data;
 
 import java.awt.Image;
+import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -69,7 +70,7 @@ public class Alus implements Piirrettava {
     private void lueSprite() {
         try {
             BufferedImage i = ImageIO.read(new File("resources/simppelialus.png"));
-            this.sprite = i;
+            sprite = i;
         } catch (IOException e) {
             System.out.println("Aluksen kuvaa ei löytynyt");
         }
@@ -209,6 +210,14 @@ public class Alus implements Piirrettava {
      */
     public void setAmpuuLaukauksiaNyt(boolean ampuuLaukauksiaNyt) {
         this.ampuuLaukauksiaNyt = ampuuLaukauksiaNyt;
+    }
+    
+    /**
+     * Palauttaa polygonin, jonka sisään alus jää.
+     * @return polygoni, jonka sisään alus jää.
+     */
+    public Polygon getBoundingBox(){
+        return new Polygon(new int[]{x, x, x+sprite.getWidth(null)}, new int[]{y, y+sprite.getHeight(null), y+sprite.getHeight(null)/2}, 3);
     }
 
 }

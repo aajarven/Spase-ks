@@ -46,7 +46,7 @@ public class FunktioLiikutinTest {
     public void testLineaarinenLiiku() {
         int x = 20;
         int y = 80;
-        liikutin = new FunktioLiikutin(x, 1, new int[]{0, 0, 0, 0, y}); // y-koordinaatti vakio 80
+        liikutin = new FunktioLiikutin(x, 1, new double[]{0, 0, 0, 0, y}); // y-koordinaatti vakio 80
         int askeleet = 0;
         while (x - askeleet >= 0) {
             assertEquals("X-koodrinaatti muuttuu väärin", x - askeleet, liikutin.getX());
@@ -63,7 +63,7 @@ public class FunktioLiikutinTest {
         int k = 2;
         int b = 60;
 
-        liikutin = new FunktioLiikutin(alkux, 1, new int[]{0, 0, 0, k, b});
+        liikutin = new FunktioLiikutin(alkux, 1, new double[]{0, 0, 0, k, b});
         int askeleet = 0;
         while (alkux - askeleet >= 0) {
             assertEquals("X-koodrinaatti muuttuu  väärin", alkux - askeleet, liikutin.getX());
@@ -83,7 +83,7 @@ public class FunktioLiikutinTest {
         int d = 3;
         int e = 80;
 
-        liikutin = new FunktioLiikutin(alkux, 1, new int[]{a, b, c, d, e});
+        liikutin = new FunktioLiikutin(alkux, 1, new double[]{a, b, c, d, e});
         for(int askeleet=0; askeleet<30; askeleet++){
             assertEquals("y-koordinaatti muuttuu väärin", laskeY(alkux-askeleet, a, b, c, d, e), liikutin.getY());
             liikutin.liiku();

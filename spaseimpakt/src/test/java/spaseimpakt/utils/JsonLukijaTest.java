@@ -56,8 +56,12 @@ public class JsonLukijaTest {
             assertTrue("Luetun vihun ilmestymisaika on väärä", 5000==luetut.get(vihu));
             
             FunktioLiikutin liikutin = (FunktioLiikutin) pikkuvihu.getLiikutin();
-            int[] kertoimet = liikutin.getKertoimet();
-            assertArrayEquals("Luetun vihun kertoimet eivät ole oikein", new int[]{5, 7, -2, 1, 100}, liikutin.getKertoimet());
+            double[] kertoimet = liikutin.getKertoimet();
+            double[] odotetut = new double[]{5, 7, -2, 1, 100};
+            
+            for(int i=0; i<kertoimet.length; i++){
+                assertEquals("Luetun vihun "+(i-1)+" asteen termin kerroin on väärä", odotetut[i], kertoimet[i], 0.0000001);
+            }
         }
     }
     

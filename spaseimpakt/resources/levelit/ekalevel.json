@@ -19,6 +19,16 @@
 				"dx": 1,
 				"kertoimet":[0, 0, 0, 0, 400]
 			}
+		},
+		{
+			"ilmestymisaika": 3000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[-0.0000000631, 0.000122, -0.0791,  19.2, -1000]
+			}
 		}
 	]
 }

@@ -48,9 +48,9 @@ public class LevelTest {
 
     @Before
     public void setUp() {
-        eka = new Pikkuvihu(1, lueSprite(), new FunktioLiikutin(1, 1, new int[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
-        toka = new Pikkuvihu(2, lueSprite(), new FunktioLiikutin(1, 1, new int[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
-        kolmas = new Pikkuvihu(3, lueSprite(), new FunktioLiikutin(1, 1, new int[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
+        eka = new Pikkuvihu(1, lueSprite(), new FunktioLiikutin(1, 1, new double[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
+        toka = new Pikkuvihu(2, lueSprite(), new FunktioLiikutin(1, 1, new double[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
+        kolmas = new Pikkuvihu(3, lueSprite(), new FunktioLiikutin(1, 1, new double[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
 
         ilmestymisaika1 = 1;
         ilmestymisaika2 = 5;
@@ -67,20 +67,20 @@ public class LevelTest {
 
     @Test
     public void testLisaaVihollinen() {
-        Vihu eka = new Pikkuvihu(1, lueSprite(), new FunktioLiikutin(1, 1, new int[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
+        Vihu eka = new Pikkuvihu(1, lueSprite(), new FunktioLiikutin(1, 1, new double[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
         Level lisaysLevel = new Level();
         lisaysLevel.lisaaVihollinen(1, eka);
         TreeMap<Integer, ArrayList<Vihu>> vihuMap = lisaysLevel.getVihut();
         assertEquals("Ensimmäisen vihollisen lisääminen ei luo uutta joukkoa kyseisellä hetkellä ilmestyviä vihollisia varten", 1, vihuMap.keySet().size());
         assertEquals("Ensimmäisen vihollisen lisäämisen jälkeen vihollisia on väärä määrä", 1, vihuMap.get(vihuMap.firstKey()).size());
 
-        Vihu toka = new Pikkuvihu(1, lueSprite(), new FunktioLiikutin(1, 1, new int[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
+        Vihu toka = new Pikkuvihu(1, lueSprite(), new FunktioLiikutin(1, 1, new double[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
         lisaysLevel.lisaaVihollinen(5, toka);
         assertEquals("Toisen eri aikaan ilmestyvän vihollisen lisääminen ei luo uutta joukkoa kyseisellä hetkellä ilmestyviä vihollisia varten", 2, vihuMap.keySet().size());
         assertEquals("Toisen vihollisen lisäämisen jälkeen vihollisia on väärä määrä kyseistä aikaa vastaavassa listassa", 1, vihuMap.get(5).size());
         assertEquals("Toisen vihollisen lisääminen muuttaa myös ensimmäisen vihollisen sisältävän ArrayListin kokoa", 1, vihuMap.get(5).size());
 
-        Vihu kolmas = new Pikkuvihu(1, lueSprite(), new FunktioLiikutin(1, 1, new int[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
+        Vihu kolmas = new Pikkuvihu(1, lueSprite(), new FunktioLiikutin(1, 1, new double[]{0, 0, 0, 0, 50}), new Pelimoottori(new GraafinenKayttoliittyma()));
         lisaysLevel.lisaaVihollinen(5, kolmas);
         assertEquals("Samaan aikaan edellisen kanssa ilmestyvän vihollisen lisääminen luo uuden avaimen vaikka sopiva on jo olemassa", 2, vihuMap.keySet().size());
         assertEquals("Samaan aikaan edellisen kanssa ilmestyvän vihollisen lisäämisen jälkeen vihollisia on väärä määrä kyseistä aikaa vastaavassa listassa", 2, vihuMap.get(5).size());
