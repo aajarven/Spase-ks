@@ -72,9 +72,9 @@ public class JsonLukija {
                 int movemode = ((Long) vihu.get("movemode")).intValue(); // movemode 0=funktio, 1=seuraa, 2=random
                 if (movemode == 0) {
                     JSONArray kerroinarray = (JSONArray) vihu.get("kertoimet");
-                    int[] kertoimet = new int[kerroinarray.size()];
+                    double[] kertoimet = new double[kerroinarray.size()];
                     for(int i=0; i<kerroinarray.size(); i++){
-                        kertoimet[i]=((Long) kerroinarray.get(i)).intValue();
+                        kertoimet[i] = ((Number)kerroinarray.get(i)).doubleValue();
                     }
                     FunktioLiikutin liikutin = new FunktioLiikutin(x, dx, kertoimet);
                     lisattava = new Pikkuvihu(x, sprite, liikutin, moottori);

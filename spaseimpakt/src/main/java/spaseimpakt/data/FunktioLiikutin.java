@@ -14,7 +14,7 @@ public class FunktioLiikutin implements Liikutin{
     private int x;
     private int y;
     private int dx;
-    private int[] kertoimet;
+    private double[] kertoimet;
     
     /**
      * Konstruktori, jolla luodaan uusi liikutin, joka antaa koordinaatteja annetun neljännen asteen funktion mukaisesti
@@ -22,7 +22,7 @@ public class FunktioLiikutin implements Liikutin{
      * @param dx nopeus, jolla alus liikkuu x-suunnassa (pikseliä/askel)
      * @param kertoimet viisialkioinen taulukko [a, b, c, d, e], joka määrittää muotoa ax⁴+bx³+cx²+dx+e olevan funktion
      */
-    public FunktioLiikutin(int x, int dx, int[] kertoimet) {
+    public FunktioLiikutin(int x, int dx, double[] kertoimet) {
         this.x = x;
         this.dx=dx;
         this.kertoimet = kertoimet;
@@ -65,7 +65,7 @@ public class FunktioLiikutin implements Liikutin{
         return x;
     }
 
-    public int[] getKertoimet() {
+    public double[] getKertoimet() {
         return kertoimet;
     }
 
