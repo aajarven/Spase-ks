@@ -5,7 +5,12 @@ package spaseimpakt.data;
 
 import java.awt.Image;
 import java.awt.Polygon;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import spaseimpakt.logiikka.Pelimoottori;
+import spaseimpakt.logiikka.Pelirunko;
 
 /**
  * Ase, joka tuhoaa kaiken aluksen edessä olevan.
@@ -19,7 +24,8 @@ public class Laser implements Ase, Piirrettava{
     private int x;
     private int y;
     private long luontihetki;
-    private final int KESTO = 200;
+    private final int KESTO = 600;
+    private Image sprite;
 
     /**
      * Luo uuden laserin.
@@ -30,8 +36,8 @@ public class Laser implements Ase, Piirrettava{
     public Laser(Alus alus, Pelimoottori moottori) {
         this.alus = alus;
         this.moottori = moottori;
-        x = alus.getX();
-        y = alus.getY();
+        lueSprite();
+        paivitaKoordinaatit();
         luontihetki = System.currentTimeMillis();
     }
 
@@ -41,12 +47,16 @@ public class Laser implements Ase, Piirrettava{
      */
     @Override
     public void liiku() {
-        this.x = alus.getX();
-        this.y = alus.getY();
+        paivitaKoordinaatit();
 
         if (System.currentTimeMillis() - luontihetki > KESTO) {
             moottori.poistaAse(this);
         }
+    }
+
+    private void paivitaKoordinaatit() {
+        this.x = alus.getX()+alus.getSprite().getWidth(null);
+        this.y = alus.getY()+alus.getSprite().getHeight(null)/2-sprite.getHeight(null)/2;
     }
 
     /**
@@ -79,13 +89,21 @@ public class Laser implements Ase, Piirrettava{
      */
     @Override
     public Image getSprite() {
-        //TODO oispa kuva
-        return null;
+        return sprite;
     }
 
     @Override
     public Polygon getVaikutusalue() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Polygon(new int[]{x, Pelirunko.LEVEYS, Pelirunko.LEVEYS, x}, new int[]{y-sprite.getHeight(null)/2, y-sprite.getHeight(null)/2, y+sprite.getHeight(null)/2, y+sprite.getHeight(null)/2}, 4 );
     }
 
+    private void lueSprite() {
+        try {
+            BufferedImage i = ImageIO.read(new File("resources/laser-tile.png"));
+            sprite = i;
+        } catch (IOException e) {
+            System.out.println("Laserin kuvaa ei löytynyt");
+        }
+    }
+    
 }

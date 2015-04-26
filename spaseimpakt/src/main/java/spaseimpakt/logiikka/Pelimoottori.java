@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import spaseimpakt.data.Alus;
 import spaseimpakt.data.Ammus;
 import spaseimpakt.data.Ase;
+import spaseimpakt.data.Laser;
 import spaseimpakt.data.Level;
 import spaseimpakt.data.Piirrettava;
 import spaseimpakt.data.Vihu;
@@ -114,6 +115,8 @@ public class Pelimoottori extends Thread {
         aseet.add(ase);
         if (ase instanceof Ammus) { // tai myöhemmin laser, pommia ei piirretä
             piirrettavat.add((Ammus) ase);
+        } else if(ase instanceof Laser){
+            piirrettavat.add((Laser) ase);
         }
     }
 

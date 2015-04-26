@@ -24,16 +24,19 @@ public class Alus implements Piirrettava {
     private int pelialueenLeveys;
     private int pelialueenKorkeus;
     private Suunta suunta;
-    private long edellinenAmmus;
     private int laserit;
     private int pommit;
     private Image sprite;
     private boolean ampuuLaukauksiaNyt;
+    private long edellinenAmmus;
+    private boolean ampuuLaseria;
+    private long edellinenLaser;
 
     // Onko tämä rumaa?
     public static final int NOPEUS = 3; // TODO sopiva nopeuden arvo alukselle
-    private final int AMPUMIS_INTERVALLI = 150;
+    private final int AMMUS_INTERVALLI = 150;
     private final int LASERIT_ALUSSA = 3;
+    private final int LASER_INTERVALLI = 1000;
     private final int POMMIT_ALUSSA = 3;
 
     // TODO törmäystarkastus
@@ -64,6 +67,7 @@ public class Alus implements Piirrettava {
         this.pommit = POMMIT_ALUSSA;
         suunta = Suunta.PAIKALLAAN;
         edellinenAmmus = 0;
+        edellinenLaser = 0;
         ampuuLaukauksiaNyt = false;
     }
 
@@ -120,6 +124,9 @@ public class Alus implements Piirrettava {
         if (ampuuLaukauksiaNyt) {
             ammuLaukaus();
         }
+        if(ampuuLaseria){
+            ammuLaser();
+        }
     }
 
     private void tarkastaPaikka() {
@@ -145,8 +152,8 @@ public class Alus implements Piirrettava {
      * @see Ammus
      */
     public void ammuLaukaus() {
-        if (System.currentTimeMillis() - edellinenAmmus > AMPUMIS_INTERVALLI) {
-            moottori.lisaaAse(new Ammus(x, y, pelialueenLeveys, moottori));
+        if (System.currentTimeMillis() - edellinenAmmus > AMMUS_INTERVALLI) {
+            moottori.lisaaAse(new Ammus(x+sprite.getWidth(null), y+sprite.getHeight(null)/2, pelialueenLeveys, moottori));
             edellinenAmmus = System.currentTimeMillis();
         }
     }
@@ -159,9 +166,10 @@ public class Alus implements Piirrettava {
      * @see Laser
      */
     public void ammuLaser() {
-        if (laserit > 0) {
+        if (laserit > 0 && System.currentTimeMillis() - edellinenLaser > LASER_INTERVALLI) {
             moottori.lisaaAse(new Laser(this, moottori));
             laserit--;
+            edellinenLaser=System.currentTimeMillis();
         }
     }
 
@@ -210,6 +218,14 @@ public class Alus implements Piirrettava {
      */
     public void setAmpuuLaukauksiaNyt(boolean ampuuLaukauksiaNyt) {
         this.ampuuLaukauksiaNyt = ampuuLaukauksiaNyt;
+    }
+
+    /**
+     * Asettaa aluksen laserin ampumistilaan. Jos true, alus ampuu laserin seuraavana mahdollisena ajanhetkenä, jos false, ei ammu.
+     * @param ampuuLaseria halutaanko aluksen ampuvan laser
+     */
+    public void setAmpuuLaseria(boolean ampuuLaseria) {
+        this.ampuuLaseria = ampuuLaseria;
     }
     
     /**
