@@ -76,6 +76,13 @@ public class GraafinenKayttoliittyma implements Runnable {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+    
+    /**
+     * Tyhjentää vanhan pelin ikkunasta
+     */
+    public void tyhjenna(){
+        frame.getContentPane().removeAll(); // todo tee paremmin
+    }
 
     /**
      * Lisää parametrina annettuun containeriin yläpalkin ja peli-ikkunan

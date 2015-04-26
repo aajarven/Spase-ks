@@ -38,8 +38,15 @@ public class Pelirunko {
     /**
      * Aloittaa pelin alusta
      */
-    public static void restart() {
-        //TODO mahdollisuus restartata
+    public static void restart(){
+        ekaPeli=false;
+        moottori.lopeta();
+        kayttoliittyma.tyhjenna();
+        moottori=new Pelimoottori(kayttoliittyma);
+//        maailma.setMoottori(moottori);
+        kayttoliittyma.setMoottori(moottori);
+        moottori.start();
+        SwingUtilities.invokeLater(kayttoliittyma);
     }
 
 }

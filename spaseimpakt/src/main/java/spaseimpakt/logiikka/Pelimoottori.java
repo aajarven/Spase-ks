@@ -177,7 +177,10 @@ public class Pelimoottori extends Thread {
     @Override
     public void run() {
 
-        //TODO alkuun varmaan dialogi, jossa kysytään pelaajan nimeä
+        if(Pelirunko.ekaPeli){
+            vaihdaPelaajanNimi();
+        }
+        
         do {
             alus.paivita();
 
@@ -281,7 +284,6 @@ public class Pelimoottori extends Thread {
             Pelirunko.pelaajanNimi = "Anonyymi";
         }
         
-        System.out.println(Pelirunko.pelaajanNimi);
         Pelirunko.restart();
     }
 
