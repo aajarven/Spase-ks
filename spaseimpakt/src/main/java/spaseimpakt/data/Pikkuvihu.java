@@ -4,6 +4,7 @@
 package spaseimpakt.data;
 
 import java.awt.Image;
+import java.awt.Polygon;
 import spaseimpakt.logiikka.Pelimoottori;
 import spaseimpakt.logiikka.Pelirunko;
 
@@ -12,7 +13,7 @@ import spaseimpakt.logiikka.Pelirunko;
  *
  * @author Anni Järvenpää
  */
-public class Pikkuvihu implements Vihu, Piirrettava {
+public class Pikkuvihu implements Vihu, Piirrettava{
 
     private int x;
     private int y;
@@ -87,6 +88,11 @@ public class Pikkuvihu implements Vihu, Piirrettava {
 
     public Liikutin getLiikutin(){
         return this.liikutin;
+    }
+
+    @Override
+    public Polygon getBoundingBox() {
+        return new Polygon(new int[]{x, x, x+sprite.getWidth(null), x+sprite.getWidth(null)}, new int[]{y, y+sprite.getHeight(null), y+sprite.getHeight(null), y}, 4);
     }
     
 }

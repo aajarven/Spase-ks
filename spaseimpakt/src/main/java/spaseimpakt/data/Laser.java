@@ -4,6 +4,7 @@
 package spaseimpakt.data;
 
 import java.awt.Image;
+import java.awt.Polygon;
 import spaseimpakt.logiikka.Pelimoottori;
 
 /**
@@ -11,7 +12,7 @@ import spaseimpakt.logiikka.Pelimoottori;
  *
  * @author Anni Järvenpää
  */
-public class Laser implements Ase, Piirrettava {
+public class Laser implements Ase, Piirrettava{
 
     Alus alus;
     Pelimoottori moottori;
@@ -80,6 +81,11 @@ public class Laser implements Ase, Piirrettava {
     public Image getSprite() {
         //TODO oispa kuva
         return null;
+    }
+
+    @Override
+    public Polygon getVaikutusalue() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

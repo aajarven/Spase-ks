@@ -3,7 +3,10 @@
  */
 package spaseimpakt.data;
 
+import java.awt.Image;
+import java.awt.Polygon;
 import spaseimpakt.logiikka.Pelimoottori;
+import spaseimpakt.logiikka.Pelirunko;
 
 /**
  * Pelin voimakkain ase, joka tyhjentää koko näytön vihollisista (poislukien
@@ -11,7 +14,7 @@ import spaseimpakt.logiikka.Pelimoottori;
  *
  * @author Anni Järvenpää
  */
-public class Pommi implements Ase {
+public class Pommi implements Ase{
 
     Pelimoottori moottori;
 
@@ -32,5 +35,10 @@ public class Pommi implements Ase {
     }
     
     //TODO vahinko vihollisiin
+
+    @Override
+    public Polygon getVaikutusalue() {
+        return new Polygon(new int[]{0, 0, Pelirunko.LEVEYS, Pelirunko.LEVEYS}, new int[]{0, Pelirunko.KORKEUS, Pelirunko.KORKEUS, 0}, 4);
+    }
 
 }

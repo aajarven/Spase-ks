@@ -1,6 +1,7 @@
 package spaseimpakt.data;
 
 import java.awt.Image;
+import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import spaseimpakt.logiikka.Pelimoottori;
  *
  * @author Anni Järvenpää
  */
-public class Ammus implements Ase, Piirrettava {
+public class Ammus implements Ase, Piirrettava{
 
     Pelimoottori moottori;
     int x;
@@ -85,6 +86,15 @@ public class Ammus implements Ase, Piirrettava {
         } catch (IOException e) {
             System.out.println("Ammuksen kuvaa ei löytynyt");
         }
+    }
+    
+    /**
+     * Palauttaa alueen, jolla oleviin vihollisiin ammus tekee vahinkoa.
+     * @return ammuksen vaikutusalue
+     */
+    @Override
+    public Polygon getVaikutusalue() {
+        return new Polygon(new int[]{x, x, x+sprite.getWidth(null), x+sprite.getWidth(null)}, new int[]{y, y+sprite.getHeight(null), y+sprite.getHeight(null), y}, 4);
     }
 
 }

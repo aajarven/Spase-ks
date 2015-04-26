@@ -3,6 +3,7 @@
  */
 package spaseimpakt.logiikka;
 
+import java.awt.geom.Area;
 import spaseimpakt.data.Alus;
 import spaseimpakt.data.Ase;
 import spaseimpakt.data.Vihu;
@@ -23,8 +24,11 @@ public class TormaysTestaaja {
      * @return true jos tutkittavat oliot koskettavat toisiaan, false jos eivät
      */
     protected boolean tormaa(Ase ase, Vihu vihu) {
-        return false;
-        //TODO actual code
+        Area aseAlue= new Area(ase.getVaikutusalue());
+        Area vihunAlue = new Area(vihu.getBoundingBox());
+        
+        aseAlue.intersect(vihunAlue);
+        return aseAlue.isEmpty();
     }
 
     /**
@@ -34,7 +38,11 @@ public class TormaysTestaaja {
      * @return true jos tutkittavat oliot koskettavat toisiaan, false jos eivät
      */
     protected boolean tormaa(Alus alus, Vihu vihu) {
-        return false;
+        Area alusAlue = new Area(alus.getBoundingBox());
+        Area vihunAlue = new Area(alus.getBoundingBox());
+        
+        alusAlue.intersect(alusAlue);
+        return alusAlue.isEmpty();
         //TODO actual code
     }
 
