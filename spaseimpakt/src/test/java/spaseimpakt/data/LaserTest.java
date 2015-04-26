@@ -22,6 +22,8 @@ public class LaserTest {
     Laser laser;
     Pelimoottori moottori;
     long alku;
+    int xEro;
+    int yEro;
 
     public LaserTest() {
     }
@@ -41,51 +43,60 @@ public class LaserTest {
         alus.ammuLaser();
         laser = (Laser) moottori.getAseet().get(0);
         alku = System.currentTimeMillis();
+        xEro = laser.getX() - alus.getX();
+        yEro = laser.getY() - alus.getY();
     }
 
     @After
     public void tearDown() {
     }
+
+    @Test
+    public void testLuodaanOikeaanKohtaan(){
+        assertEquals("Laserin x-koordinaatti ei ole sama kuin aluksen kärjen", alus.getX()+alus.getSprite().getWidth(null), laser.getX());
+        assertEquals("Laserin y-koordinaatti ei ole sellainen, että se lähtee keskeltä aluksen kärkeä", alus.getY()+alus.getSprite().getHeight(null)/2-laser.getSprite().getHeight(null)/2, laser.getY());
+    }
     
     @Test
-    public void eiLiikuKunAlusPaikallaan() {
+    public void testEiLiikuKunAlusPaikallaan() {
         laser.liiku();
-        assertEquals("Laserin x-koordinaatti muuttuu vaikka ei pitäisi", alus.getX(), laser.getX());
+        tarkastaX("Laserin x-koordinaatti muuttuu vaikka ei pitäisi");
+        tarkastaY("Laserin y-koordinaatti muuttuu vaikka ei pitäisi");
     }
 
     @Test
-    public void liikkuuAluksenKanssaYlos() {
+    public void testLiikkuuAluksenKanssaYlos() {
         liikutaMolemmat(Suunta.YLOS);
-        assertEquals("Laserin x-koordinaatti ei seuraa alusta sen liikkuessa ylös", alus.getX(), laser.getX());
-        assertEquals("Laser y-koordinaatti ei seuraa alusta sen liikkuessa ylös", alus.getY(), laser.getY());
+        tarkastaX("Laserin x-koordinaatti ei seuraa alusta sen liikkuessa ylös");
+        tarkastaY("Laser y-koordinaatti ei seuraa alusta sen liikkuessa ylös");
     }
 
     @Test
-    public void liikkuuAluksenKanssaOikealle() {
+    public void testLiikkuuAluksenKanssaOikealle() {
         liikutaMolemmat(Suunta.OIKEA);
-        assertEquals("Laserin x-koordinaatti ei seuraa alusta sen liikkuessa oikealle", alus.getX(), laser.getX());
-        assertEquals("Laser y-koordinaatti ei seuraa alusta sen liikkuessa oikealle", alus.getY(), laser.getY());
+        tarkastaX("Laserin x-koordinaatti ei seuraa alusta sen liikkuessa oikealle");
+        tarkastaY("Laser y-koordinaatti ei seuraa alusta sen liikkuessa oikealle");
     }
 
     @Test
-    public void liikkuuAluksenKanssaAlas() {
+    public void testLiikkuuAluksenKanssaAlas() {
         liikutaMolemmat(Suunta.ALAS);
-        assertEquals("Laserin x-koordinaatti ei seuraa alusta sen liikkuessa alas", alus.getX(), laser.getX());
-        assertEquals("Laser y-koordinaatti ei seuraa alusta sen liikkuessa alas", alus.getY(), laser.getY());
+        tarkastaX("Laserin x-koordinaatti ei seuraa alusta sen liikkuessa alas");
+        tarkastaY("Laserin y-koordinaatti ei seuraa alusta sen liikkuessa alas");
     }
 
     @Test
-    public void liikkuuAluksenKanssaVasemmalle() {
+    public void testLiikkuuAluksenKanssaVasemmalle() {
         liikutaMolemmat(Suunta.VASEN);
-        assertEquals("Laserin x-koordinaatti ei seuraa alusta sen liikkuessa vasemmalle", alus.getX(), laser.getX());
-        assertEquals("Laser y-koordinaatti ei seuraa alusta sen liikkuessa vasemmalle", alus.getY(), laser.getY());
+        tarkastaX("Laserin x-koordinaatti ei seuraa alusta sen liikkuessa vasemmalle");
+        tarkastaY("Laserin y-koordinaatti ei seuraa alusta sen liikkuessa vasemmalle");
     }
 
     @Test
-    public void katoaaOikein() {
+    public void testKatoaaOikein() {
         laser.liiku();
         assertEquals("Laser katoaa liian aikaisin", 1, moottori.getAseet().size());
-        while(System.currentTimeMillis()-alku<=laser.getKESTO()){
+        while (System.currentTimeMillis() - alku <= laser.getKESTO()) {
             laser.liiku();
         }
         laser.liiku();
@@ -98,4 +109,12 @@ public class LaserTest {
         laser.liiku();
     }
     
+        private void tarkastaY(String virheviesti) {
+        assertEquals(virheviesti, alus.getY(), laser.getY()-yEro);
+    }
+
+    private void tarkastaX(String virheviesti) {
+        assertEquals(virheviesti, alus.getX(), laser.getX()-xEro);
+    }
+
 }
