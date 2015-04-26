@@ -28,7 +28,7 @@ public class TormaysTestaaja {
         Area vihunAlue = new Area(vihu.getBoundingBox());
         
         aseAlue.intersect(vihunAlue);
-        return aseAlue.isEmpty();
+        return !aseAlue.isEmpty();
     }
 
     /**
@@ -39,10 +39,10 @@ public class TormaysTestaaja {
      */
     protected boolean tormaa(Alus alus, Vihu vihu) {
         Area alusAlue = new Area(alus.getBoundingBox());
-        Area vihunAlue = new Area(alus.getBoundingBox());
+        Area vihunAlue = new Area(vihu.getBoundingBox());
         
-        alusAlue.intersect(alusAlue);
-        return alusAlue.isEmpty();
+        alusAlue.intersect(vihunAlue);
+        return !alusAlue.isEmpty();
         //TODO actual code
     }
 
