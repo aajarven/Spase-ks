@@ -43,7 +43,6 @@ public class TormaysTestaaja {
         
         alusAlue.intersect(vihunAlue);
         return !alusAlue.isEmpty();
-        //TODO actual code
     }
 
 }

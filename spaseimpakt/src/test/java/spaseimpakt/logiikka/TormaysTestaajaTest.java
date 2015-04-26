@@ -74,14 +74,6 @@ public class TormaysTestaajaTest {
         assertTrue("Aluksen ja vihun pitäisi törmätä kun ne ovat päällekkäin", testaaja.tormaa(alus, vihu));
         vihu.liiku();
         assertFalse("Aluksen ja vihun ei pitäisi törmätä kun ne ovat vierekkäin mutta eivät päällekäin", testaaja.tormaa(alus, vihu));
-        
-        
-//        Alus alus=new Alus(0, 0, 100, 100, null);
-//        Vihu vihu = new Pikkuvihu(alus.getX()+alus.getSprite().getWidth(null)-1, lueVihusprite(), new FunktioLiikutin(alus.getX()+alus.getSprite().getWidth(null)-1, -1, new double[]{0,0,0,0,0}), null);
-//        assertFalse("Aluksen ja vihollisen ei huomata törmäävän kun ne ovat vain hieman päällekäin", testaaja.tormaa(alus, vihu));
-////        vihu.liiku();
-//        vihu = new Pikkuvihu(alus.getX()+alus.getSprite().getWidth(null)+500, lueVihusprite(), new FunktioLiikutin(alus.getX()+alus.getSprite().getWidth(null)+500, -1, new double[]{0,0,0,0,0}), null);
-//        assertTrue("Aluksen ja vihollisen ei pitäisi törmätä kun ne ovat aivan vierekkäin", testaaja.tormaa(alus, vihu));
     }
     
     private Image lueVihusprite(){
