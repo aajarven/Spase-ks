@@ -4,6 +4,8 @@
 package spaseimpakt.kayttoliittyma;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import spaseimpakt.logiikka.Pelimoottori;
 import spaseimpakt.logiikka.Pelirunko;
@@ -81,9 +83,48 @@ public class GraafinenKayttoliittyma implements Runnable {
      * @param container container, johon komponentit lisätään
      */
     private void luoKomponentit(Container container) {
+        container.add(luoMenupalkki(), BorderLayout.NORTH);
         ikkuna = new Ikkuna(moottori);
         ikkuna.setPreferredSize(new Dimension(Pelirunko.LEVEYS, Pelirunko.KORKEUS));
-        container.add(ikkuna);
+        container.add(ikkuna, BorderLayout.CENTER);
+    }
+    
+    /**
+     * Luo ja palauttaa yläpalkin peli-ikkunaan. 
+     * Palkki mahdollistaa pelin aloittamisen alusta, pelaajan nimen muuttamisen, 
+     * luolan valitsemisen, highscorejen näyttämisen sekä ohjeiden ja tietojen näyttämisen.
+     * @return menupalkki
+     */
+    private JMenuBar luoMenupalkki() {
+        JMenuBar ylapalkki = new JMenuBar();
+
+
+        JMenu pelimenu = new JMenu("Peli");
+
+        JMenuItem restartnappi = new JMenuItem("Aloita alusta");
+        restartnappi.addActionListener(new RestartKuuntelija());
+        pelimenu.add(restartnappi);
+
+        JMenuItem pelaajaValintaNappi = new JMenuItem("Pelaajan nimi");
+        pelaajaValintaNappi.addActionListener(new PelaajaValintaKuuntelija());
+        pelimenu.add(pelaajaValintaNappi);
+
+//        JMenuItem highscorenappi = new JMenuItem("Highscores");
+//        highscorenappi.addActionListener(new HighscoreKuuntelija());
+//        pelimenu.add(highscorenappi);
+
+        JMenu apuamenu = new JMenu("Apua");
+        JMenuItem ohjenappi = new JMenuItem("Ohjeet");
+        ohjenappi.addActionListener(new OhjeetKuuntelija());
+        apuamenu.add(ohjenappi);
+
+        JMenuItem tietojanappi = new JMenuItem("Tietoja");
+        tietojanappi.addActionListener(new TietojaKuuntelija());
+        apuamenu.add(tietojanappi);
+
+        ylapalkki.add(pelimenu);
+        ylapalkki.add(apuamenu);
+        return ylapalkki;
     }
 
     /**
@@ -112,8 +153,56 @@ public class GraafinenKayttoliittyma implements Runnable {
     public void piirra() {
         if (ikkuna != null) {
             ikkuna.repaint();
-        } else {
-//            System.out.println("ikkuna oli null");
+        }
+    }
+    
+    /**
+     * Mahdollistaa pelaajan nimen vaihtamisen kutsumalla pelimoottorin vaihdaPelaajanNimi-metodia.
+     * @see Pelimoottori#vaihdaPelaajanNimi() 
+     */
+    private class PelaajaValintaKuuntelija implements ActionListener {// pelaajan nimen valinnan voisi tehdä myös JDialogilla kuten chompissa
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            moottori.vaihdaPelaajanNimi();
+        }
+    }
+    
+    /**
+     * Mahdollistaa pelin aloittamisen alusta kutsumalla pelirungon restart-metodia
+     * @see Pelirunko#restart() 
+     */
+    private class RestartKuuntelija implements ActionListener {
+
+        //Tänne highscore
+        public RestartKuuntelija() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Pelirunko.restart();
+        }
+    }
+    
+    private static class OhjeetKuuntelija implements ActionListener {
+
+        public OhjeetKuuntelija() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Splash t. ohjeetkuuntelija");
+        }
+    }
+    
+    private static class TietojaKuuntelija implements ActionListener {
+
+        public TietojaKuuntelija() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Splash t. tietojakuuntelija");
         }
     }
 }

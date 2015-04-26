@@ -3,10 +3,12 @@
  */
 package spaseimpakt.logiikka;
 
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
+import javax.swing.JOptionPane;
 import spaseimpakt.data.Alus;
 import spaseimpakt.data.Ammus;
 import spaseimpakt.data.Ase;
@@ -78,7 +80,7 @@ public class Pelimoottori extends Thread {
      * Törmäystestaaja, jota käytetään hahmojen välisten törmäysten tutkimiseen
      */
     private TormaysTestaaja tormaysTestaaja;
-    
+
     private boolean peliHavitty;
 
     /**
@@ -100,7 +102,7 @@ public class Pelimoottori extends Thread {
         peliVoitettu = false;
         piirrettavat.add(alus);
         tormaysTestaaja = new TormaysTestaaja();
-        peliHavitty=false;
+        peliHavitty = false;
     }
 
     /**
@@ -215,13 +217,13 @@ public class Pelimoottori extends Thread {
     private void kasitteleTormaykset() {
         for (Vihu vihu : viholliset) {
             if (tormaysTestaaja.tormaa(alus, vihu)) {
-                peliHavitty=true;
+                peliHavitty = true;
                 lopeta();
             } else {
-                for(Ase ase: aseet){
-                    if(tormaysTestaaja.tormaa(ase, vihu)){
+                for (Ase ase : aseet) {
+                    if (tormaysTestaaja.tormaa(ase, vihu)) {
                         poistaVihu(vihu);
-                        if(ase.getClass()==Ammus.class){
+                        if (ase.getClass() == Ammus.class) {
                             poistaAse(ase);
                         }
                     }
@@ -248,12 +250,39 @@ public class Pelimoottori extends Thread {
      */
     public void lopeta() {
         kaynnissa = false;
-        
+
         // TODO toimintaa, joka riippuu siitä, onko voitettu tai hävitty
     }
 
     public CopyOnWriteArraySet<Piirrettava> getPiirrettavat() {
         return piirrettavat;
+    }
+
+    /**
+     * Näyttää dialogin, jossa kysytään pelaajan nimeä. Mikäli kenttä jätetään
+     * tyhjäksi, nimeksi vaihdetaan "Anonyymi", muuten pelaajan antama nimi.
+     *
+     * @throws HeadlessException
+     */
+    public void vaihdaPelaajanNimi() throws HeadlessException { //TODO jos cancel niin pidä edellinen nimi, ei anonyymi
+        //Tänne highscore
+
+        if (!Pelirunko.ekaPeli) {
+            lopeta();
+        }
+        Pelirunko.pelaajanNimi = (String) JOptionPane.showInputDialog(
+                kayttoliittyma.getFrame(),
+                "Anna nimesi", "Pelaajan nimi",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                null,
+                Pelirunko.pelaajanNimi);
+        if (Pelirunko.pelaajanNimi == null || Pelirunko.pelaajanNimi.isEmpty()) {
+            Pelirunko.pelaajanNimi = "Anonyymi";
+        }
+        
+        System.out.println(Pelirunko.pelaajanNimi);
+        Pelirunko.restart();
     }
 
 }

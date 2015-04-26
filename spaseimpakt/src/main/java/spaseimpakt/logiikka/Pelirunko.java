@@ -19,6 +19,9 @@ public class Pelirunko {
 
     public static Pelimoottori moottori;
     private static GraafinenKayttoliittyma kayttoliittyma;
+    
+    public static boolean ekaPeli;
+    public static String pelaajanNimi="Anonyymi";
 
     //TODO pelaajan nimen kysyminen
     public static void main(String[] args) {
@@ -26,7 +29,9 @@ public class Pelirunko {
         moottori = new Pelimoottori(kayttoliittyma);
         kayttoliittyma.setMoottori(moottori);
         SwingUtilities.invokeLater(kayttoliittyma);
-
+        
+        ekaPeli=true;
+        
         moottori.start();
     }
 
