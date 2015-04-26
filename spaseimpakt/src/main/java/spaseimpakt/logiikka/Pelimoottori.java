@@ -38,39 +38,49 @@ public class Pelimoottori extends Thread {
 
     private Alus alus;
     private GraafinenKayttoliittyma kayttoliittyma;
-    
+
     /**
      * Pelaajan ampumat aseet, jotka tällä hetkellä ovat ruudulla näkyvissä
      */
     private CopyOnWriteArrayList<Ase> aseet;
-    
+
     /**
      * Kaikki pelihahmot (esim viholliset, alus), jotka näytölle pitää pirtää
      */
     private CopyOnWriteArraySet<Piirrettava> piirrettavat;
-    
+
     /**
      * Näytöllä tällä hetkellä olevat viholliset
      */
     private CopyOnWriteArrayList<Vihu> viholliset;
-    
+
     /**
      * LevelManager, joka ohjaa levelien vaihtamista
      */
     private LevelManager lvlManager;
-    
+
+    /**
+     * Nykyinen taso tai null jos peli ei ole vielä alkanut
+     */
     private Level lvl;
-    
+
     /**
      * Polut leveltiedostoihin
      */
-    private final String[] levelTiedostot = new String[]{"resources/levelit/ekalevel.json"}; 
-    
+    private final String[] levelTiedostot = new String[]{"resources/levelit/ekalevel.json"};
+
     /**
-     * 
+     * Aika levelin alkaessa, tästä lasketaan vihollisten ilmestymisajat
      */
     private long levelinAlkuAika;
+
+    /**
+     * Törmäystestaaja, jota käytetään hahmojen välisten törmäysten tutkimiseen
+     */
+    private TormaysTestaaja tormaysTestaaja;
     
+    private boolean peliHavitty;
+
     /**
      * Konstruktori
      *
@@ -84,11 +94,13 @@ public class Pelimoottori extends Thread {
         aseet = new CopyOnWriteArrayList<>();
         piirrettavat = new CopyOnWriteArraySet<>();
         viholliset = new CopyOnWriteArrayList<>();
-        lvlManager=new LevelManager(levelTiedostot, this);
-        lvl=lvlManager.lueSeuraavaLevel();
-        levelinAlkuAika=System.currentTimeMillis();
-        peliVoitettu=false;
+        lvlManager = new LevelManager(levelTiedostot, this);
+        lvl = lvlManager.lueSeuraavaLevel();
+        levelinAlkuAika = System.currentTimeMillis();
+        peliVoitettu = false;
         piirrettavat.add(alus);
+        tormaysTestaaja = new TormaysTestaaja();
+        peliHavitty=false;
     }
 
     /**
@@ -164,7 +176,7 @@ public class Pelimoottori extends Thread {
     public void run() {
 
         //TODO alkuun varmaan dialogi, jossa kysytään pelaajan nimeä
-        do {        
+        do {
             alus.paivita();
 
             for (Ase ase : aseet) {
@@ -175,6 +187,7 @@ public class Pelimoottori extends Thread {
                 vihu.liiku();
             }
 
+            kasitteleTormaykset();
             kayttoliittyma.piirra();
 
             paivitaLevel();
@@ -183,19 +196,37 @@ public class Pelimoottori extends Thread {
     }
 
     private void paivitaLevel() {
-        if(lvl==null){
-            lvl=lvlManager.lueSeuraavaLevel();
-            if(lvl==null){
-                peliVoitettu=false;
+        if (lvl == null) {
+            lvl = lvlManager.lueSeuraavaLevel();
+            if (lvl == null) {
+                peliVoitettu = false;
                 lopeta();
             }
-            levelinAlkuAika=System.currentTimeMillis();
+            levelinAlkuAika = System.currentTimeMillis();
         }
-        
-        Long aikaLevelinAlustaLong = System.currentTimeMillis()-levelinAlkuAika;
+
+        Long aikaLevelinAlustaLong = System.currentTimeMillis() - levelinAlkuAika;
         int aikaLevelinAlusta = aikaLevelinAlustaLong.intValue();
-        while(lvl.onkoSeuraavanVihollisenAika(aikaLevelinAlusta)){
+        while (lvl.onkoSeuraavanVihollisenAika(aikaLevelinAlusta)) {
             lisaaVihu(lvl.seuraavaVihollinen());
+        }
+    }
+
+    private void kasitteleTormaykset() {
+        for (Vihu vihu : viholliset) {
+            if (tormaysTestaaja.tormaa(alus, vihu)) {
+                peliHavitty=true;
+                lopeta();
+            } else {
+                for(Ase ase: aseet){
+                    if(tormaysTestaaja.tormaa(ase, vihu)){
+                        poistaVihu(vihu);
+                        if(ase.getClass()==Ammus.class){
+                            poistaAse(ase);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -217,6 +248,8 @@ public class Pelimoottori extends Thread {
      */
     public void lopeta() {
         kaynnissa = false;
+        
+        // TODO toimintaa, joka riippuu siitä, onko voitettu tai hävitty
     }
 
     public CopyOnWriteArraySet<Piirrettava> getPiirrettavat() {
