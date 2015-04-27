@@ -14,4 +14,4 @@
 |10.4.2015  | ??                | Jotain, ei voi muistaa enää viimeviikkoa |
 |17.4.2015  | 6                 | Paljon säätöä, vähän aikaansaantia. Vihollisen liikkuminen (yksi tapa), leveldatan lukemiseen käytetty JsonLukija, testejä, pit-hämmennystä |
 |23.-24.4.2015| 6               | Viholliset näytölle, sekvenssikaavio lisää, testejä, dokkia, törmäystestauksen ajattelua ja aloittelua |
-|26.4.2013| 6                  | Käliin nappuloita, laser, jar, testejä |
+|26.4.2013| 4                  | Käliin nappuloita, laser, jar, testejä |
