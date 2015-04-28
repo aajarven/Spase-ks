@@ -16,7 +16,7 @@ public class StringMuotoilija {
      */
     public static String nimiOikeanMittaiseksi(String nimi, int pituus) {
         if (nimi.length() > pituus) {
-            return nimi.substring(0, pituus - 1);
+            return nimi.substring(0, pituus);
         } else {
             StringBuffer nimiBuffer = new StringBuffer(nimi);
             while (nimiBuffer.length() < pituus) {
