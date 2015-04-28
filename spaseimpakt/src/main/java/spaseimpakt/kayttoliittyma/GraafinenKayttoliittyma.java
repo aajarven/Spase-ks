@@ -6,6 +6,8 @@ package spaseimpakt.kayttoliittyma;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Scanner;
 import javax.swing.*;
 import spaseimpakt.logiikka.Pelimoottori;
 import spaseimpakt.logiikka.Pelirunko;
@@ -122,11 +124,11 @@ public class GraafinenKayttoliittyma implements Runnable {
 
         JMenu apuamenu = new JMenu("Apua");
         JMenuItem ohjenappi = new JMenuItem("Ohjeet");
-        ohjenappi.addActionListener(new OhjeetKuuntelija());
+        ohjenappi.addActionListener(new ApuaKuuntelija("Apua", "Apua", new File("resources/ohjeet.txt"), frame));
         apuamenu.add(ohjenappi);
 
         JMenuItem tietojanappi = new JMenuItem("Tietoja");
-        tietojanappi.addActionListener(new TietojaKuuntelija());
+        tietojanappi.addActionListener(new ApuaKuuntelija("Tietoja", "Tietoja", new File("resources/tietoja.txt"), frame));
         apuamenu.add(tietojanappi);
 
         ylapalkki.add(pelimenu);
@@ -191,25 +193,81 @@ public class GraafinenKayttoliittyma implements Runnable {
         }
     }
     
-    private static class OhjeetKuuntelija implements ActionListener {
+    private static class ApuaKuuntelija implements ActionListener{
+        
+        String ikkunaOtsikko;
+        String otsikko;
+        File tekstitiedosto;
+        Frame frame;
 
-        public OhjeetKuuntelija() {
+        public ApuaKuuntelija(String ikkunaOtsikko, String otsikko, File teksti, Frame frame) {
+            this.ikkunaOtsikko = ikkunaOtsikko;
+            this.otsikko = otsikko;
+            this.tekstitiedosto = teksti;
+            this.frame = frame;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Splash t. ohjeetkuuntelija");
+            JDialog naytettava = this.luoDialogi();
+            naytettava.pack();
+            naytettava.setVisible(true);
         }
-    }
-    
-    private static class TietojaKuuntelija implements ActionListener {
-
-        public TietojaKuuntelija() {
+        
+        private JDialog luoDialogi(){
+            JDialog dialogi = new JDialog(frame, ikkunaOtsikko, true);
+            dialogi.setLayout(new GridBagLayout());
+            dialogi.setPreferredSize(new Dimension(400, 350));
+            
+            GridBagConstraints c = new GridBagConstraints();
+            
+            lisaaOtsikko(c, dialogi);
+            lisaaTekstialue(c, dialogi);
+            
+            return dialogi;
         }
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("Splash t. tietojakuuntelija");
+        private void lisaaOtsikko(GridBagConstraints c, JDialog dialogi) {
+            JLabel otsikko = new JLabel(this.otsikko);
+            otsikko.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
+            c.gridx=0;
+            c.gridy=0;
+            c.anchor=GridBagConstraints.FIRST_LINE_START;
+            c.insets=new Insets(10, 20, 0, 0);
+            dialogi.add(otsikko, c);
+        }
+        
+        private void lisaaTekstialue(GridBagConstraints c, JDialog dialogi){
+            JTextArea tekstialue = new JTextArea();
+            JScrollPane scrollialue = new JScrollPane(tekstialue);
+            tekstialue.setEditable(false);
+            tekstialue.setMargin(new Insets(5, 5, 5, 5));
+            
+            c.gridx=0;
+            c.gridy=1;
+            c.weightx=1;
+            c.weighty=1;
+            c.insets=new Insets(5,5,5,5);
+            c.fill=GridBagConstraints.BOTH;
+            
+            dialogi.add(scrollialue, c);
+            tekstialue.setText(lueTekstiTiedostosta());
+            tekstialue.setLineWrap(true);
+            tekstialue.setWrapStyleWord(true);
+        }
+        
+        private String lueTekstiTiedostosta(){
+            String palautettava = "";
+            try{
+                Scanner lukija = new Scanner(tekstitiedosto, "UTF-8");
+                while(lukija.hasNextLine()){
+                    palautettava+=lukija.nextLine()+"\n";
+                }
+                lukija.close();
+                return palautettava;
+            } catch (Exception e){
+                return "Virhe tiedostoa luettaessa: "+e.getMessage();
+            }
         }
     }
 }

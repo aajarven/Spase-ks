@@ -1,0 +1,6 @@
+Lennä vihreällä aluksella ja tuhoa muut alukset ampumalla. Tuhotuista aluksista saa pisteitä, viholliseen osuminen päättää pelin.
+
+Kontrollit: 
+liikkuminen	nuolinäppäimet
+ampuminen	välilyönti
+laser		x

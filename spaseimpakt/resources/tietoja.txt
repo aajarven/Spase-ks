@@ -1,0 +1,5 @@
+Spase Impakt v. 1.0
+
+Alkuperäinen idea joissain Nokia 3310 -puhelimessa ja joissain sen seuraajissa olleesta Space Impact -pelistä.
+
+Toteutus ja taide (c) Anni Järvenpää
