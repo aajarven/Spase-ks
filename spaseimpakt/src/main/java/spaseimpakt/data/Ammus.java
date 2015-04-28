@@ -14,7 +14,7 @@ import spaseimpakt.logiikka.Pelimoottori;
  *
  * @author Anni Järvenpää
  */
-public class Ammus implements Ase, Piirrettava{
+public class Ammus implements Ase, Piirrettava {
 
     Pelimoottori moottori;
     int x;
@@ -87,14 +87,15 @@ public class Ammus implements Ase, Piirrettava{
             System.out.println("Ammuksen kuvaa ei löytynyt");
         }
     }
-    
+
     /**
      * Palauttaa alueen, jolla oleviin vihollisiin ammus tekee vahinkoa.
+     *
      * @return ammuksen vaikutusalue
      */
     @Override
     public Polygon getVaikutusalue() {
-        return new Polygon(new int[]{x, x, x+sprite.getWidth(null), x+sprite.getWidth(null)}, new int[]{y, y+sprite.getHeight(null), y+sprite.getHeight(null), y}, 4);
+        return new Polygon(new int[]{x, x, x + sprite.getWidth(null), x + sprite.getWidth(null)}, new int[]{y, y + sprite.getHeight(null), y + sprite.getHeight(null), y}, 4);
     }
 
 }

@@ -80,6 +80,7 @@ public class Level {
 
     /**
      * Kertoo, onko kaikki tason viholliset jo haettu
+     *
      * @return true jos uusia vihollisia ei enää ole, false jos on
      */
     public boolean ovatkoVihollisetLoppu() {
@@ -87,10 +88,12 @@ public class Level {
     }
 
     /**
-     * Testausta varten tarvittava metodi, joka palauttaa TreeMapin, jossa ovat tason vihut ja niiden ilmestymishetket
+     * Testausta varten tarvittava metodi, joka palauttaa TreeMapin, jossa ovat
+     * tason vihut ja niiden ilmestymishetket
+     *
      * @return tason vihut ilmestymishetken mukaan
      */
-    public TreeMap<Integer, ArrayList<Vihu>> getVihut(){
+    public TreeMap<Integer, ArrayList<Vihu>> getVihut() {
         return viholliset;
-    }    
+    }
 }

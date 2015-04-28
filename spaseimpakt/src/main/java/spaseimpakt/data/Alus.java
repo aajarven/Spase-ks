@@ -32,16 +32,12 @@ public class Alus implements Piirrettava {
     private boolean ampuuLaseria;
     private long edellinenLaser;
 
-    // Onko tämä rumaa?
     public static final int NOPEUS = 3; // TODO sopiva nopeuden arvo alukselle
     private final int AMMUS_INTERVALLI = 150;
     private final int LASERIT_ALUSSA = 3;
     private final int LASER_INTERVALLI = 1000;
     private final int POMMIT_ALUSSA = 3;
 
-    // TODO törmäystarkastus
-    // TODO elämät
-    
     /**
      * Luo aluksen, jolla pelaaja lentää. Jos annetut aloituskoordinaatit eivät
      * ole sallitulla alueella, luodaan alus niitä lähimpään sallittuun
@@ -59,7 +55,7 @@ public class Alus implements Piirrettava {
         this.y = y;
         this.pelialueenLeveys = pelialueenLeveys;
         this.pelialueenKorkeus = pelialueenKorkeus;
-        this.maxX = pelialueenLeveys - sprite.getWidth(null); // TODO korjaa se, ettei mikään estä laittamasta maksimiarvoksi esim negatiivista lukua, jos ohjelmoija on tyhmä
+        this.maxX = pelialueenLeveys - sprite.getWidth(null);
         this.maxY = pelialueenKorkeus - sprite.getHeight(null);
         tarkastaPaikka();
         this.moottori = moottori;
@@ -124,11 +120,15 @@ public class Alus implements Piirrettava {
         if (ampuuLaukauksiaNyt) {
             ammuLaukaus();
         }
-        if(ampuuLaseria){
+        if (ampuuLaseria) {
             ammuLaser();
         }
     }
 
+    /**
+     * Jos pelaaja yrittää liikkua pelialueen ulkopuolelle, alus siirretään
+     * lähimpään sallittuun paikkaan.
+     */
     private void tarkastaPaikka() {
         if (this.x > maxX) {
             this.x = maxX;
@@ -153,7 +153,7 @@ public class Alus implements Piirrettava {
      */
     public void ammuLaukaus() {
         if (System.currentTimeMillis() - edellinenAmmus > AMMUS_INTERVALLI) {
-            moottori.lisaaAse(new Ammus(x+sprite.getWidth(null), y+sprite.getHeight(null)/2, pelialueenLeveys, moottori));
+            moottori.lisaaAse(new Ammus(x + sprite.getWidth(null), y + sprite.getHeight(null) / 2, pelialueenLeveys, moottori));
             edellinenAmmus = System.currentTimeMillis();
         }
     }
@@ -169,10 +169,11 @@ public class Alus implements Piirrettava {
         if (laserit > 0 && System.currentTimeMillis() - edellinenLaser > LASER_INTERVALLI) {
             moottori.lisaaAse(new Laser(this, moottori));
             laserit--;
-            edellinenLaser=System.currentTimeMillis();
+            edellinenLaser = System.currentTimeMillis();
         }
     }
 
+    // TODO toteuta pommin laukaisu
     /**
      * Ampuu pommin, joka tuhoaa kaikki tavalliset viholliset näytöltä.
      *
@@ -221,19 +222,22 @@ public class Alus implements Piirrettava {
     }
 
     /**
-     * Asettaa aluksen laserin ampumistilaan. Jos true, alus ampuu laserin seuraavana mahdollisena ajanhetkenä, jos false, ei ammu.
+     * Asettaa aluksen laserin ampumistilan. Jos true, alus ampuu laserin
+     * seuraavana mahdollisena ajanhetkenä, jos false, ei ammu.
+     *
      * @param ampuuLaseria halutaanko aluksen ampuvan laser
      */
     public void setAmpuuLaseria(boolean ampuuLaseria) {
         this.ampuuLaseria = ampuuLaseria;
     }
-    
+
     /**
      * Palauttaa polygonin, jonka sisään alus jää.
+     *
      * @return polygoni, jonka sisään alus jää.
      */
-    public Polygon getBoundingBox(){
-        return new Polygon(new int[]{x, x, x+sprite.getWidth(null)}, new int[]{y, y+sprite.getHeight(null), y+sprite.getHeight(null)/2}, 3);
+    public Polygon getBoundingBox() {
+        return new Polygon(new int[]{x, x, x + sprite.getWidth(null)}, new int[]{y, y + sprite.getHeight(null), y + sprite.getHeight(null) / 2}, 3);
     }
 
 }

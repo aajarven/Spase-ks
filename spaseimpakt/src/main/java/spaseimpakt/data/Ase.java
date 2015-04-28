@@ -12,14 +12,15 @@ import java.awt.Polygon;
  */
 public interface Ase {
 
-    // TODO törmäystarkastus johonkin, mihin?
     /**
      * Liikuttaa asetta yhdessä framessa liikutettavan määrän.
      */
     public void liiku();
-    
+
     /**
-     * Palauttaa aseen vaikutusalueen (alueen, jolla oleviin vihollisiin ase tekee vahinkoa)
+     * Palauttaa aseen vaikutusalueen (alueen, jolla oleviin vihollisiin ase
+     * tekee vahinkoa)
+     *
      * @return vaikutusalue
      */
     public Polygon getVaikutusalue();

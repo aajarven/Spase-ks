@@ -17,7 +17,7 @@ import spaseimpakt.logiikka.Pelirunko;
  *
  * @author Anni Järvenpää
  */
-public class Laser implements Ase, Piirrettava{
+public class Laser implements Ase, Piirrettava {
 
     Alus alus;
     Pelimoottori moottori;
@@ -54,9 +54,12 @@ public class Laser implements Ase, Piirrettava{
         }
     }
 
+    /**
+     * Muuttaa laserin koordinaatit aluksen koordinaattien mukaisiksi
+     */
     private void paivitaKoordinaatit() {
-        this.x = alus.getX()+alus.getSprite().getWidth(null);
-        this.y = alus.getY()+alus.getSprite().getHeight(null)/2-sprite.getHeight(null)/2;
+        this.x = alus.getX() + alus.getSprite().getWidth(null);
+        this.y = alus.getY() + alus.getSprite().getHeight(null) / 2 - sprite.getHeight(null) / 2;
     }
 
     /**
@@ -94,9 +97,12 @@ public class Laser implements Ase, Piirrettava{
 
     @Override
     public Polygon getVaikutusalue() {
-        return new Polygon(new int[]{x, Pelirunko.LEVEYS, Pelirunko.LEVEYS, x}, new int[]{y-sprite.getHeight(null)/2, y-sprite.getHeight(null)/2, y+sprite.getHeight(null)/2, y+sprite.getHeight(null)/2}, 4 );
+        return new Polygon(new int[]{x, Pelirunko.LEVEYS, Pelirunko.LEVEYS, x}, new int[]{y - sprite.getHeight(null) / 2, y - sprite.getHeight(null) / 2, y + sprite.getHeight(null) / 2, y + sprite.getHeight(null) / 2}, 4);
     }
 
+    /**
+     * Lukee aluksen kuvan tiedostosta
+     */
     private void lueSprite() {
         try {
             BufferedImage i = ImageIO.read(new File("resources/laser-tile.png"));
@@ -105,5 +111,5 @@ public class Laser implements Ase, Piirrettava{
             System.out.println("Laserin kuvaa ei löytynyt");
         }
     }
-    
+
 }

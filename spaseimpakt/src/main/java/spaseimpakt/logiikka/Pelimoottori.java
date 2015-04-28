@@ -272,7 +272,6 @@ public class Pelimoottori extends Thread {
 
         kirjaaScore();
         
-        //TODO viestit
         if (peliVoitettu) {
             kayttoliittyma.naytaViesti("Onnittelut, voitit pelin!", "Voitit");
             peliVoitettu=false;

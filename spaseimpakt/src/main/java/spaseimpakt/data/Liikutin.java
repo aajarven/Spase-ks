@@ -11,8 +11,23 @@ package spaseimpakt.data;
  */
 public interface Liikutin {
 
+    /**
+     * Liikuttaa vihollista sen seuraavaan sijaintiin.
+     *
+     * @return vihollisen uudet koordinaatit kaksialkioisessa taulukossa [x, y]
+     */
     public int[] liiku();
+
+    /**
+     *
+     * @return vihollisen x-koordinaatti
+     */
     public int getX();
+
+    /**
+     *
+     * @return vihollisen y-koordinaatti
+     */
     public int getY();
-    
+
 }
