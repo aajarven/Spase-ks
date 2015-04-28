@@ -165,6 +165,10 @@ public class GraafinenKayttoliittyma implements Runnable {
         }
     }
     
+    public void naytaViesti(String viesti, String otsikko){
+        JOptionPane.showMessageDialog(frame, viesti, otsikko, JOptionPane.INFORMATION_MESSAGE);
+    }
+    
     /**
      * Mahdollistaa pelaajan nimen vaihtamisen kutsumalla pelimoottorin vaihdaPelaajanNimi-metodia.
      * @see Pelimoottori#vaihdaPelaajanNimi() 

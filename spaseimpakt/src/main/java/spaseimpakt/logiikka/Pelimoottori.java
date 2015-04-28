@@ -219,7 +219,7 @@ public class Pelimoottori extends Thread {
         if (lvl == null) {
             lvl = lvlManager.lueSeuraavaLevel();
             if (lvl == null) {
-                peliVoitettu = false;
+                peliVoitettu = true;
                 lopeta();
             }
             levelinAlkuAika = System.currentTimeMillis();
@@ -274,9 +274,11 @@ public class Pelimoottori extends Thread {
         
         //TODO viestit
         if (peliVoitettu) {
-
+            kayttoliittyma.naytaViesti("Onnittelut, voitit pelin!", "Voitit");
+            peliVoitettu=false;
         } else if (peliHavitty) {
-
+            kayttoliittyma.naytaViesti("Hävisit pelin.", "Hävisit");
+            peliHavitty=false;
         }
     }
 
@@ -326,5 +328,9 @@ public class Pelimoottori extends Thread {
      */
     public String haeScoret(){
         return highscoreManager.scoretMuotoiltunaStringina();
+    }
+
+    public int getPisteet() {
+        return pisteet;
     }
 }

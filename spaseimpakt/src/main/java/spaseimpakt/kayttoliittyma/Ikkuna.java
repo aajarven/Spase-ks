@@ -4,6 +4,7 @@
 package spaseimpakt.kayttoliittyma;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -36,6 +37,7 @@ public class Ikkuna extends JPanel {
      * @param alus pelaajan ohjaama alus, joka näytölle piirretään
      */
     public Ikkuna(Pelimoottori moottori) {
+        this.moottori = moottori;
         this.piirrettavat = moottori.getPiirrettavat();
     }
 
@@ -55,8 +57,8 @@ public class Ikkuna extends JPanel {
 
         for (Piirrettava piirrettava : piirrettavat) {
             if (piirrettava instanceof Laser) {
-                int x=piirrettava.getX();
-                while(x<Pelirunko.LEVEYS){
+                int x = piirrettava.getX();
+                while (x < Pelirunko.LEVEYS) {
                     g.drawImage(piirrettava.getSprite(), x, piirrettava.getY(), this);
                     x++;
                 }
@@ -64,5 +66,16 @@ public class Ikkuna extends JPanel {
                 g.drawImage(piirrettava.getSprite(), piirrettava.getX(), piirrettava.getY(), this);
             }
         }
+
+        piirraPisteet(g);
+
+    }
+
+    private void piirraPisteet(Graphics g) {
+        g.setColor(Color.WHITE);
+        Font fontti = new Font(Font.MONOSPACED, 1, 20);
+        g.setFont(fontti);
+        String pisteet = ((Integer) moottori.getPisteet()).toString();
+        g.drawString(pisteet, Pelirunko.LEVEYS - pisteet.length() * 12 - 20, 30);
     }
 }
