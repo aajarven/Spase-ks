@@ -23,7 +23,6 @@ public class Pelirunko {
     public static boolean ekaPeli;
     public static String pelaajanNimi="Anonyymi";
 
-    //TODO pelaajan nimen kysyminen
     public static void main(String[] args) {
         kayttoliittyma = new GraafinenKayttoliittyma();
         moottori = new Pelimoottori(kayttoliittyma);
