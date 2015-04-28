@@ -3,4 +3,4 @@ Lennä vihreällä aluksella ja tuhoa muut alukset ampumalla. Tuhotuista aluksis
 Kontrollit: 
 liikkuminen	nuolinäppäimet
 ampuminen	välilyönti
-laser		x
+laser	x

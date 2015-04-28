@@ -118,9 +118,9 @@ public class GraafinenKayttoliittyma implements Runnable {
         pelaajaValintaNappi.addActionListener(new PelaajaValintaKuuntelija());
         pelimenu.add(pelaajaValintaNappi);
 
-//        JMenuItem highscorenappi = new JMenuItem("Highscores");
-//        highscorenappi.addActionListener(new HighscoreKuuntelija());
-//        pelimenu.add(highscorenappi);
+        JMenuItem highscorenappi = new JMenuItem("Highscores");
+        highscorenappi.addActionListener(new HighscoreKuuntelija(moottori));
+        pelimenu.add(highscorenappi);
 
         JMenu apuamenu = new JMenu("Apua");
         JMenuItem ohjenappi = new JMenuItem("Ohjeet");
@@ -210,6 +210,7 @@ public class GraafinenKayttoliittyma implements Runnable {
         @Override
         public void actionPerformed(ActionEvent e) {
             JDialog naytettava = this.luoDialogi();
+            naytettava.setLocationRelativeTo(frame);
             naytettava.pack();
             naytettava.setVisible(true);
         }
@@ -268,6 +269,39 @@ public class GraafinenKayttoliittyma implements Runnable {
             } catch (Exception e){
                 return "Virhe tiedostoa luettaessa: "+e.getMessage();
             }
+        }
+    }
+    
+    private class HighscoreKuuntelija implements ActionListener {
+        
+        Pelimoottori moottori;
+
+        public HighscoreKuuntelija(Pelimoottori moottori) {
+            this.moottori=moottori;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) { //TODO highscoret kauniimmiksi
+            moottori.lopeta();
+
+            JDialog highscoreDialogi = new JDialog(frame, "Highscores");
+//            highscoreDialogi.addWindowListener(new IkkunanSulkuKuuntelija());
+
+            JTextArea tekstit = new JTextArea();
+            tekstit.setMargin(new Insets(5, 5, 5, 5));
+            tekstit.setText(moottori.haeScoret());
+            tekstit.setFont(new Font(Font.MONOSPACED, 0, 20));
+            tekstit.setBackground(Color.BLACK);
+            tekstit.setForeground(Color.RED);
+            tekstit.setEditable(false);
+
+            highscoreDialogi.add(tekstit);
+
+            highscoreDialogi.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            highscoreDialogi.pack();
+            highscoreDialogi.setResizable(false);
+            highscoreDialogi.setLocationRelativeTo(frame);
+            highscoreDialogi.setVisible(true);
         }
     }
 }

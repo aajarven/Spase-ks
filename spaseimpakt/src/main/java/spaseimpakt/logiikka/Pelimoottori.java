@@ -82,7 +82,11 @@ public class Pelimoottori extends Thread {
      */
     private TormaysTestaaja tormaysTestaaja;
 
+    private HighscoreManager highscoreManager;
+
+    private int pisteet;
     private boolean peliHavitty;
+    private boolean scoreKirjattu;
 
     /**
      * Konstruktori
@@ -104,6 +108,9 @@ public class Pelimoottori extends Thread {
         piirrettavat.add(alus);
         tormaysTestaaja = new TormaysTestaaja();
         peliHavitty = false;
+        pisteet = 0;
+        scoreKirjattu = false;
+        highscoreManager = new HighscoreManager();
     }
 
     /**
@@ -115,7 +122,7 @@ public class Pelimoottori extends Thread {
         aseet.add(ase);
         if (ase instanceof Ammus) { // tai myöhemmin laser, pommia ei piirretä
             piirrettavat.add((Ammus) ase);
-        } else if(ase instanceof Laser){
+        } else if (ase instanceof Laser) {
             piirrettavat.add((Laser) ase);
         }
     }
@@ -180,10 +187,10 @@ public class Pelimoottori extends Thread {
     @Override
     public void run() {
 
-        if(Pelirunko.ekaPeli){
+        if (Pelirunko.ekaPeli) {
             vaihdaPelaajanNimi();
         }
-        
+
         do {
             alus.paivita();
 
@@ -204,6 +211,11 @@ public class Pelimoottori extends Thread {
     }
 
     private void paivitaLevel() {
+        if (lvl.ovatkoVihollisetLoppu() && viholliset.isEmpty()) {
+            muutaPisteita(5000);
+            lvl = null;
+        }
+
         if (lvl == null) {
             lvl = lvlManager.lueSeuraavaLevel();
             if (lvl == null) {
@@ -211,12 +223,12 @@ public class Pelimoottori extends Thread {
                 lopeta();
             }
             levelinAlkuAika = System.currentTimeMillis();
-        }
-
-        Long aikaLevelinAlustaLong = System.currentTimeMillis() - levelinAlkuAika;
-        int aikaLevelinAlusta = aikaLevelinAlustaLong.intValue();
-        while (lvl.onkoSeuraavanVihollisenAika(aikaLevelinAlusta)) {
-            lisaaVihu(lvl.seuraavaVihollinen());
+        } else {
+            Long aikaLevelinAlustaLong = System.currentTimeMillis() - levelinAlkuAika;
+            int aikaLevelinAlusta = aikaLevelinAlustaLong.intValue();
+            while (lvl.onkoSeuraavanVihollisenAika(aikaLevelinAlusta)) {
+                lisaaVihu(lvl.seuraavaVihollinen());
+            }
         }
     }
 
@@ -228,6 +240,7 @@ public class Pelimoottori extends Thread {
             } else {
                 for (Ase ase : aseet) {
                     if (tormaysTestaaja.tormaa(ase, vihu)) {
+                        muutaPisteita(100);
                         poistaVihu(vihu);
                         if (ase.getClass() == Ammus.class) {
                             poistaAse(ase);
@@ -257,7 +270,14 @@ public class Pelimoottori extends Thread {
     public void lopeta() {
         kaynnissa = false;
 
-        // TODO toimintaa, joka riippuu siitä, onko voitettu tai hävitty
+        kirjaaScore();
+        
+        //TODO viestit
+        if (peliVoitettu) {
+
+        } else if (peliHavitty) {
+
+        }
     }
 
     public CopyOnWriteArraySet<Piirrettava> getPiirrettavat() {
@@ -271,7 +291,6 @@ public class Pelimoottori extends Thread {
      * @throws HeadlessException
      */
     public void vaihdaPelaajanNimi() throws HeadlessException { //TODO jos cancel niin pidä edellinen nimi, ei anonyymi
-        //Tänne highscore
 
         if (!Pelirunko.ekaPeli) {
             lopeta();
@@ -286,8 +305,26 @@ public class Pelimoottori extends Thread {
         if (Pelirunko.pelaajanNimi == null || Pelirunko.pelaajanNimi.isEmpty()) {
             Pelirunko.pelaajanNimi = "Anonyymi";
         }
-        
+
         Pelirunko.restart();
     }
 
+    public void muutaPisteita(int muutos) {
+        pisteet += muutos;
+    }
+
+    private void kirjaaScore() {
+        if (!scoreKirjattu && pisteet > 0) {
+            highscoreManager.lisaaScore(Pelirunko.pelaajanNimi, pisteet);
+        }
+        scoreKirjattu=true;
+    }
+    
+    /**
+     * Hakee pelattavan luolan hichscoret HighscoreManagerilta muotoiltuna Stringinä ja palauttaa ne
+     * @return pelattavan luolan highscoret valmiiksi muotoiltuna Stringinä
+     */
+    public String haeScoret(){
+        return highscoreManager.scoretMuotoiltunaStringina();
+    }
 }
