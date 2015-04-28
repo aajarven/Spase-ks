@@ -1,10 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package spaseimpakt.utils;
 
+/**
+ * Stringien muotoiluun käytettävä luokka
+ *
+ * @author Anni Järvenpää
+ */
 public class StringMuotoilija {
 
     /**
@@ -27,10 +27,14 @@ public class StringMuotoilija {
     }
 
     /**
-     *Tekee järjestysluvusta yhtä monta merkkiä pitkän kuin maksiminumerosta lisäämällä alkuun nollia. Lisäksi loppuun lisätään piste ja välilyönti.
+     * Tekee järjestysluvusta yhtä monta merkkiä pitkän kuin maksiminumerosta
+     * lisäämällä alkuun nollia. Lisäksi loppuun lisätään piste ja välilyönti.
+     *
      * @param numero käsiteltävä numero
-     * @param maksimiNumero numero, jonka kanssa käsiteltävästä numerosta tehdään yhtä pitkä
-     * @return annettu numero johon on lisätty haluttu määrä alkunollia ja loppuun piste ja välilyönti
+     * @param maksimiNumero numero, jonka kanssa käsiteltävästä numerosta
+     * tehdään yhtä pitkä
+     * @return annettu numero johon on lisätty haluttu määrä alkunollia ja
+     * loppuun piste ja välilyönti
      */
     public static String jarjestyslukuMuotoilija(int numero, int maksimiNumero) {
         StringBuffer buffer = new StringBuffer(numeronPituusMerkkeina(maksimiNumero) + 2);
@@ -46,6 +50,7 @@ public class StringMuotoilija {
 
     /**
      * Palauttaa annetun numeron pituuden merkkeinä
+     *
      * @param numero tutkittava numero
      * @return numeron pituus merkkeinä
      */
@@ -54,11 +59,13 @@ public class StringMuotoilija {
     }
 
     /**
-     * Muotoilee annetut pisteet lisäämällä alkuun nollia niin, 
-     * että pisteistä tulee yhtä pitkä luku kuin pelirungon MAX_PISTEET-vakion
-     * arvo ja kutsuu ryhmittele-metodia, joka ryhmittelee numerot kolmen ryhmiin
+     * Muotoilee annetut pisteet lisäämällä alkuun nollia niin, että pisteistä
+     * tulee yhtä pitkä luku kuin pelirungon MAX_PISTEET-vakion arvo ja kutsuu
+     * ryhmittele-metodia, joka ryhmittelee numerot kolmen ryhmiin
+     *
      * @param pisteet muotoiltavat pisteet
-     * @return pisteet Stringinä kolmen numeron ryhmiin ryhmiteltynä ja oikealla määrällä etunollia varustettuna
+     * @return pisteet Stringinä kolmen numeron ryhmiin ryhmiteltynä ja oikealla
+     * määrällä etunollia varustettuna
      */
     public static String pisteMuotoilija(int pisteet, int maksimipisteet) {
         int maxPituus = Integer.toString(maksimipisteet).length();
@@ -74,7 +81,9 @@ public class StringMuotoilija {
     }
 
     /**
-     * ryhmittelee StringBufferin sisältämän luvun numerot kolmen numeron ryhmiin
+     * Ryhmittelee StringBufferin sisältämän luvun numerot kolmen numeron
+     * ryhmiin
+     *
      * @param buffer käsiteltävä bufferi
      * @return bufferi ryhmiteltynä
      */

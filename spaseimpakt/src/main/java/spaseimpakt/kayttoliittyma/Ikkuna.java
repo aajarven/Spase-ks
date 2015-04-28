@@ -19,8 +19,16 @@ import spaseimpakt.data.Piirrettava;
 import spaseimpakt.logiikka.Pelimoottori;
 import spaseimpakt.logiikka.Pelirunko;
 
+/**
+ * Varsinainen peli-ikkuna, jossa pelin tapahtumat näkyvät
+ *
+ * @author Anni Järvenpää
+ */
 public class Ikkuna extends JPanel {
 
+    /**
+     * Moottori, jonka tapahtumia piirretään
+     */
     Pelimoottori moottori;
 
     /**
@@ -41,7 +49,6 @@ public class Ikkuna extends JPanel {
         this.piirrettavat = moottori.getPiirrettavat();
     }
 
-    //TODO vihut, ammukset
     /**
      * Piirtää ikkunaan taustan ja aluksen, myöhemmin myös vihut ja ammukset
      * sekä taustan
@@ -71,6 +78,11 @@ public class Ikkuna extends JPanel {
 
     }
 
+    /**
+     * Piirtää pelaajan pistemäärän näytön oikeaan yläkulmaan
+     *
+     * @param g grafiikkaolio, jota piirtämiseen käytetään
+     */
     private void piirraPisteet(Graphics g) {
         g.setColor(Color.WHITE);
         Font fontti = new Font(Font.MONOSPACED, 1, 20);

@@ -14,12 +14,13 @@ import spaseimpakt.logiikka.Pelirunko;
  *
  * @author Anni Järvenpää
  */
-public class Pommi implements Ase{
+public class Pommi implements Ase {
 
     Pelimoottori moottori;
 
     /**
      * Luo uuden pommin
+     *
      * @param moottori pelimoottori, jonka pyörittämään peliin pommi luodaan.
      */
     public Pommi(Pelimoottori moottori) {
@@ -33,8 +34,6 @@ public class Pommi implements Ase{
     public void liiku() {
         moottori.poistaAse(this);
     }
-    
-    //TODO vahinko vihollisiin
 
     @Override
     public Polygon getVaikutusalue() {

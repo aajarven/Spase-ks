@@ -10,28 +10,29 @@ import java.awt.Polygon;
  *
  * @author Anni Järvenpää
  */
-public interface Vihu{
+public interface Vihu {
 
     /**
      * Liikuttaa vihollista yhden askeleen
      */
     public void liiku();
-    
+
     /**
-     * 
+     *
      * @return vihollisen vasemman yläkulman x-koordinaatti
      */
     public int getX();
-    
+
     /**
-     * 
+     *
      * @return vihollisen vasemman yläkulman y-koordinaatti
      */
     public int getY();
-    
+
     /**
-     * Polygoni, jonka sisään vihu mahtuu kokonaan
-     * @return 
+     * Palauttaa törmäystestauksissa tarvittavan alueen, jonka sisällä vihu on
+     *
+     * @return Polygoni, jonka sisään vihu mahtuu kokonaan
      */
     public Polygon getBoundingBox();
 }

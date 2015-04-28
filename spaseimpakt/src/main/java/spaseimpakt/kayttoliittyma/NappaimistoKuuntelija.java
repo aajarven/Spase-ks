@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package spaseimpakt.kayttoliittyma;
 
 import java.awt.event.KeyEvent;
@@ -12,6 +7,7 @@ import spaseimpakt.data.Suunta;
 import spaseimpakt.logiikka.Pelimoottori;
 
 /**
+ * KeyListener, joka tarkkailee näppäimistöä
  *
  * @author Anni Järvenpää
  */
@@ -41,7 +37,7 @@ public class NappaimistoKuuntelija implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             alus.setAmpuuLaukauksiaNyt(true);
         }
-        if(e.getKeyCode() == KeyEvent.VK_X){
+        if (e.getKeyCode() == KeyEvent.VK_X) {
             alus.setAmpuuLaseria(true);
         }
 
@@ -65,7 +61,7 @@ public class NappaimistoKuuntelija implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             alus.setAmpuuLaukauksiaNyt(false);
         }
-        if(e.getKeyCode() == KeyEvent.VK_X){
+        if (e.getKeyCode() == KeyEvent.VK_X) {
             alus.setAmpuuLaseria(false);
         }
 

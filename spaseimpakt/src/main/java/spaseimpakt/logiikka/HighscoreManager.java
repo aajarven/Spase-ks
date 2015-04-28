@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package spaseimpakt.logiikka;
 
 import java.io.*;
@@ -10,6 +5,11 @@ import java.util.TreeSet;
 import spaseimpakt.data.Tulos;
 import spaseimpakt.utils.StringMuotoilija;
 
+/**
+ * Hoitaa parhaiden pelitulosten kirjaamisen sekä lukemisen tiedostosta.
+ *
+ * @author Anni Järvenpää
+ */
 public class HighscoreManager {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +46,10 @@ public class HighscoreManager {
         paivitaScoretTiedostoon();
     }
 
+    /**
+     * Luo nollan pisteen tuloksia anonyymeille pelaajille, kunnes scoretaulu on
+     * täynnä
+     */
     private void taytaScoretaulu() {
         int i = 0;
         while (scoret.size() < SAILYTETTAVAT_SCORET) {
@@ -76,16 +80,6 @@ public class HighscoreManager {
         } catch (ClassNotFoundException e) {
             System.out.println("CNF Error ladattaessa: " + e.getMessage());
         }
-//        } finally {
-//            try {
-//                if (outputStream != null) {
-//                    outputStream.flush();
-//                    outputStream.close();
-//                }
-//            } catch (IOException e) {
-//                System.out.println("IO Error ladattaessa: " + e.getMessage());
-//            }
-//        }
     }
 
     /**
@@ -144,7 +138,7 @@ public class HighscoreManager {
                 i++;
             }
         }
-        
+
         return scoreMuodostaja.toString();
     }
 

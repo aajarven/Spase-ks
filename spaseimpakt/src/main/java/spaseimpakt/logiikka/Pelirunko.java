@@ -24,28 +24,35 @@ public class Pelirunko {
     public static String pelaajanNimi="Anonyymi";
 
     public static void main(String[] args) {
+        ekaPeli=true;
+        alusta();
+    }
+
+    private static void alusta() {
         kayttoliittyma = new GraafinenKayttoliittyma();
         moottori = new Pelimoottori(kayttoliittyma);
         kayttoliittyma.setMoottori(moottori);
         SwingUtilities.invokeLater(kayttoliittyma);
-        
-        ekaPeli=true;
-        
         moottori.start();
     }
 
     /**
      * Aloittaa pelin alusta
      */
-    public static void restart(){
+    public static void restart(){ // TODO: tosi ruma tapa tehdä tämä, keksi parempi joka toimii
+        kayttoliittyma.sulje();
         ekaPeli=false;
-        moottori.lopeta();
-        kayttoliittyma.tyhjenna();
-        moottori=new Pelimoottori(kayttoliittyma);
-//        maailma.setMoottori(moottori);
-        kayttoliittyma.setMoottori(moottori);
-        moottori.start();
-        SwingUtilities.invokeLater(kayttoliittyma);
+        alusta();
+        
+        
+//        ekaPeli=false;
+//        moottori.lopeta();
+//        kayttoliittyma.tyhjenna();
+//        moottori=new Pelimoottori(kayttoliittyma);
+////        maailma.setMoottori(moottori);
+//        kayttoliittyma.setMoottori(moottori);
+//        moottori.start();
+//        SwingUtilities.invokeLater(kayttoliittyma);
     }
 
 }

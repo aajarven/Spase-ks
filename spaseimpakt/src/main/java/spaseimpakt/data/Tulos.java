@@ -7,27 +7,51 @@ package spaseimpakt.data;
 
 import java.io.Serializable;
 
-public class Tulos implements Comparable<Tulos>, Serializable{
+/**
+ * Pelaajan pistetilanne pelin päättyessä. Tallentaa pelaajan nimen ja hänen
+ * saamansa pisteet.
+ *
+ * @author Anni Järvenpää
+ */
+public class Tulos implements Comparable<Tulos>, Serializable {
+
     private final int pisteet;
     private final String nimi;
-    
-    public Tulos(String nimi, int pisteet){
-        this.nimi=nimi;
-        this.pisteet=pisteet;
+
+    /**
+     *
+     * @param nimi pelaajan nimi
+     * @param pisteet pelaajan saamat pisteet
+     */
+    public Tulos(String nimi, int pisteet) {
+        this.nimi = nimi;
+        this.pisteet = pisteet;
     }
-    
-    public int getPisteet(){
+
+    /**
+     *
+     * @return pelaajan pistemäärä
+     */
+    public int getPisteet() {
         return pisteet;
     }
-    
-    public String getNimi(){
+
+    /**
+     *
+     * @return pelaajan nimi
+     */
+    public String getNimi() {
         return nimi;
     }
 
     @Override
     public int compareTo(Tulos t) {
-        if (this.pisteet>t.getPisteet()) return -1;
-        else if (this.pisteet<t.getPisteet()) return 1;
-        else return this.nimi.compareTo(t.getNimi());
+        if (this.pisteet > t.getPisteet()) {
+            return -1;
+        } else if (this.pisteet < t.getPisteet()) {
+            return 1;
+        } else {
+            return this.nimi.compareTo(t.getNimi());
+        }
     }
 }

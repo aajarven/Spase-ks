@@ -240,4 +240,13 @@ public class Alus implements Piirrettava {
         return new Polygon(new int[]{x, x, x + sprite.getWidth(null)}, new int[]{y, y + sprite.getHeight(null), y + sprite.getHeight(null) / 2}, 3);
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    
 }

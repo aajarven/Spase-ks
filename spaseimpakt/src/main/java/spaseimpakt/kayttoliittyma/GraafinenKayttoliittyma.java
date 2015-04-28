@@ -54,6 +54,11 @@ public class GraafinenKayttoliittyma implements Runnable {
     public GraafinenKayttoliittyma() {
     }
 
+    /**
+     * Asettaa pelimoottorin, jonka tapahtumat näytölle piirretään
+     *
+     * @param moottori
+     */
     public void setPelimoottori(Pelimoottori moottori) {
         this.moottori = moottori;
     }
@@ -78,13 +83,6 @@ public class GraafinenKayttoliittyma implements Runnable {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-    
-    /**
-     * Tyhjentää vanhan pelin ikkunasta
-     */
-    public void tyhjenna(){
-        frame.getContentPane().removeAll(); // todo tee paremmin
-    }
 
     /**
      * Lisää parametrina annettuun containeriin yläpalkin ja peli-ikkunan
@@ -97,16 +95,16 @@ public class GraafinenKayttoliittyma implements Runnable {
         ikkuna.setPreferredSize(new Dimension(Pelirunko.LEVEYS, Pelirunko.KORKEUS));
         container.add(ikkuna, BorderLayout.CENTER);
     }
-    
+
     /**
-     * Luo ja palauttaa yläpalkin peli-ikkunaan. 
-     * Palkki mahdollistaa pelin aloittamisen alusta, pelaajan nimen muuttamisen, 
-     * luolan valitsemisen, highscorejen näyttämisen sekä ohjeiden ja tietojen näyttämisen.
+     * Luo ja palauttaa yläpalkin peli-ikkunaan. Palkki mahdollistaa pelin
+     * aloittamisen alusta, pelaajan nimen muuttamisen, luolan valitsemisen,
+     * highscorejen näyttämisen sekä ohjeiden ja tietojen näyttämisen.
+     *
      * @return menupalkki
      */
     private JMenuBar luoMenupalkki() {
         JMenuBar ylapalkki = new JMenuBar();
-
 
         JMenu pelimenu = new JMenu("Peli");
 
@@ -164,14 +162,32 @@ public class GraafinenKayttoliittyma implements Runnable {
             ikkuna.repaint();
         }
     }
-    
-    public void naytaViesti(String viesti, String otsikko){
+
+    /**
+     * Näyttää pelaajalle popup-ikkunan annetulla viestillä ja otsikolla.
+     * Ikkunassa on ainoastaan ok- ja rastipainikkeet, ei muuta
+     * interaktiivisuutta.
+     *
+     * @param viesti
+     * @param otsikko
+     */
+    public void naytaViesti(String viesti, String otsikko) {
         JOptionPane.showMessageDialog(frame, viesti, otsikko, JOptionPane.INFORMATION_MESSAGE);
     }
-    
+
     /**
-     * Mahdollistaa pelaajan nimen vaihtamisen kutsumalla pelimoottorin vaihdaPelaajanNimi-metodia.
-     * @see Pelimoottori#vaihdaPelaajanNimi() 
+     * Sulkee käyttöliittymän
+     */
+    public void sulje() {
+        frame.setVisible(false);
+        frame.dispose();
+    }
+
+    /**
+     * Mahdollistaa pelaajan nimen vaihtamisen kutsumalla pelimoottorin
+     * vaihdaPelaajanNimi-metodia.
+     *
+     * @see Pelimoottori#vaihdaPelaajanNimi()
      */
     private class PelaajaValintaKuuntelija implements ActionListener {// pelaajan nimen valinnan voisi tehdä myös JDialogilla kuten chompissa
 
@@ -180,14 +196,15 @@ public class GraafinenKayttoliittyma implements Runnable {
             moottori.vaihdaPelaajanNimi();
         }
     }
-    
+
     /**
-     * Mahdollistaa pelin aloittamisen alusta kutsumalla pelirungon restart-metodia
-     * @see Pelirunko#restart() 
+     * Mahdollistaa pelin aloittamisen alusta kutsumalla pelirungon
+     * restart-metodia
+     *
+     * @see Pelirunko#restart()
      */
     private class RestartKuuntelija implements ActionListener {
 
-        //Tänne highscore
         public RestartKuuntelija() {
         }
 
@@ -196,14 +213,26 @@ public class GraafinenKayttoliittyma implements Runnable {
             Pelirunko.restart();
         }
     }
-    
-    private static class ApuaKuuntelija implements ActionListener{
-        
+
+    /**
+     * ActionListener, joka kuuntelee nappulaa, jolla pelaaja saa ohjeita
+     * sisältävän ikkunan näkyviin.
+     */
+    private static class ApuaKuuntelija implements ActionListener {
+
         String ikkunaOtsikko;
         String otsikko;
         File tekstitiedosto;
         Frame frame;
 
+        /**
+         * Konstruktori.
+         *
+         * @param ikkunaOtsikko popup-ikkunan otsikko
+         * @param otsikko otsikko, joka näytetään tekstin yläpuolella
+         * @param teksti tiedosto, joka sisältää leipätekstin
+         * @param frame frame, jonka lapseksi uusi ikkuna luodaan
+         */
         public ApuaKuuntelija(String ikkunaOtsikko, String otsikko, File teksti, Frame frame) {
             this.ikkunaOtsikko = ikkunaOtsikko;
             this.otsikko = otsikko;
@@ -218,78 +247,111 @@ public class GraafinenKayttoliittyma implements Runnable {
             naytettava.pack();
             naytettava.setVisible(true);
         }
-        
-        private JDialog luoDialogi(){
+
+        /**
+         * Luo uuden JDialogin, jossa on annettu otsikko ja kutsuu muita
+         * metodeja, joilla siihen saadan oikea teksti.
+         *
+         * @return luotu ikkuna
+         * @see #lisaaOtsikko(java.awt.GridBagConstraints, javax.swing.JDialog)
+         * @see #lisaaTekstialue(java.awt.GridBagConstraints,
+         * javax.swing.JDialog)
+         */
+        private JDialog luoDialogi() {
             JDialog dialogi = new JDialog(frame, ikkunaOtsikko, true);
             dialogi.setLayout(new GridBagLayout());
             dialogi.setPreferredSize(new Dimension(400, 350));
-            
+
             GridBagConstraints c = new GridBagConstraints();
-            
+
             lisaaOtsikko(c, dialogi);
             lisaaTekstialue(c, dialogi);
-            
+
             return dialogi;
         }
 
+        /**
+         * Lisää annettuun JDialogiin otsikon
+         *
+         * @param c GridBagConstraints, jotka ohjaavat ikkunan layouttia
+         * @param dialogi JDialog, johon otsikko lisätään
+         */
         private void lisaaOtsikko(GridBagConstraints c, JDialog dialogi) {
             JLabel otsikko = new JLabel(this.otsikko);
             otsikko.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
-            c.gridx=0;
-            c.gridy=0;
-            c.anchor=GridBagConstraints.FIRST_LINE_START;
-            c.insets=new Insets(10, 20, 0, 0);
+            c.gridx = 0;
+            c.gridy = 0;
+            c.anchor = GridBagConstraints.FIRST_LINE_START;
+            c.insets = new Insets(10, 20, 0, 0);
             dialogi.add(otsikko, c);
         }
-        
-        private void lisaaTekstialue(GridBagConstraints c, JDialog dialogi){
+
+        /**
+         * Lisää annettuun JDialogiin tekstin
+         *
+         * @param c GridBagConstraints, jotka ohjaavat ikkunan layouttia
+         * @param dialogi JDialog, johon tekstilisätään
+         */
+        private void lisaaTekstialue(GridBagConstraints c, JDialog dialogi) {
             JTextArea tekstialue = new JTextArea();
             JScrollPane scrollialue = new JScrollPane(tekstialue);
             tekstialue.setEditable(false);
             tekstialue.setMargin(new Insets(5, 5, 5, 5));
-            
-            c.gridx=0;
-            c.gridy=1;
-            c.weightx=1;
-            c.weighty=1;
-            c.insets=new Insets(5,5,5,5);
-            c.fill=GridBagConstraints.BOTH;
-            
+
+            c.gridx = 0;
+            c.gridy = 1;
+            c.weightx = 1;
+            c.weighty = 1;
+            c.insets = new Insets(5, 5, 5, 5);
+            c.fill = GridBagConstraints.BOTH;
+
             dialogi.add(scrollialue, c);
             tekstialue.setText(lueTekstiTiedostosta());
             tekstialue.setLineWrap(true);
             tekstialue.setWrapStyleWord(true);
         }
-        
-        private String lueTekstiTiedostosta(){
+
+        /**
+         * Lukee ikkunassa näytettävän tekstin tiedostosta
+         *
+         * @return tiedoston teksti Stringinä
+         */
+        private String lueTekstiTiedostosta() {
             String palautettava = "";
-            try{
+            try {
                 Scanner lukija = new Scanner(tekstitiedosto, "UTF-8");
-                while(lukija.hasNextLine()){
-                    palautettava+=lukija.nextLine()+"\n";
+                while (lukija.hasNextLine()) {
+                    palautettava += lukija.nextLine() + "\n";
                 }
                 lukija.close();
                 return palautettava;
-            } catch (Exception e){
-                return "Virhe tiedostoa luettaessa: "+e.getMessage();
+            } catch (Exception e) {
+                return "Virhe tiedostoa luettaessa: " + e.getMessage();
             }
         }
     }
-    
+
+    /**
+     * ActionListener, joka kuuntelee highscorenapin painallusta
+     */
     private class HighscoreKuuntelija implements ActionListener {
-        
+
         Pelimoottori moottori;
 
+        /**
+         * Konstruktori
+         *
+         * @param moottori pelimoottori, jonka highscoret näytetään
+         */
         public HighscoreKuuntelija(Pelimoottori moottori) {
-            this.moottori=moottori;
+            this.moottori = moottori;
         }
 
         @Override
-        public void actionPerformed(ActionEvent e) { //TODO highscoret kauniimmiksi
+        public void actionPerformed(ActionEvent e) {
             moottori.lopeta();
 
             JDialog highscoreDialogi = new JDialog(frame, "Highscores");
-//            highscoreDialogi.addWindowListener(new IkkunanSulkuKuuntelija());
 
             JTextArea tekstit = new JTextArea();
             tekstit.setMargin(new Insets(5, 5, 5, 5));
