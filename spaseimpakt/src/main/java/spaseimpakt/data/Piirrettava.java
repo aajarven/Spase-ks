@@ -4,7 +4,6 @@
 package spaseimpakt.data;
 
 import java.awt.Image;
-import java.awt.Polygon;
 
 /**
  * Rajapinta, jonka kaikki näytölle piirrettävät oliot (esim. alus, aseet,

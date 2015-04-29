@@ -3,7 +3,6 @@
  */
 package spaseimpakt.data;
 
-import java.awt.Image;
 import java.awt.Polygon;
 import spaseimpakt.logiikka.Pelimoottori;
 import spaseimpakt.logiikka.Pelirunko;

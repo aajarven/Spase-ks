@@ -189,6 +189,7 @@ public class Alus implements Piirrettava {
     /**
      *
      * @return palauttaa ammuttavissa olevien laserien määrän.
+     * @see Laser
      */
     public int getLaserit() {
         return laserit;
@@ -197,6 +198,7 @@ public class Alus implements Piirrettava {
     /**
      *
      * @return palauttaa ammuttavissa olevien pommien määrän.
+     * @see Pommi
      */
     public int getPommit() {
         return pommit;
