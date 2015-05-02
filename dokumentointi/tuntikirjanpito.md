@@ -11,7 +11,10 @@
 |2.4.2015   | 3                 | Alus liikkumaan näytöllä, ammusten näytölle tuomisen aloittaminen|
 |3.4.2015   | 1                 | Ammukset ja niitä koskevat testit toimimaan|
 |9.4.2015   | 0,5               | Javadoc |
-|10.4.2015  | ??                | Jotain, ei voi muistaa enää viimeviikkoa |
+|10.4.2015  | ??                | Pit, pom |
 |17.4.2015  | 6                 | Paljon säätöä, vähän aikaansaantia. Vihollisen liikkuminen (yksi tapa), leveldatan lukemiseen käytetty JsonLukija, testejä, pit-hämmennystä |
 |23.-24.4.2015| 6               | Viholliset näytölle, sekvenssikaavio lisää, testejä, dokkia, törmäystestauksen ajattelua ja aloittelua |
-|26.4.2013| 4                  | Käliin nappuloita, laser, jar, testejä, lisää vihollisia leveliin |
+|26.4.2015  | 4                 | Käliin nappuloita, laser, jar, testejä, lisää vihollisia leveliin |
+|28.4.2015  | 4?                | Kälin nappulat toimimaan, peliohjeet, koodia siistimmäksi, javadoc | 
+|29.3.2015  | 1                 | Muutama uusi testi ja luokkien muokkausta siten, että ne menevät läpi, turhat importit pois |
+|2.3.2015   | 2                 | Loppupalautukseen vaadittavia dokkareita, kaikki kuntoon |
