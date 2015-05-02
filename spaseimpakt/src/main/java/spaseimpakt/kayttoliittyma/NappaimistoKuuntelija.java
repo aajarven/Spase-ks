@@ -14,7 +14,6 @@ import spaseimpakt.logiikka.Pelimoottori;
 public class NappaimistoKuuntelija implements KeyListener {
 
     private final Alus alus;
-    private final Pelimoottori moottori;
 
     private boolean vasenpainettu;
     private boolean oikeapainettu;
@@ -28,7 +27,6 @@ public class NappaimistoKuuntelija implements KeyListener {
      * @param moottori pelimoottori, jonka pyörittämän pelin toimintaa ohjataan.
      */
     public NappaimistoKuuntelija(Pelimoottori moottori) {
-        this.moottori = moottori;
         this.alus = moottori.getAlus();
     }
 
