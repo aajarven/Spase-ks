@@ -180,6 +180,156 @@
 				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000192503, 1.02235, 250]
 			}
 		},
+		{
+			"ilmestymisaika": 7000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 8000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 9000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 10000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 11000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 12000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 13000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 14000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 15000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 16000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 17000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 18000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 19000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 20000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
+		{
+			"ilmestymisaika": 21000,
+			"vihu":{
+				"x": 800,
+				"sprite": "resources/normivihu.png",
+				"movemode": 0,
+				"dx": 1,
+				"kertoimet":[4.73592E-9, -5.84352E-6, 0.000191503, 1.02235, 150]
+			}
+		},
 
 		{
 			"ilmestymisaika": 25000,
