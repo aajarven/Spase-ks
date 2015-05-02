@@ -1,4 +1,5 @@
 /spaseimpakt/target/
+/arkisto/
 *~
 *.fuse_hidden*
 highscores.dat
