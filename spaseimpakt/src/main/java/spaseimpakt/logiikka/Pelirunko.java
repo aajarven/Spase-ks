@@ -28,6 +28,9 @@ public class Pelirunko {
         alusta();
     }
 
+    /**
+     * Luo uuden pelimoottorin ja käyttöliittymän, käynnistää pelin
+     */
     private static void alusta() {
         kayttoliittyma = new GraafinenKayttoliittyma();
         moottori = new Pelimoottori(kayttoliittyma);
@@ -41,6 +44,7 @@ public class Pelirunko {
      */
     public static void restart(){ // TODO: tosi ruma tapa tehdä tämä, keksi parempi joka toimii
         kayttoliittyma.sulje();
+        moottori.lopeta();
         ekaPeli=false;
         alusta();
         

@@ -33,7 +33,7 @@ public class Alus implements Piirrettava {
     private long edellinenLaser;
 
     public static final int NOPEUS = 3; // TODO sopiva nopeuden arvo alukselle
-    private final int AMMUS_INTERVALLI = 150;
+    private final int AMMUS_INTERVALLI = 250;
     private final int LASERIT_ALUSSA = 3;
     private final int LASER_INTERVALLI = 1000;
     private final int POMMIT_ALUSSA = 3;
@@ -114,12 +114,13 @@ public class Alus implements Piirrettava {
         } else if (suunta == Suunta.VASEN) {
             this.x -= NOPEUS;
         }
-
+        
         tarkastaPaikka();
 
-        if (ampuuLaukauksiaNyt) {
+        // Autofire, muuta mahdollisesti myöhemmin
+//        if (ampuuLaukauksiaNyt) {
             ammuLaukaus();
-        }
+//        }
         if (ampuuLaseria) {
             ammuLaser();
         }

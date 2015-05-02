@@ -32,9 +32,10 @@ public class NappaimistoKuuntelija implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            alus.setAmpuuLaukauksiaNyt(true);
-        }
+        // Uncomment jos autofire ei päällä
+//        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+//            alus.setAmpuuLaukauksiaNyt(true);
+//        }
         if (e.getKeyCode() == KeyEvent.VK_X) {
             alus.setAmpuuLaseria(true);
         }
