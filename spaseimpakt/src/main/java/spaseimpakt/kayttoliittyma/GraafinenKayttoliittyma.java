@@ -57,7 +57,7 @@ public class GraafinenKayttoliittyma implements Runnable {
     /**
      * Asettaa pelimoottorin, jonka tapahtumat näytölle piirretään
      *
-     * @param moottori
+     * @param moottori pelimoottori, joka pyörittää kyseistä peliä
      */
     public void setPelimoottori(Pelimoottori moottori) {
         this.moottori = moottori;
@@ -168,8 +168,8 @@ public class GraafinenKayttoliittyma implements Runnable {
      * Ikkunassa on ainoastaan ok- ja rastipainikkeet, ei muuta
      * interaktiivisuutta.
      *
-     * @param viesti
-     * @param otsikko
+     * @param viesti näytettävä viesti
+     * @param otsikko viestin otsikko
      */
     public void naytaViesti(String viesti, String otsikko) {
         JOptionPane.showMessageDialog(frame, viesti, otsikko, JOptionPane.INFORMATION_MESSAGE);

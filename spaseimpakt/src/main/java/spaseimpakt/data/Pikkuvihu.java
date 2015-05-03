@@ -25,11 +25,10 @@ public class Pikkuvihu implements Vihu, Piirrettava {
     /**
      * Konstruktori.
      *
-     * @param x
-     * @param y
-     * @param sprite
-     * @param liikutin
-     * @param moottori
+     * @param x vihollisen x-koordinaatti alussa
+     * @param sprite vihollisen sprite
+     * @param liikutin vihollista liikuttava Liikutin
+     * @param moottori pelimoottori, joka pyörittää peliä
      */
     public Pikkuvihu(int x, Image sprite, Liikutin liikutin, Pelimoottori moottori) {
         this.x = x;

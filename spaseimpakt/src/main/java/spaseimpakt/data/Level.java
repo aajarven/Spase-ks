@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 /**
- *
+ * Pitää kirjaa leveliin kuuluvista vihollisista ja niiden ilmestymisajoista sekä palauttaa pyydettäessä seuraavan vihollisen
  * @author Anni Järvenpää
  */
 public class Level {
@@ -64,7 +64,7 @@ public class Level {
     /**
      * Kertoo, pitäisikö seuraavan vihollisen olla jo näytöllä
      *
-     * @param nykyhetki
+     * @param nykyhetki tarkasteltava ajanhetki
      * @return true, jos seuraavan vihollisen voi jo piirtää näytölle, false jos
      * ei
      */

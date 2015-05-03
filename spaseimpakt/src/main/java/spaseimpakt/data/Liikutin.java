@@ -6,7 +6,7 @@
 package spaseimpakt.data;
 
 /**
- *
+ * Vihollisen liikuttamisesta huolehtiva luokka. Määrittää jokaisen liikkumisen jälkeen uuden paikan viholliselle.
  * @author Anni Järvenpää
  */
 public interface Liikutin {

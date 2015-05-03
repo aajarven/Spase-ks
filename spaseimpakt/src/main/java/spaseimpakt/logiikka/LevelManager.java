@@ -20,6 +20,7 @@ public class LevelManager {
     /**
      * Konstruktori,
      *
+     * @param levelPolut lista leveleistä, jotka tässä pelissä pelataan
      * @param moottori pelimoottori, jonka pyörittämään peliin luettu level
      * tulee
      */

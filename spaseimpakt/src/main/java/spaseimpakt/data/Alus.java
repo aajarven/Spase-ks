@@ -48,6 +48,7 @@ public class Alus implements Piirrettava {
      * @param pelialueenLeveys Peli-ikkunan koko x-suunnassa
      * @param pelialueenKorkeus Peli-ikkunan koko y-suunnassa (käytännössä
      * pelialueen korkeus)
+     * @param moottori pelissä käytössä oleva pelimoottori
      */
     public Alus(int x, int y, int pelialueenLeveys, int pelialueenKorkeus, Pelimoottori moottori) {
         lueSprite();
@@ -95,7 +96,7 @@ public class Alus implements Piirrettava {
     /**
      * Asettaa aluksen kulkusuunnan.
      *
-     * @param suunta
+     * @param suunta aluksen haluttu kulkusuunta
      */
     public void setSuunta(Suunta suunta) {
         this.suunta = suunta;

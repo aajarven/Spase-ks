@@ -37,7 +37,7 @@ public class Ikkuna extends JPanel {
     /**
      * Konstruktori
      *
-     * @param alus pelaajan ohjaama alus, joka näytölle piirretään
+     * @param moottori pelimoottori, jonka tapahtumat piirretään
      */
     public Ikkuna(Pelimoottori moottori) {
         this.moottori = moottori;

@@ -6,7 +6,7 @@
 package spaseimpakt.data;
 
 /**
- *
+ * Liikutin, joka liikuttaa vihollista siten, että sen y-koordinaatti lasketaan x-koordinaatista annetulla neljännen asteen funktiolla.
  * @author Anni Järvenpää
  */
 public class FunktioLiikutin implements Liikutin {

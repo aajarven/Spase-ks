@@ -12,6 +12,7 @@ public class StringMuotoilija {
      * osoittaman mittaisena
      *
      * @param nimi merkkijono, jonka pituus muutetaan
+     * @param pituus pituus, johon merkkijono katkaistaan/täydennetään välilyönneillä
      * @return oikean mittainen merkkijono
      */
     public static String nimiOikeanMittaiseksi(String nimi, int pituus) {
@@ -64,6 +65,7 @@ public class StringMuotoilija {
      * ryhmittele-metodia, joka ryhmittelee numerot kolmen ryhmiin
      *
      * @param pisteet muotoiltavat pisteet
+     * @param maksimipisteet suurin sallittu pistemäärä, joka määrää luvun etunollien määrän
      * @return pisteet Stringinä kolmen numeron ryhmiin ryhmiteltynä ja oikealla
      * määrällä etunollia varustettuna
      */

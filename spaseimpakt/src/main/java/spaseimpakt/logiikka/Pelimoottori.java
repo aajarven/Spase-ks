@@ -90,7 +90,6 @@ public class Pelimoottori extends Thread {
      * Konstruktori
      *
      * @param kayttoliittyma käyttöliittymä, joka näyttää pelin tapahtumat
-     * @param maailma maailma, jonka tilannetta päivitetään
      */
     public Pelimoottori(GraafinenKayttoliittyma kayttoliittyma) {
         this.kayttoliittyma = kayttoliittyma;
@@ -269,13 +268,13 @@ public class Pelimoottori extends Thread {
         kaynnissa = false;
 
         kirjaaScore();
-        
+
         if (peliVoitettu) {
             kayttoliittyma.naytaViesti("Onnittelut, voitit pelin!", "Voitit");
-            peliVoitettu=false;
+            peliVoitettu = false;
         } else if (peliHavitty) {
             kayttoliittyma.naytaViesti("Hävisit pelin.", "Hävisit");
-            peliHavitty=false;
+            peliHavitty = false;
         }
     }
 
@@ -287,9 +286,8 @@ public class Pelimoottori extends Thread {
      * Näyttää dialogin, jossa kysytään pelaajan nimeä. Mikäli kenttä jätetään
      * tyhjäksi, nimeksi vaihdetaan "Anonyymi", muuten pelaajan antama nimi.
      *
-     * @throws HeadlessException
      */
-    public void vaihdaPelaajanNimi() throws HeadlessException { //TODO jos cancel niin pidä edellinen nimi, ei anonyymi
+    public void vaihdaPelaajanNimi() { //TODO jos cancel niin pidä edellinen nimi, ei anonyymi
 
         if (!Pelirunko.ekaPeli) {
             lopeta();
@@ -316,14 +314,16 @@ public class Pelimoottori extends Thread {
         if (!scoreKirjattu && pisteet > 0) {
             highscoreManager.lisaaScore(Pelirunko.pelaajanNimi, pisteet);
         }
-        scoreKirjattu=true;
+        scoreKirjattu = true;
     }
-    
+
     /**
-     * Hakee pelattavan luolan hichscoret HighscoreManagerilta muotoiltuna Stringinä ja palauttaa ne
+     * Hakee pelattavan luolan hichscoret HighscoreManagerilta muotoiltuna
+     * Stringinä ja palauttaa ne
+     *
      * @return pelattavan luolan highscoret valmiiksi muotoiltuna Stringinä
      */
-    public String haeScoret(){
+    public String haeScoret() {
         return highscoreManager.scoretMuotoiltunaStringina();
     }
 
